@@ -1,0 +1,119 @@
+<svg width="100%" viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>Semantic Burstiness in Literary Texts — Degli Esposti &amp; Montemurro 2026</title>
+<desc>Banner: embedding trajectory of War and Peace with plasma-coloured orbit, key results, and bursty PC1 time series with event raster</desc>
+
+<rect width="680" height="200" fill="#0d1117"/>
+
+<g stroke="#161c24" stroke-width="0.5">
+  <line x1="0" y1="50" x2="680" y2="50"/><line x1="0" y1="100" x2="680" y2="100"/><line x1="0" y1="150" x2="680" y2="150"/>
+  <line x1="68" y1="0" x2="68" y2="200"/><line x1="136" y1="0" x2="136" y2="200"/>
+  <line x1="272" y1="0" x2="272" y2="200"/><line x1="340" y1="0" x2="340" y2="200"/><line x1="408" y1="0" x2="408" y2="200"/>
+  <line x1="476" y1="0" x2="476" y2="200"/><line x1="544" y1="0" x2="544" y2="200"/><line x1="612" y1="0" x2="612" y2="200"/>
+</g>
+<line x1="207" y1="12" x2="207" y2="188" stroke="#21262d" stroke-width="1"/>
+<line x1="462" y1="12" x2="462" y2="188" stroke="#21262d" stroke-width="1"/>
+<text x="103" y="13" text-anchor="middle" font-family="'Courier New',monospace" font-size="7.5" fill="#2d333b" letter-spacing="1.5">EMBEDDING SPACE</text>
+<text x="570" y="13" text-anchor="middle" font-family="'Courier New',monospace" font-size="7.5" fill="#2d333b" letter-spacing="1.5">PC1 PROJECTION</text>
+
+<defs>
+  <marker id="arw" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M1 1L7 4L1 7" fill="none" stroke="#2d333b" stroke-width="1.2" stroke-linecap="round"/>
+  </marker>
+</defs>
+<line x1="22" y1="103" x2="185" y2="103" stroke="#2d333b" stroke-width="0.8" marker-end="url(#arw)"/>
+<line x1="98" y1="183" x2="98" y2="24" stroke="#2d333b" stroke-width="0.8" marker-end="url(#arw)"/>
+<text x="188" y="107" font-family="Georgia,serif" font-size="9" fill="#3d444d" font-style="italic">PC1</text>
+<text x="101" y="22" font-family="Georgia,serif" font-size="9" fill="#3d444d" font-style="italic">PC2</text>
+
+<line x1="151" y1="86"  x2="151" y2="100" stroke="#0d0888" stroke-width="2.5"/>
+<line x1="151" y1="100" x2="142" y2="114" stroke="#2a0593" stroke-width="2.5"/>
+<line x1="142" y1="114" x2="127" y2="126" stroke="#46039f" stroke-width="2.5"/>
+<line x1="127" y1="126" x2="107" y2="134" stroke="#6201a5" stroke-width="2.5"/>
+<line x1="107" y1="134" x2="86"  y2="137" stroke="#7c12a4" stroke-width="2.5"/>
+<line x1="86"  y1="137" x2="67"  y2="134" stroke="#9a1798" stroke-width="2.5"/>
+<line x1="67"  y1="134" x2="52"  y2="126" stroke="#b12a90" stroke-width="2.5"/>
+<line x1="52"  y1="126" x2="45"  y2="114" stroke="#c53e84" stroke-width="2.5"/>
+<line x1="45"  y1="114" x2="45"  y2="100" stroke="#d6556e" stroke-width="2.5"/>
+<line x1="45"  y1="100" x2="54"  y2="86"  stroke="#e26b57" stroke-width="2.5"/>
+<line x1="54"  y1="86"  x2="69"  y2="74"  stroke="#ec8135" stroke-width="2.5"/>
+<line x1="69"  y1="74"  x2="89"  y2="66"  stroke="#f59720" stroke-width="2.5"/>
+<line x1="89"  y1="66"  x2="110" y2="63"  stroke="#fbad0d" stroke-width="2.5"/>
+<line x1="110" y1="63"  x2="129" y2="66"  stroke="#fdc506" stroke-width="2.5"/>
+<line x1="129" y1="66"  x2="144" y2="74"  stroke="#fbd906" stroke-width="2.5"/>
+<line x1="144" y1="74"  x2="151" y2="86"  stroke="#f5ec0e" stroke-width="2.5"/>
+
+<circle cx="151" cy="86"  r="3.5" fill="#0d0888" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="151" cy="100" r="3.5" fill="#2a0593" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="142" cy="114" r="3.5" fill="#46039f" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="127" cy="126" r="3.5" fill="#6201a5" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="107" cy="134" r="3.5" fill="#7c12a4" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="86"  cy="137" r="3.5" fill="#9a1798" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="67"  cy="134" r="3.5" fill="#b12a90" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="52"  cy="126" r="3.5" fill="#c53e84" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="45"  cy="114" r="3.5" fill="#d6556e" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="45"  cy="100" r="3.5" fill="#e26b57" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="54"  cy="86"  r="3.5" fill="#ec8135" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="69"  cy="74"  r="3.5" fill="#f59720" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="89"  cy="66"  r="3.5" fill="#fbad0d" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="110" cy="63"  r="3.5" fill="#fdc506" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="129" cy="66"  r="3.5" fill="#fbd906" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="144" cy="74"  r="3.5" fill="#f5ec0e" stroke="#0d1117" stroke-width="0.8"/>
+<circle cx="151" cy="86"  r="6" fill="none" stroke="#0d0888" stroke-width="1.2" opacity="0.7"/>
+<circle cx="144" cy="74"  r="6" fill="none" stroke="#f5ec0e" stroke-width="1.2" opacity="0.7"/>
+<polygon points="151,97 148,91 154,91" fill="#3d444d"/>
+
+<text x="98"  y="50" text-anchor="middle" font-family="Georgia,serif" font-size="8.5" fill="#3fb950" font-style="italic">regiment · cavalry</text>
+<text x="98"  y="153" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#6e7681" font-style="italic">feel · myself</text>
+<text x="163" y="84" font-family="Georgia,serif" font-size="8.5" fill="#f85149" font-style="italic">gerasim</text>
+<rect x="38"  y="172" width="9" height="5" fill="#0d0888"/>
+<rect x="47"  y="172" width="9" height="5" fill="#46039f"/>
+<rect x="56"  y="172" width="9" height="5" fill="#7c12a4"/>
+<rect x="65"  y="172" width="9" height="5" fill="#b12a90"/>
+<rect x="74"  y="172" width="9" height="5" fill="#d6556e"/>
+<rect x="83"  y="172" width="9" height="5" fill="#ec8135"/>
+<rect x="92"  y="172" width="9" height="5" fill="#fbad0d"/>
+<rect x="101" y="172" width="9" height="5" fill="#fdc506"/>
+<rect x="110" y="172" width="9" height="5" fill="#f5ec0e"/>
+<text x="34"  y="177" text-anchor="end"  font-family="'Courier New',monospace" font-size="7" fill="#3d444d">start</text>
+<text x="123" y="177" font-family="'Courier New',monospace" font-size="7" fill="#3d444d">end</text>
+
+<text x="333" y="67" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="21" fill="#c9d1d9" font-weight="bold">Semantic Burstiness</text>
+<text x="333" y="87" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="14" fill="#8b949e">in Literary Texts</text>
+<line x1="250" y1="97" x2="416" y2="97" stroke="#21262d" stroke-width="1"/>
+<text x="333" y="118" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13" fill="#c9d1d9">
+  <tspan font-style="italic">B</tspan><tspan dy="3" font-size="9">orig</tspan><tspan dy="-3"> &gt;&gt; </tspan><tspan font-style="italic">B</tspan><tspan dy="3" font-size="9">FGN</tspan><tspan dy="-3"> &#x2248; </tspan><tspan font-style="italic">B</tspan><tspan dy="3" font-size="9">shuf</tspan>
+</text>
+<text x="333" y="138" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#484f58">16 texts · 20 PCA components · 99.4% of pairs</text>
+<text x="333" y="156" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="9.5" fill="#3d444d" font-style="italic">Degli Esposti &amp; Montemurro, 2026</text>
+<line x1="250" y1="163" x2="416" y2="163" stroke="#21262d" stroke-width="0.5"/>
+<text x="333" y="175" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#2d333b" letter-spacing="0.5">github.com/semantic-burstiness-texts</text>
+
+<polyline
+  points="472,102 476,98 480,104 485,96 490,88 493,76 496,70 499,65 502,72 505,68 508,74 511,79 514,84 518,92 522,99 527,104 532,100 537,106 542,97 547,104 552,101 557,97 561,105 565,90 568,78 571,68 574,63 577,70 580,65 583,73 586,68 589,76 592,72 595,83 598,91 602,99 607,104 612,98 617,104 622,100 628,105 634,99 640,104 646,100 652,105 658,99 664,103 668,102"
+  fill="none" stroke="#4c9be8" stroke-width="1.3" opacity="0.9"/>
+<line x1="472" y1="87" x2="668" y2="87" stroke="#f85149" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.6"/>
+<text x="671" y="90" font-family="Georgia,serif" font-size="8.5" fill="#f85149" opacity="0.7" font-style="italic">q</text>
+
+<g stroke="#4c9be8" stroke-width="1.8" opacity="0.9">
+  <line x1="492" y1="166" x2="492" y2="179"/><line x1="495" y1="166" x2="495" y2="179"/>
+  <line x1="498" y1="166" x2="498" y2="179"/><line x1="501" y1="166" x2="501" y2="179"/>
+  <line x1="504" y1="166" x2="504" y2="179"/><line x1="507" y1="166" x2="507" y2="179"/>
+  <line x1="510" y1="166" x2="510" y2="179"/><line x1="513" y1="166" x2="513" y2="179"/>
+</g>
+<g stroke="#4c9be8" stroke-width="1.8" opacity="0.4">
+  <line x1="543" y1="166" x2="543" y2="179"/><line x1="557" y1="166" x2="557" y2="179"/>
+</g>
+<g stroke="#4c9be8" stroke-width="1.8" opacity="0.9">
+  <line x1="568" y1="166" x2="568" y2="179"/><line x1="571" y1="166" x2="571" y2="179"/>
+  <line x1="574" y1="166" x2="574" y2="179"/><line x1="577" y1="166" x2="577" y2="179"/>
+  <line x1="580" y1="166" x2="580" y2="179"/><line x1="583" y1="166" x2="583" y2="179"/>
+  <line x1="586" y1="166" x2="586" y2="179"/><line x1="589" y1="166" x2="589" y2="179"/>
+  <line x1="592" y1="166" x2="592" y2="179"/>
+</g>
+<g stroke="#4c9be8" stroke-width="1.8" opacity="0.4">
+  <line x1="619" y1="166" x2="619" y2="179"/><line x1="641" y1="166" x2="641" y2="179"/>
+</g>
+
+<text x="668" y="57" text-anchor="end" font-family="Georgia,serif" font-size="10" fill="#4c9be8" font-style="italic">B&#x2081; = 1.46</text>
+<text x="472" y="32" font-family="'Courier New',monospace" font-size="7.5" fill="#3d444d">original text · Great Expectations</text>
+</svg>
