@@ -1,5 +1,5 @@
 # Semantic Burstiness in Literary Texts
-
+![Banner](banner.svg)
 Code and data for:
 
 > M. Degli Esposti, M. A. Montemurro  
