@@ -1,4 +1,4 @@
-# Semantic Burstiness in Literary Texts
+<!-- # Semantic Burstiness in Literary Texts -->
 ![Banner](banner.svg)
 Code and data for:
 
