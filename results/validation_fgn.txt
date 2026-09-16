@@ -1,0 +1,116 @@
+
+THE_ANALYSIS_OF_MIND.txt   1 s   bisection: 4 evals, seed 42
+  alpha  text 0.7426 (ref 0.7349)   alpha0 0.7581 (ref 0.7581)   alpha_surr 0.7521   M_fgn 30449 (M 30449)
+  B_fgn - ref : mean +0.0016  std 0.0317  max|.| 0.1143
+  B_fgn - B_surr: mine mean +0.0004 (std 0.0241)   ref mean -0.0012 (std 0.0240)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+darwin_beagle.txt   1 s   bisection: 4 evals, seed 42
+  alpha  text 0.6295 (ref 0.6222)   alpha0 0.6656 (ref 0.6656)   alpha_surr 0.6273   M_fgn 84931 (M 84931)
+  B_fgn - ref : mean +0.0029  std 0.0216  max|.| 0.1044
+  B_fgn - B_surr: mine mean -0.0007 (std 0.0181)   ref mean -0.0036 (std 0.0135)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+darwin_origin.txt   1 s   bisection: 4 evals, seed 42
+  alpha  text 0.7705 (ref 0.7694)   alpha0 0.8044 (ref 0.8044)   alpha_surr 0.7646   M_fgn 58913 (M 58913)
+  B_fgn - ref : mean -0.0000  std 0.0243  max|.| 0.1203
+  B_fgn - B_surr: mine mean +0.0036 (std 0.0195)   ref mean +0.0037 (std 0.0159)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+davidcopperfield.txt   1 s   bisection: 3 evals, seed 42
+  alpha  text 0.7273 (ref 0.7281)   alpha0 0.7813 (ref 0.7813)   alpha_surr 0.7331   M_fgn 134409 (M 134409)
+  B_fgn - ref : mean -0.0020  std 0.0199  max|.| 0.1136
+  B_fgn - B_surr: mine mean +0.0015 (std 0.0149)   ref mean +0.0035 (std 0.0112)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+doriangray.txt   0 s   bisection: 3 evals, seed 42
+  alpha  text 0.8451 (ref 0.8453)   alpha0 0.8738 (ref 0.8044)   alpha_surr 0.8494   M_fgn 16776 (M 16776)
+  B_fgn - ref : mean +0.0029  std 0.0646  max|.| 0.3576
+  B_fgn - B_surr: mine mean +0.0046 (std 0.0420)   ref mean +0.0017 (std 0.0465)
+  fraction B_orig > B_fgn over (q,k): mine 0.967   ref 0.983
+
+eng_missisipi.txt   0 s   bisection: 2 evals, seed 42
+  alpha  text 0.7740 (ref 0.7763)   alpha0 0.8275 (ref 0.8275)   alpha_surr 0.7831   M_fgn 52741 (M 52741)
+  B_fgn - ref : mean -0.0031  std 0.0236  max|.| 0.0845
+  B_fgn - B_surr: mine mean +0.0009 (std 0.0216)   ref mean +0.0040 (std 0.0200)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+eng_moby.txt   1 s   bisection: 1 evals, seed 42
+  alpha  text 0.6942 (ref 0.6998)   alpha0 0.7350 (ref 0.7581)   alpha_surr 0.6968   M_fgn 82773 (M 82773)
+  B_fgn - ref : mean +0.0024  std 0.0285  max|.| 0.1426
+  B_fgn - B_surr: mine mean +0.0004 (std 0.0172)   ref mean -0.0020 (std 0.0190)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+eng_pride.txt   0 s   bisection: 4 evals, seed 42
+  alpha  text 0.6417 (ref 0.6359)   alpha0 0.6656 (ref 0.6656)   alpha_surr 0.6360   M_fgn 42364 (M 42364)
+  B_fgn - ref : mean -0.0008  std 0.0335  max|.| 0.1591
+  B_fgn - B_surr: mine mean -0.0001 (std 0.0185)   ref mean +0.0007 (std 0.0239)
+  fraction B_orig > B_fgn over (q,k): mine 0.992   ref 0.983
+
+eng_quixote.txt   1 s   bisection: 4 evals, seed 42
+  alpha  text 0.7108 (ref 0.7134)   alpha0 0.7581 (ref 0.7581)   alpha_surr 0.7121   M_fgn 147279 (M 147279)
+  B_fgn - ref : mean +0.0016  std 0.0164  max|.| 0.0754
+  B_fgn - B_surr: mine mean +0.0009 (std 0.0135)   ref mean -0.0006 (std 0.0112)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+eng_sawyer.txt   0 s   bisection: 4 evals, seed 42
+  alpha  text 0.7885 (ref 0.8053)   alpha0 0.8044 (ref 0.8044)   alpha_surr 0.7916   M_fgn 22085 (M 22085)
+  B_fgn - ref : mean +0.0040  std 0.0411  max|.| 0.1718
+  B_fgn - B_surr: mine mean +0.0080 (std 0.0347)   ref mean +0.0040 (std 0.0318)
+  fraction B_orig > B_fgn over (q,k): mine 0.992   ref 0.992
+
+eng_ulysses.txt   1 s   bisection: 4 evals, seed 42
+  alpha  text 0.7632 (ref 0.7938)   alpha0 0.8044 (ref 0.8391)   alpha_surr 0.7716   M_fgn 101489 (M 101489)
+  B_fgn - ref : mean -0.0033  std 0.0329  max|.| 0.1740
+  B_fgn - B_surr: mine mean +0.0039 (std 0.0199)   ref mean +0.0072 (std 0.0225)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+eng_wrnpc.txt   2 s   bisection: 4 evals, seed 42
+  alpha  text 0.7209 (ref 0.7191)   alpha0 0.7581 (ref 0.7697)   alpha_surr 0.7210   M_fgn 235933 (M 235933)
+  B_fgn - ref : mean -0.0038  std 0.0146  max|.| 0.0717
+  B_fgn - B_surr: mine mean -0.0004 (std 0.0099)   ref mean +0.0034 (std 0.0121)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+great_expectations_cut_clean.txt   0 s   bisection: 1 evals, seed 42
+  alpha  text 0.6889 (ref 0.6881)   alpha0 0.7350 (ref 0.7350)   alpha_surr 0.6904   M_fgn 64410 (M 64410)
+  B_fgn - ref : mean +0.0007  std 0.0244  max|.| 0.1537
+  B_fgn - B_surr: mine mean -0.0009 (std 0.0181)   ref mean -0.0016 (std 0.0151)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+kipling_junglebook.txt   0 s   bisection: 2 evals, seed 42
+  alpha  text 0.7753 (ref 0.7713)   alpha0 0.8275 (ref 0.8044)   alpha_surr 0.7777   M_fgn 49522 (M 49522)
+  B_fgn - ref : mean +0.0015  std 0.0346  max|.| 0.2109
+  B_fgn - B_surr: mine mean +0.0008 (std 0.0240)   ref mean -0.0007 (std 0.0257)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+olivertwist_cut_clean.txt   0 s   bisection: 4 evals, seed 42
+  alpha  text 0.7112 (ref 0.7109)   alpha0 0.7581 (ref 0.7581)   alpha_surr 0.7175   M_fgn 59729 (M 59729)
+  B_fgn - ref : mean +0.0015  std 0.0335  max|.| 0.1599
+  B_fgn - B_surr: mine mean +0.0009 (std 0.0192)   ref mean -0.0006 (std 0.0257)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+principia_newton.txt   1 s   bisection: 4 evals, seed 42
+  alpha  text 0.8152 (ref 0.8282)   alpha0 0.8506 (ref 0.8506)   alpha_surr 0.8194   M_fgn 26347 (M 26347)
+  B_fgn - ref : mean -0.0047  std 0.0437  max|.| 0.1595
+  B_fgn - B_surr: mine mean +0.0030 (std 0.0286)   ref mean +0.0077 (std 0.0328)
+  fraction B_orig > B_fgn over (q,k): mine 1.000   ref 1.000
+
+                            file  alpha  alpha_ref  alpha0  alpha0_ref  alpha_surr  dB_mean  dB_max  frac_mine  frac_ref
+        THE_ANALYSIS_OF_MIND.txt 0.7426     0.7349  0.7581      0.7581      0.7521   0.0016  0.1143     1.0000    1.0000
+               darwin_beagle.txt 0.6295     0.6222  0.6656      0.6656      0.6273   0.0029  0.1044     1.0000    1.0000
+               darwin_origin.txt 0.7705     0.7694  0.8044      0.8044      0.7646  -0.0000  0.1203     1.0000    1.0000
+            davidcopperfield.txt 0.7273     0.7281  0.7813      0.7813      0.7331  -0.0020  0.1136     1.0000    1.0000
+                  doriangray.txt 0.8451     0.8453  0.8738      0.8044      0.8494   0.0029  0.3576     0.9667    0.9833
+               eng_missisipi.txt 0.7740     0.7763  0.8275      0.8275      0.7831  -0.0031  0.0845     1.0000    1.0000
+                    eng_moby.txt 0.6942     0.6998  0.7350      0.7581      0.6968   0.0024  0.1426     1.0000    1.0000
+                   eng_pride.txt 0.6417     0.6359  0.6656      0.6656      0.6360  -0.0008  0.1591     0.9917    0.9833
+                 eng_quixote.txt 0.7108     0.7134  0.7581      0.7581      0.7121   0.0016  0.0754     1.0000    1.0000
+                  eng_sawyer.txt 0.7885     0.8053  0.8044      0.8044      0.7916   0.0040  0.1718     0.9917    0.9917
+                 eng_ulysses.txt 0.7632     0.7938  0.8044      0.8391      0.7716  -0.0033  0.1740     1.0000    1.0000
+                   eng_wrnpc.txt 0.7209     0.7191  0.7581      0.7697      0.7210  -0.0038  0.0717     1.0000    1.0000
+great_expectations_cut_clean.txt 0.6889     0.6881  0.7350      0.7350      0.6904   0.0007  0.1537     1.0000    1.0000
+          kipling_junglebook.txt 0.7753     0.7713  0.8275      0.8044      0.7777   0.0015  0.2109     1.0000    1.0000
+       olivertwist_cut_clean.txt 0.7112     0.7109  0.7581      0.7581      0.7175   0.0015  0.1599     1.0000    1.0000
+            principia_newton.txt 0.8152     0.8282  0.8506      0.8506      0.8194  -0.0047  0.1595     1.0000    1.0000
+
+max |alpha_surr - alpha| = 0.0095   max |B_fgn - ref| = 0.3576
