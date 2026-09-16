@@ -1,0 +1,80 @@
+
+=== corpus_burstiness: 1920 matched rows (new 1920, ref 1920)
+     column  mean_diff  max_abs  exact  within_1e2
+      N_all     0.0000   0.0000 1.0000      1.0000
+     N_filt     0.0000   0.0000 1.0000      1.0000
+ M_filtered     0.0000   0.0000 1.0000      1.0000
+      alpha    -0.0027   0.0306 0.0000      0.8125
+     alpha0     0.0014   0.0694 0.6875      0.6875
+     B_orig    -0.0000   0.0060 0.9943      1.0000
+B_surr_mean     0.0003   0.0425 0.5125      0.9906
+ B_surr_std     0.0002   0.0257 0.5844      0.9906
+      B_fgn     0.0001   0.3576 0.0052      0.5089
+  orig_surr    -0.0005   0.0752 0.4995      0.9844
+   orig_fgn     0.0000   0.4600 0.0036      0.4062
+
+--- corpus-level numbers (burstiness) ---
+NEW q=0.95 mean ratio over texts: orig/surr 1.295 (sd 0.135)   orig/fgn 1.294 (sd 0.137)   fgn/surr 1.001 (sd 0.003)
+REF q=0.95 mean ratio over texts: orig/surr 1.295 (sd 0.135)   orig/fgn 1.290 (sd 0.131)   fgn/surr 1.004 (sd 0.008)
+
+fraction of (text,k) with B_orig > B_fgn and B_orig > B_surr_mean, by q:
+  q=0.6   new 1.000   ref 1.000
+  q=0.7   new 1.000   ref 1.000
+  q=0.8   new 1.000   ref 1.000
+  q=0.9   new 1.000   ref 1.000
+  q=0.95  new 1.000   ref 1.000
+  q=0.99  new 0.981   ref 0.984
+
+alpha / alpha0 per text (new vs ref):
+                                   alpha  alpha_ref  alpha0  alpha0_ref  d_alpha  d_alpha0
+file                                                                                      
+THE_ANALYSIS_OF_MIND.txt          0.7426     0.7349  0.7581      0.7581   0.0077    0.0000
+darwin_beagle.txt                 0.6295     0.6222  0.6656      0.6656   0.0073    0.0000
+darwin_origin.txt                 0.7705     0.7694  0.8044      0.8044   0.0011    0.0000
+davidcopperfield.txt              0.7273     0.7281  0.7813      0.7813  -0.0008    0.0000
+doriangray.txt                    0.8451     0.8453  0.8738      0.8044  -0.0002    0.0694
+eng_missisipi.txt                 0.7740     0.7763  0.8275      0.8275  -0.0023    0.0000
+eng_moby.txt                      0.6942     0.6998  0.7350      0.7581  -0.0056   -0.0231
+eng_pride.txt                     0.6417     0.6359  0.6656      0.6656   0.0058    0.0000
+eng_quixote.txt                   0.7108     0.7134  0.7581      0.7581  -0.0026    0.0000
+eng_sawyer.txt                    0.7885     0.8053  0.8044      0.8044  -0.0168    0.0000
+eng_ulysses.txt                   0.7632     0.7938  0.8044      0.8391  -0.0306   -0.0347
+eng_wrnpc.txt                     0.7209     0.7191  0.7581      0.7697   0.0018   -0.0116
+great_expectations_cut_clean.txt  0.6889     0.6881  0.7350      0.7350   0.0008    0.0000
+kipling_junglebook.txt            0.7753     0.7713  0.8275      0.8044   0.0040    0.0231
+olivertwist_cut_clean.txt         0.7112     0.7109  0.7581      0.7581   0.0003    0.0000
+principia_newton.txt              0.8152     0.8282  0.8506      0.8506  -0.0130    0.0000
+
+=== corpus_acf  (ref rho_fgn/fgn_sig/alpha unreliable): 2880 matched rows (new 2880, ref 3060)
+    column  mean_diff  max_abs  exact  within_1e2
+M_filtered     0.0000   0.0000 1.0000      1.0000
+     alpha    -0.0320   0.1399 0.0000      0.2500
+  rho_orig    -0.0000   0.0000 1.0000      1.0000
+   rho_fgn    -0.0001   0.0325 0.0097      0.8854
+  rho_surr     0.0003   0.0302 0.0097      0.8851
+     ci_95     0.0000   0.0000 1.0000      1.0000
+  orig_sig     0.0000   0.0000 1.0000      1.0000
+   fgn_sig     0.0000   1.0000 0.8951      0.8951
+  surr_sig     0.0024   1.0000 0.9052      0.9052
+
+fraction outside 95% band, by lag (new | ref):
+  lag   1: orig 1.000 | 1.000   fgn 0.109 | 0.119   surr 0.047 | 0.041
+  lag  10: orig 0.934 | 0.934   fgn 0.025 | 0.044   surr 0.066 | 0.053
+  lag  50: orig 0.728 | 0.728   fgn 0.037 | 0.056   surr 0.056 | 0.044
+  lag 100: orig 0.569 | 0.569   fgn 0.066 | 0.069   surr 0.050 | 0.069
+  lag 300: orig 0.350 | 0.350   fgn 0.062 | 0.037   surr 0.062 | 0.059
+
+=== corpus_dfa: 320 matched rows (new 320, ref 320)
+       column  mean_diff  max_abs  exact  within_1e2
+   M_filtered     0.0000   0.0000 1.0000      1.0000
+   alpha_text    -0.0027   0.0306 0.0000      0.8125
+  alpha0_text     0.0014   0.0694 0.6875      0.6875
+     dfa_orig     0.0000   0.0000 1.0000      1.0000
+      dfa_fgn     0.0010   0.0640 0.0031      0.3844
+dfa_surr_mean     0.0000   0.0000 1.0000      1.0000
+ dfa_surr_std     0.0000   0.0000 1.0000      1.0000
+
+DFA of projections, corpus mean over (text,k) (new | ref):
+  dfa_orig       0.6657 (sd 0.0539) | 0.6657 (sd 0.0539)
+  dfa_fgn        0.5041 (sd 0.0187) | 0.5030 (sd 0.0180)
+  dfa_surr_mean  0.4994 (sd 0.0043) | 0.4994 (sd 0.0043)
