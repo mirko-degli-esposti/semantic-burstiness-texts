@@ -6,3 +6,4 @@ results/runs/
 figures/
 *.npz
 .DS_Store
+results/runs/
