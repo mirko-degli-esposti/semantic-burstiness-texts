@@ -1,0 +1,21 @@
+file                                     ref  legacy     diff  leg+strip     diff      nltk     diff   sec
+THE_ANALYSIS_OF_MIND.txt              0.7349  0.7349  +0.0000     0.7349  +0.0000    0.7426  +0.0077    0.6
+darwin_beagle.txt                     0.6222  0.6222  -0.0000     0.6222  -0.0000    0.6295  +0.0073    0.4
+darwin_origin.txt                     0.7694  0.7694  +0.0000     0.7694  +0.0000    0.7705  +0.0011    0.3
+davidcopperfield.txt                  0.7281  0.7281  -0.0000     0.7281  -0.0000    0.7273  -0.0008    0.6
+doriangray.txt                        0.8453  0.8453  -0.0000     0.8453  -0.0000    0.8451  -0.0002    0.1
+eng_missisipi.txt                     0.7763  0.7763  +0.0000     0.7763  +0.0000    0.7740  -0.0023    0.3
+eng_moby.txt                          0.6998  0.6998  -0.0000     0.6998  -0.0000    0.6942  -0.0056    0.4
+eng_pride.txt                         0.6359  0.6359  -0.0000     0.6359  -0.0000    0.6417  +0.0058    0.2
+eng_quixote.txt                       0.7134  0.7134  +0.0000     0.7134  +0.0000    0.7108  -0.0026    0.7
+eng_sawyer.txt                        0.8053  0.8053  +0.0000     0.8053  +0.0000    0.7885  -0.0168    0.1
+eng_ulysses.txt                       0.7938  0.7938  +0.0000     0.7938  +0.0000    0.7632  -0.0306    0.5
+eng_wrnpc.txt                         0.7191  0.7191  +0.0000     0.7191  +0.0000    0.7209  +0.0018    1.1
+great_expectations_cut_clean.txt      0.6881  0.6881  +0.0000     0.6881  +0.0000    0.6889  +0.0008    0.3
+kipling_junglebook.txt                0.7713  0.7713  +0.0000     0.7713  +0.0000    0.7753  +0.0040    0.3
+olivertwist_cut_clean.txt             0.7109  0.7109  -0.0000     0.7109  -0.0000    0.7112  +0.0003    0.3
+principia_newton.txt                  0.8282  0.8282  -0.0000     0.8282  -0.0000    0.8152  -0.0130    0.4
+
+legacy tokeniser : max|diff| 0.0000   exact(4dp) 16/16
+legacy + strip   : max|diff| 0.0000   mean 0.0000   (effect of Gutenberg boilerplate)
+nltk tokeniser   : max|diff| 0.0306   mean 0.0063   max |nltk-legacy| 0.0307

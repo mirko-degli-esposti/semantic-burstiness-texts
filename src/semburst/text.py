@@ -42,6 +42,14 @@ def load_raw(path: str | Path) -> str:
         return strip_gutenberg(f.read())
 
 
+def tokenise_legacy_regex(raw: str) -> list[str]:
+    """The tokeniser used for the FGN surrogate in the Colab notebook (Paper-1 pipeline):
+    lower-case, digits -> space, tokens = \\w+.  No Gutenberg stripping was applied there.
+    Kept for validation against the reference alpha values only; not used by the pipeline."""
+    import re
+    return re.findall(r"\w+", re.sub(r"\d", " ", raw.lower()))
+
+
 def tokenise(raw: str) -> list[str]:
     """Lower-case, NLTK word_tokenize, keep purely alphabetic tokens."""
     _ensure_nltk()
