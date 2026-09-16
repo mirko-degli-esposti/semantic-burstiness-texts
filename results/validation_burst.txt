@@ -1,0 +1,243 @@
+
+THE_ANALYSIS_OF_MIND.txt   M=30449 (ref 30449)   EVR PC1..3 = [0.0732 0.041  0.0291]   2 s
+  B_orig       max|diff|=0.00382   exact 118/120   within 0.002 119/120
+  B_surr_mean  max|diff|=0.01929   exact   2/120   within 0.002  56/120
+  B_surr_std   max|diff|=0.02835   exact   1/120   within 0.002  78/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00539     0.00149
+0.70  0.00005      0.00531     0.00421
+0.80  0.00005      0.00646     0.00340
+0.90  0.00032      0.00886     0.00425
+0.95  0.00005      0.00925     0.00678
+0.99  0.00382      0.01929     0.02835
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=+0.001  std z=1.033  |z|>2: 8.3%  |z|>3: 0.8%
+
+darwin_beagle.txt   M=84931 (ref 84931)   EVR PC1..3 = [0.0637 0.0381 0.0295]   5 s
+  B_orig       max|diff|=0.00027   exact 119/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.01139   exact   3/120   within 0.002  81/120
+  B_surr_std   max|diff|=0.00785   exact   6/120   within 0.002  88/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00189     0.00183
+0.70  0.00005      0.00311     0.00193
+0.80  0.00005      0.00358     0.00237
+0.90  0.00005      0.00323     0.00415
+0.95  0.00005      0.00992     0.00485
+0.99  0.00027      0.01139     0.00785
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.049  std z=0.981  |z|>2: 4.2%  |z|>3: 0.0%
+
+darwin_origin.txt   M=58913 (ref 58913)   EVR PC1..3 = [0.0661 0.0358 0.0299]   3 s
+  B_orig       max|diff|=0.00180   exact 119/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.01846   exact   1/120   within 0.002  78/120
+  B_surr_std   max|diff|=0.01716   exact   2/120   within 0.002  88/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00217     0.00143
+0.70  0.00005      0.00290     0.00176
+0.80  0.00004      0.00318     0.00336
+0.90  0.00004      0.00684     0.00515
+0.95  0.00005      0.00763     0.00619
+0.99  0.00180      0.01846     0.01716
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.044  std z=0.890  |z|>2: 3.3%  |z|>3: 0.0%
+
+davidcopperfield.txt   M=134409 (ref 134409)   EVR PC1..3 = [0.0719 0.0387 0.031 ]   10 s
+  B_orig       max|diff|=0.00005   exact 120/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.00940   exact   2/120   within 0.002  84/120
+  B_surr_std   max|diff|=0.01219   exact   4/120   within 0.002  95/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00346     0.00105
+0.70  0.00005      0.00303     0.00148
+0.80  0.00005      0.00266     0.00225
+0.90  0.00004      0.00333     0.00265
+0.95  0.00005      0.00415     0.00459
+0.99  0.00005      0.00940     0.01219
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.586  std z=1.131  |z|>2: 8.3%  |z|>3: 4.2%
+
+doriangray.txt   M=16776 (ref 16776)   EVR PC1..3 = [0.0643 0.0492 0.0344]   1 s
+  B_orig       max|diff|=0.00596   exact 118/120   within 0.002 119/120
+  B_surr_mean  max|diff|=0.03865   exact   1/120   within 0.002  45/120
+  B_surr_std   max|diff|=0.01950   exact   0/120   within 0.002  51/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00004      0.00625     0.00380
+0.70  0.00004      0.00563     0.00222
+0.80  0.00005      0.00922     0.00516
+0.90  0.00005      0.01109     0.00860
+0.95  0.00121      0.01650     0.01378
+0.99  0.00596      0.03865     0.01950
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.043  std z=1.063  |z|>2: 7.5%  |z|>3: 0.0%
+
+eng_missisipi.txt   M=52741 (ref 52741)   EVR PC1..3 = [0.0504 0.0435 0.0282]   3 s
+  B_orig       max|diff|=0.00014   exact 119/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.02198   exact   2/120   within 0.002  76/120
+  B_surr_std   max|diff|=0.01495   exact   2/120   within 0.002  79/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00365     0.00169
+0.70  0.00005      0.00274     0.00219
+0.80  0.00005      0.00384     0.00272
+0.90  0.00014      0.00624     0.00591
+0.95  0.00004      0.00852     0.00690
+0.99  0.00005      0.02198     0.01495
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.275  std z=0.918  |z|>2: 4.2%  |z|>3: 0.8%
+
+eng_moby.txt   M=82773 (ref 82773)   EVR PC1..3 = [0.0737 0.0373 0.0261]   5 s
+  B_orig       max|diff|=0.00005   exact 120/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.01446   exact   2/120   within 0.002  82/120
+  B_surr_std   max|diff|=0.01098   exact   4/120   within 0.002  89/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00210     0.00142
+0.70  0.00005      0.00257     0.00175
+0.80  0.00005      0.00383     0.00223
+0.90  0.00005      0.00353     0.00275
+0.95  0.00005      0.00542     0.00477
+0.99  0.00005      0.01446     0.01098
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=+0.004  std z=0.869  |z|>2: 2.5%  |z|>3: 0.0%
+
+eng_pride.txt   M=42364 (ref 42364)   EVR PC1..3 = [0.0684 0.0481 0.0377]   3 s
+  B_orig       max|diff|=0.00005   exact 120/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.01921   exact   2/120   within 0.002  64/120
+  B_surr_std   max|diff|=0.01712   exact   4/120   within 0.002  78/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00004      0.00421     0.00173
+0.70  0.00005      0.00367     0.00161
+0.80  0.00004      0.00403     0.00226
+0.90  0.00005      0.00668     0.00430
+0.95  0.00005      0.00681     0.00926
+0.99  0.00005      0.01921     0.01712
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.092  std z=1.006  |z|>2: 4.2%  |z|>3: 0.8%
+
+eng_quixote.txt   M=147279 (ref 147279)   EVR PC1..3 = [0.0766 0.0371 0.0271]   12 s
+  B_orig       max|diff|=0.00005   exact 120/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.00737   exact   2/120   within 0.002  87/120
+  B_surr_std   max|diff|=0.00941   exact   4/120   within 0.002 104/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00169     0.00120
+0.70  0.00005      0.00250     0.00140
+0.80  0.00005      0.00254     0.00166
+0.90  0.00005      0.00390     0.00247
+0.95  0.00005      0.00650     0.00342
+0.99  0.00004      0.00737     0.00941
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.149  std z=1.014  |z|>2: 5.8%  |z|>3: 0.0%
+
+eng_sawyer.txt   M=22085 (ref 22085)   EVR PC1..3 = [0.0613 0.0488 0.0274]   1 s
+  B_orig       max|diff|=0.00005   exact 120/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.03416   exact   2/120   within 0.002  50/120
+  B_surr_std   max|diff|=0.03244   exact   1/120   within 0.002  60/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00397     0.00373
+0.70  0.00005      0.00622     0.00257
+0.80  0.00005      0.00652     0.00531
+0.90  0.00005      0.00674     0.00789
+0.95  0.00005      0.01175     0.01104
+0.99  0.00005      0.03416     0.03244
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.152  std z=0.940  |z|>2: 3.3%  |z|>3: 0.0%
+
+eng_ulysses.txt   M=101489 (ref 101489)   EVR PC1..3 = [0.0676 0.0343 0.0306]   7 s
+  B_orig       max|diff|=0.00191   exact 119/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.00953   exact   4/120   within 0.002  76/120
+  B_surr_std   max|diff|=0.01040   exact   1/120   within 0.002  89/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00294     0.00114
+0.70  0.00004      0.00269     0.00167
+0.80  0.00004      0.00329     0.00256
+0.90  0.00004      0.00333     0.00289
+0.95  0.00191      0.00714     0.00610
+0.99  0.00005      0.00953     0.01040
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.254  std z=1.046  |z|>2: 7.5%  |z|>3: 0.8%
+
+eng_wrnpc.txt   M=235933 (ref 235933)   EVR PC1..3 = [0.0698 0.0421 0.0297]   21 s
+  B_orig       max|diff|=0.00005   exact 120/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.00797   exact   5/120   within 0.002  90/120
+  B_surr_std   max|diff|=0.00710   exact   3/120   within 0.002 104/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00159     0.00103
+0.70  0.00004      0.00193     0.00101
+0.80  0.00005      0.00230     0.00168
+0.90  0.00005      0.00259     0.00192
+0.95  0.00005      0.00390     0.00387
+0.99  0.00005      0.00797     0.00710
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.305  std z=1.080  |z|>2: 5.0%  |z|>3: 0.0%
+
+great_expectations_cut_clean.txt   M=64410 (ref 64410)   EVR PC1..3 = [0.0654 0.0434 0.03  ]   4 s
+  B_orig       max|diff|=0.00051   exact 119/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.01832   exact   0/120   within 0.002  70/120
+  B_surr_std   max|diff|=0.01294   exact   3/120   within 0.002  82/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00264     0.00155
+0.70  0.00005      0.00256     0.00214
+0.80  0.00005      0.00387     0.00232
+0.90  0.00005      0.00655     0.00407
+0.95  0.00005      0.00836     0.00512
+0.99  0.00051      0.01832     0.01294
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.160  std z=1.016  |z|>2: 5.0%  |z|>3: 0.0%
+
+kipling_junglebook.txt   M=49522 (ref 49522)   EVR PC1..3 = [0.0581 0.0431 0.0281]   3 s
+  B_orig       max|diff|=0.00094   exact 119/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.01620   exact   0/120   within 0.002  69/120
+  B_surr_std   max|diff|=0.01977   exact   2/120   within 0.002  82/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00365     0.00206
+0.70  0.00005      0.00296     0.00367
+0.80  0.00005      0.00580     0.00314
+0.90  0.00005      0.00581     0.00416
+0.95  0.00094      0.00822     0.00757
+0.99  0.00005      0.01620     0.01977
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.158  std z=1.001  |z|>2: 2.5%  |z|>3: 0.8%
+
+olivertwist_cut_clean.txt   M=59729 (ref 59729)   EVR PC1..3 = [0.0675 0.039  0.0289]   4 s
+  B_orig       max|diff|=0.00005   exact 120/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.01712   exact   2/120   within 0.002  75/120
+  B_surr_std   max|diff|=0.01889   exact   1/120   within 0.002  87/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00376     0.00220
+0.70  0.00005      0.00357     0.00137
+0.80  0.00005      0.00244     0.00195
+0.90  0.00005      0.00388     0.00555
+0.95  0.00005      0.00762     0.00897
+0.99  0.00005      0.01712     0.01889
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.459  std z=0.969  |z|>2: 5.0%  |z|>3: 0.8%
+
+principia_newton.txt   M=26347 (ref 26347)   EVR PC1..3 = [0.0766 0.0273 0.0208]   2 s
+  B_orig       max|diff|=0.00132   exact 119/120   within 0.002 120/120
+  B_surr_mean  max|diff|=0.03004   exact   1/120   within 0.002  63/120
+  B_surr_std   max|diff|=0.02482   exact   2/120   within 0.002  65/120
+  max|diff| by q:
+       B_orig  B_surr_mean  B_surr_std
+q                                     
+0.60  0.00005      0.00343     0.00201
+0.70  0.00005      0.00411     0.00388
+0.80  0.00005      0.00599     0.00403
+0.90  0.00005      0.01183     0.00574
+0.95  0.00005      0.01463     0.00853
+0.99  0.00132      0.03004     0.02482
+  z-test of B_surr_mean_ref (n=200 local perms): mean z=-0.275  std z=0.946  |z|>2: 5.0%  |z|>3: 0.0%
+
+worst |diff| overall: 0.03865
+pooled z over 1920 rows: mean -0.187  std 1.005  |z|>2: 5.1% (expect ~4.6%)  |z|>3: 0.6% (expect ~0.3%)
