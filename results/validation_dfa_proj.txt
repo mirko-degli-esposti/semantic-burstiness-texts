@@ -1,0 +1,114 @@
+
+THE_ANALYSIS_OF_MIND.txt   M=30449   alpha 0.743 -> alpha0 0.758   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5007  ref 0.5040   diff mean -0.0033 max|.| 0.0527
+  dfa_surr : mine mean 0.5009  ref 0.5009   diff mean +0.0000 max|.| 0.0000
+  orig mean 0.6651  (ref 0.6651)   orig > fgn: mine 1.00 ref 1.00
+
+darwin_beagle.txt   M=84931   alpha 0.630 -> alpha0 0.666   2 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5030  ref 0.4978   diff mean +0.0052 max|.| 0.0342
+  dfa_surr : mine mean 0.5002  ref 0.5002   diff mean -0.0000 max|.| 0.0000
+  orig mean 0.6892  (ref 0.6892)   orig > fgn: mine 1.00 ref 1.00
+
+darwin_origin.txt   M=58913   alpha 0.771 -> alpha0 0.804   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5052  ref 0.5035   diff mean +0.0017 max|.| 0.0290
+  dfa_surr : mine mean 0.5001  ref 0.5001   diff mean -0.0000 max|.| 0.0000
+  orig mean 0.7081  (ref 0.7082)   orig > fgn: mine 1.00 ref 1.00
+
+davidcopperfield.txt   M=134409   alpha 0.727 -> alpha0 0.781   3 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5089  ref 0.5032   diff mean +0.0057 max|.| 0.0411
+  dfa_surr : mine mean 0.4993  ref 0.4993   diff mean -0.0000 max|.| 0.0000
+  orig mean 0.6422  (ref 0.6422)   orig > fgn: mine 1.00 ref 1.00
+
+doriangray.txt   M=16776   alpha 0.845 -> alpha0 0.874   0 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5069  ref 0.4976   diff mean +0.0093 max|.| 0.0567
+  dfa_surr : mine mean 0.5005  ref 0.5005   diff mean +0.0000 max|.| 0.0000
+  orig mean 0.6205  (ref 0.6205)   orig > fgn: mine 1.00 ref 1.00
+
+eng_missisipi.txt   M=52741   alpha 0.774 -> alpha0 0.828   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5071  ref 0.5105   diff mean -0.0033 max|.| 0.0420
+  dfa_surr : mine mean 0.5001  ref 0.5001   diff mean +0.0000 max|.| 0.0000
+  orig mean 0.6808  (ref 0.6808)   orig > fgn: mine 1.00 ref 1.00
+
+eng_moby.txt   M=82773   alpha 0.694 -> alpha0 0.735   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5009  ref 0.4984   diff mean +0.0025 max|.| 0.0453
+  dfa_surr : mine mean 0.4983  ref 0.4983   diff mean -0.0000 max|.| 0.0000
+  orig mean 0.6848  (ref 0.6848)   orig > fgn: mine 1.00 ref 1.00
+
+eng_pride.txt   M=42364   alpha 0.642 -> alpha0 0.666   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.4981  ref 0.4965   diff mean +0.0015 max|.| 0.0518
+  dfa_surr : mine mean 0.4992  ref 0.4992   diff mean -0.0000 max|.| 0.0000
+  orig mean 0.6201  (ref 0.6201)   orig > fgn: mine 1.00 ref 1.00
+
+eng_quixote.txt   M=147279   alpha 0.711 -> alpha0 0.758   3 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5018  ref 0.4997   diff mean +0.0021 max|.| 0.0332
+  dfa_surr : mine mean 0.4980  ref 0.4980   diff mean +0.0000 max|.| 0.0000
+  orig mean 0.6550  (ref 0.6550)   orig > fgn: mine 1.00 ref 1.00
+
+eng_sawyer.txt   M=22085   alpha 0.788 -> alpha0 0.804   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5080  ref 0.5058   diff mean +0.0022 max|.| 0.0640
+  dfa_surr : mine mean 0.4999  ref 0.4999   diff mean +0.0000 max|.| 0.0000
+  orig mean 0.6368  (ref 0.6368)   orig > fgn: mine 1.00 ref 1.00
+
+eng_ulysses.txt   M=101489   alpha 0.763 -> alpha0 0.804   2 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5077  ref 0.5159   diff mean -0.0082 max|.| 0.0564
+  dfa_surr : mine mean 0.4992  ref 0.4992   diff mean -0.0000 max|.| 0.0000
+  orig mean 0.7010  (ref 0.7010)   orig > fgn: mine 1.00 ref 1.00
+
+eng_wrnpc.txt   M=235933   alpha 0.721 -> alpha0 0.758   5 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5045  ref 0.5051   diff mean -0.0006 max|.| 0.0341
+  dfa_surr : mine mean 0.4995  ref 0.4995   diff mean +0.0000 max|.| 0.0000
+  orig mean 0.7094  (ref 0.7094)   orig > fgn: mine 1.00 ref 1.00
+
+great_expectations_cut_clean.txt   M=64410   alpha 0.689 -> alpha0 0.735   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.4988  ref 0.5020   diff mean -0.0033 max|.| 0.0379
+  dfa_surr : mine mean 0.4986  ref 0.4986   diff mean -0.0000 max|.| 0.0000
+  orig mean 0.6232  (ref 0.6232)   orig > fgn: mine 1.00 ref 1.00
+
+kipling_junglebook.txt   M=49522   alpha 0.775 -> alpha0 0.828   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5037  ref 0.5024   diff mean +0.0013 max|.| 0.0478
+  dfa_surr : mine mean 0.4979  ref 0.4979   diff mean +0.0000 max|.| 0.0000
+  orig mean 0.6812  (ref 0.6812)   orig > fgn: mine 1.00 ref 1.00
+
+olivertwist_cut_clean.txt   M=59729   alpha 0.711 -> alpha0 0.758   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5069  ref 0.5028   diff mean +0.0041 max|.| 0.0515
+  dfa_surr : mine mean 0.4997  ref 0.4997   diff mean -0.0000 max|.| 0.0000
+  orig mean 0.6447  (ref 0.6447)   orig > fgn: mine 1.00 ref 1.00
+
+principia_newton.txt   M=26347   alpha 0.815 -> alpha0 0.851   1 s
+  dfa_orig : max|diff| 0.0000   within 1e-3 20/20
+  dfa_fgn  : mine mean 0.5031  ref 0.5033   diff mean -0.0002 max|.| 0.0546
+  dfa_surr : mine mean 0.4987  ref 0.4987   diff mean +0.0000 max|.| 0.0000
+  orig mean 0.6893  (ref 0.6893)   orig > fgn: mine 1.00 ref 1.00
+
+                            file  d_orig_max  fgn_mine  fgn_ref  surr_mine  surr_ref   orig
+        THE_ANALYSIS_OF_MIND.txt         0.0    0.5007   0.5040     0.5009    0.5009 0.6651
+               darwin_beagle.txt         0.0    0.5030   0.4978     0.5002    0.5002 0.6892
+               darwin_origin.txt         0.0    0.5052   0.5035     0.5001    0.5001 0.7081
+            davidcopperfield.txt         0.0    0.5089   0.5032     0.4993    0.4993 0.6422
+                  doriangray.txt         0.0    0.5069   0.4976     0.5005    0.5005 0.6205
+               eng_missisipi.txt         0.0    0.5071   0.5105     0.5001    0.5001 0.6808
+                    eng_moby.txt         0.0    0.5009   0.4984     0.4983    0.4983 0.6848
+                   eng_pride.txt         0.0    0.4981   0.4965     0.4992    0.4992 0.6201
+                 eng_quixote.txt         0.0    0.5018   0.4997     0.4980    0.4980 0.6550
+                  eng_sawyer.txt         0.0    0.5080   0.5058     0.4999    0.4999 0.6368
+                 eng_ulysses.txt         0.0    0.5077   0.5159     0.4992    0.4992 0.7010
+                   eng_wrnpc.txt         0.0    0.5045   0.5051     0.4995    0.4995 0.7094
+great_expectations_cut_clean.txt         0.0    0.4988   0.5020     0.4986    0.4986 0.6232
+          kipling_junglebook.txt         0.0    0.5037   0.5024     0.4979    0.4979 0.6812
+       olivertwist_cut_clean.txt         0.0    0.5069   0.5028     0.4997    0.4997 0.6447
+            principia_newton.txt         0.0    0.5031   0.5033     0.4987    0.4987 0.6893

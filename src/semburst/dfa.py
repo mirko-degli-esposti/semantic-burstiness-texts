@@ -5,7 +5,8 @@ its frequency rank (1 = most frequent), integrate the rank series, and fit the s
 the detrended fluctuation F(L) ~ L^alpha over log-spaced window sizes L.
 Defaults (100 .. 10000, 10 scales) are those used for the reference results.
 
-`dfa()` is also used, unchanged, on the PCA projection series (corpus_dfa.csv).
+`projection_alpha()` applies the same DFA to a PCA projection series with the settings of
+the reference run (20 scales from 10 to N/4; corpus_dfa.csv).
 """
 from __future__ import annotations
 
@@ -29,8 +30,8 @@ def zipf_ranks(tokens: list[str]) -> np.ndarray:
 
 
 def dfa_scales(l_min: int = DFA_L_MIN, l_max: int = DFA_L_MAX, n: int = DFA_N_SCALES) -> np.ndarray:
-    dl = (np.log2(l_max) - np.log2(l_min)) / (n - 1)
-    return np.unique(np.round(l_min * 2 ** (dl * np.arange(n)))).astype(int)
+    """n log-spaced window sizes between l_min and l_max (rounded, duplicates removed)."""
+    return np.unique(np.round(np.logspace(np.log10(l_min), np.log10(l_max), n))).astype(int)
 
 
 def dfa_fluctuation(profile: np.ndarray, L: int) -> float:
@@ -60,6 +61,23 @@ def dfa_exponent(series: np.ndarray, l_min: int = DFA_L_MIN, l_max: int = DFA_L_
     """Slope of log F vs log L."""
     Ls, F = dfa(series, l_min, l_max, n)
     return float(linregress(np.log(Ls), np.log(F)).slope)
+
+
+PROJ_L_MIN, PROJ_N_SCALES = 10, 20
+
+
+def projection_alpha(x: np.ndarray, l_min: int = PROJ_L_MIN, n: int = PROJ_N_SCALES) -> float:
+    """DFA exponent of a PCA projection series: n scales between l_min and len(x)//4.
+    Returns NaN if the series is too short (fewer than 3 usable scales)."""
+    N = len(x)
+    l_max = N // 4
+    if l_min >= l_max:
+        return np.nan
+    Ls, F = dfa(x, l_min, l_max, n)
+    ok = np.isfinite(F) & (N // Ls >= 2)
+    if ok.sum() < 3:
+        return np.nan
+    return float(linregress(np.log(Ls[ok]), np.log(F[ok])).slope)
 
 
 def text_alpha(tokens: list[str]) -> float:
