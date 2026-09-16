@@ -1,0 +1,82 @@
+
+THE_ANALYSIS_OF_MIND.txt   M=30449  ci95=0.01123  alpha 0.743 -> alpha0 0.758   1 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.744 ref 0.744   surr: mine 0.061 ref 0.017   fgn: mine 0.067 ref 0.056 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0717 (ref 0.0717)   fgn 0.0016 (ref 0.0003)   surr 0.0004 (ref 0.0009)
+
+darwin_beagle.txt   M=84931  ci95=0.00673  alpha 0.630 -> alpha0 0.666   1 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.889 ref 0.889   surr: mine 0.039 ref 0.017   fgn: mine 0.072 ref 0.061 (ref mis-tuned)
+  lag 1 mean over k: orig 0.1355 (ref 0.1355)   fgn 0.0006 (ref 0.0024)   surr -0.0002 (ref -0.0003)
+
+darwin_origin.txt   M=58913  ci95=0.00808  alpha 0.771 -> alpha0 0.804   1 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.878 ref 0.878   surr: mine 0.056 ref 0.089   fgn: mine 0.072 ref 0.056 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0999 (ref 0.0999)   fgn 0.0027 (ref 0.0016)   surr 0.0004 (ref -0.0016)
+
+davidcopperfield.txt   M=134409  ci95=0.00535  alpha 0.727 -> alpha0 0.781   2 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.806 ref 0.806   surr: mine 0.044 ref 0.089   fgn: mine 0.056 ref 0.083 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0967 (ref 0.0967)   fgn 0.0012 (ref 0.0028)   surr -0.0008 (ref 0.0003)
+
+doriangray.txt   M=16776  ci95=0.01513  alpha 0.845 -> alpha0 0.874   0 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.494 ref 0.494   surr: mine 0.033 ref 0.067   fgn: mine 0.078 ref 0.056 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0980 (ref 0.0980)   fgn 0.0040 (ref 0.0028)   surr -0.0010 (ref 0.0008)
+
+eng_missisipi.txt   M=52741  ci95=0.00853  alpha 0.774 -> alpha0 0.828   0 s
+  rho_orig  max|diff| 0.00001   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.794 ref 0.794   surr: mine 0.056 ref 0.044   fgn: mine 0.083 ref 0.050 (ref mis-tuned)
+  lag 1 mean over k: orig 0.1081 (ref 0.1081)   fgn 0.0016 (ref 0.0001)   surr 0.0002 (ref -0.0007)
+
+eng_moby.txt   M=82773  ci95=0.00681  alpha 0.694 -> alpha0 0.735   1 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.839 ref 0.839   surr: mine 0.056 ref 0.022   fgn: mine 0.078 ref 0.067 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0966 (ref 0.0966)   fgn 0.0015 (ref 0.0014)   surr -0.0005 (ref 0.0011)
+
+eng_pride.txt   M=42364  ci95=0.00952  alpha 0.642 -> alpha0 0.666   0 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.583 ref 0.583   surr: mine 0.056 ref 0.078   fgn: mine 0.056 ref 0.033 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0824 (ref 0.0824)   fgn 0.0006 (ref 0.0007)   surr 0.0011 (ref -0.0003)
+
+eng_quixote.txt   M=147279  ci95=0.00511  alpha 0.711 -> alpha0 0.758   2 s
+  rho_orig  max|diff| 0.00001   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.800 ref 0.800   surr: mine 0.050 ref 0.050   fgn: mine 0.067 ref 0.094 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0983 (ref 0.0983)   fgn 0.0019 (ref 0.0039)   surr 0.0002 (ref 0.0002)
+
+eng_sawyer.txt   M=22085  ci95=0.01319  alpha 0.788 -> alpha0 0.804   0 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.550 ref 0.550   surr: mine 0.039 ref 0.028   fgn: mine 0.050 ref 0.050 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0903 (ref 0.0903)   fgn 0.0014 (ref 0.0003)   surr 0.0031 (ref -0.0003)
+
+eng_ulysses.txt   M=101489  ci95=0.00615  alpha 0.763 -> alpha0 0.804   1 s
+  rho_orig  max|diff| 0.00001   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.878 ref 0.878   surr: mine 0.083 ref 0.044   fgn: mine 0.044 ref 0.056 (ref mis-tuned)
+  lag 1 mean over k: orig 0.1240 (ref 0.1240)   fgn -0.0001 (ref 0.0019)   surr -0.0006 (ref 0.0001)
+
+eng_wrnpc.txt   M=235933  ci95=0.00404  alpha 0.721 -> alpha0 0.758   3 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.961 ref 0.961   surr: mine 0.033 ref 0.044   fgn: mine 0.078 ref 0.100 (ref mis-tuned)
+  lag 1 mean over k: orig 0.1237 (ref 0.1237)   fgn 0.0019 (ref 0.0038)   surr 0.0003 (ref 0.0001)
+
+great_expectations_cut_clean.txt   M=64410  ci95=0.00772  alpha 0.689 -> alpha0 0.735   1 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.667 ref 0.667   surr: mine 0.056 ref 0.061   fgn: mine 0.033 ref 0.089 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0930 (ref 0.0930)   fgn -0.0001 (ref 0.0023)   surr 0.0003 (ref -0.0007)
+
+kipling_junglebook.txt   M=49522  ci95=0.00881  alpha 0.775 -> alpha0 0.828   1 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.800 ref 0.800   surr: mine 0.067 ref 0.044   fgn: mine 0.078 ref 0.050 (ref mis-tuned)
+  lag 1 mean over k: orig 0.1191 (ref 0.1191)   fgn 0.0002 (ref 0.0019)   surr 0.0008 (ref 0.0003)
+
+olivertwist_cut_clean.txt   M=59729  ci95=0.00802  alpha 0.711 -> alpha0 0.758   1 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.717 ref 0.717   surr: mine 0.072 ref 0.022   fgn: mine 0.044 ref 0.050 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0961 (ref 0.0961)   fgn 0.0025 (ref 0.0000)   surr 0.0007 (ref -0.0004)
+
+principia_newton.txt   M=26347  ci95=0.01208  alpha 0.815 -> alpha0 0.851   1 s
+  rho_orig  max|diff| 0.00000   exact(5dp) 180/180   within 1e-4 180/180
+  outside CI  orig: mine 0.744 ref 0.744   surr: mine 0.033 ref 0.078   fgn: mine 0.044 ref 0.050 (ref mis-tuned)
+  lag 1 mean over k: orig 0.0725 (ref 0.0725)   fgn 0.0028 (ref 0.0012)   surr -0.0014 (ref -0.0014)
+
+worst |rho_orig - ref| = 0.00001
