@@ -117,6 +117,15 @@ def main() -> int:
         w(f"- ratio {lab}: mean over pairs {rr.mean():.4f} ± s.e. {rr.std(ddof=1)/np.sqrt(n):.4f} (sd {rr.std(ddof=1):.3f}), "
           f"range [{rr.min():.2f}, {rr.max():.2f}]; per-text means: mean {pt.mean():.3f}, sd {pt.std(ddof=1):.3f}, range [{pt.min():.2f}, {pt.max():.2f}]; "
           f"t-test vs 1: t={tt.statistic:.2f}, p={tt.pvalue:.3g}   (old {old})")
+    w("\nPer-text mean ratios at q=0.95 (definition of eq. ratio_corpus):\n")
+    w("| file | orig/surr | orig/FGN | FGN/surr |"); w("|---|---|---|---|")
+    pt = q95.assign(rs=q95.B_orig/q95.B_surr_mean, rf=q95.B_orig/q95.B_fgn, rfs=q95.B_fgn/q95.B_surr_mean).groupby("file")[["rs", "rf", "rfs"]].mean()
+    for f, row in pt.sort_values("rs").iterrows():
+        w(f"| {f} | {row.rs:.3f} | {row.rf:.3f} | {row.rfs:.4f} |")
+    for c, lab in [("rs", "orig/surr"), ("rf", "orig/FGN"), ("rfs", "FGN/surr")]:
+        tt = ttest_1samp(pt[c], 1.0)
+        w(f"- {lab}: mean over 16 texts {pt[c].mean():.4f} ± s.e. {pt[c].std(ddof=1)/4:.4f} (sd {pt[c].std(ddof=1):.4f}), "
+          f"range [{pt[c].min():.3f}, {pt[c].max():.3f}], t={tt.statistic:.2f}, p={tt.pvalue:.2g}")
     w("\nBy q (fraction of pairs):\n")
     w("| q | orig>surr | orig>FGN | full ordering | \\|FGN/surr-1\\|<0.05 |"); w("|---|---|---|---|---|")
     for q in P.q_sweep:
@@ -151,6 +160,8 @@ def main() -> int:
     for lag in sorted(a16.lag.unique()):
         s = a16[a16.lag == lag]
         w(f"| {lag} | {100*s.orig_sig.mean():.1f}% | {100*s.fgn_sig.mean():.1f}% | {100*s.surr_sig.mean():.1f}% |")
+    only = a16.assign(x=(a16.orig_sig == 1) & (a16.fgn_sig == 0)).groupby("lag").x.mean()
+    w("\n'original significant and FGN not' by lag: " + ", ".join(f"{l}: {100*v:.1f}%" for l, v in only.items()) + " (old: peak 89.7% at lag 2, >56% up to 100)")
     s1 = a16[a16.lag == 1]
     tt = ttest_1samp(s1.rho_fgn, 0.0)
     w(f"\n(old lag 1: 100% / 17.2% / 4.7%; lag 2: 89.7% orig; 'above 56% up to lag ...')")

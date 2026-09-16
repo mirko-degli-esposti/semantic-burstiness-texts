@@ -69,6 +69,30 @@ N range [55,619, 564,788]; M range [16,776, 235,933] (old: 27,000–565,000 and 
 - ratio orig/FGN: mean over pairs 1.2943 ± s.e. 0.0127 (sd 0.226), range [1.03, 3.94]; per-text means: mean 1.294, sd 0.137, range [1.17, 1.74]; t-test vs 1: t=23.26, p=1.16e-70   (old 1.244±0.010)
 - ratio FGN/surr: mean over pairs 1.0008 ± s.e. 0.0012 (sd 0.022), range [0.91, 1.09]; per-text means: mean 1.001, sd 0.003, range [1.00, 1.01]; t-test vs 1: t=0.63, p=0.527   (old 1.0035±0.0012, range [0.94,1.11], t=2.88 p=0.011)
 
+Per-text mean ratios at q=0.95 (definition of eq. ratio_corpus):
+
+| file | orig/surr | orig/FGN | FGN/surr |
+|---|---|---|---|
+| eng_pride.txt | 1.172 | 1.172 | 1.0003 |
+| davidcopperfield.txt | 1.203 | 1.203 | 1.0008 |
+| great_expectations_cut_clean.txt | 1.207 | 1.204 | 1.0023 |
+| doriangray.txt | 1.209 | 1.209 | 1.0014 |
+| olivertwist_cut_clean.txt | 1.212 | 1.209 | 1.0023 |
+| eng_sawyer.txt | 1.219 | 1.223 | 0.9975 |
+| eng_quixote.txt | 1.219 | 1.217 | 1.0019 |
+| eng_moby.txt | 1.264 | 1.268 | 0.9964 |
+| eng_ulysses.txt | 1.265 | 1.264 | 1.0008 |
+| eng_missisipi.txt | 1.278 | 1.272 | 1.0053 |
+| kipling_junglebook.txt | 1.280 | 1.281 | 0.9995 |
+| THE_ANALYSIS_OF_MIND.txt | 1.335 | 1.329 | 1.0051 |
+| darwin_beagle.txt | 1.336 | 1.339 | 0.9975 |
+| darwin_origin.txt | 1.387 | 1.381 | 1.0046 |
+| eng_wrnpc.txt | 1.394 | 1.396 | 0.9990 |
+| principia_newton.txt | 1.732 | 1.741 | 0.9978 |
+- orig/surr: mean over 16 texts 1.2945 ± s.e. 0.0337 (sd 0.1348), range [1.172, 1.732], t=8.74, p=2.8e-07
+- orig/FGN: mean over 16 texts 1.2943 ± s.e. 0.0341 (sd 0.1365), range [1.172, 1.741], t=8.62, p=3.4e-07
+- FGN/surr: mean over 16 texts 1.0008 ± s.e. 0.0007 (sd 0.0028), range [0.996, 1.005], t=1.13, p=0.28
+
 By q (fraction of pairs):
 
 | q | orig>surr | orig>FGN | full ordering | \|FGN/surr-1\|<0.05 |
@@ -121,6 +145,8 @@ k=11..20: max |rho_FGN(1)| = 0.007 (old 'all < 0.007'); bold = |rho| > ci95 = 0.
 | 100 | 56.9% | 6.6% | 5.0% |
 | 200 | 40.3% | 5.3% | 4.1% |
 | 300 | 35.0% | 6.2% | 6.2% |
+
+'original significant and FGN not' by lag: 1: 89.1%, 2: 93.1%, 5: 91.6%, 10: 90.9%, 20: 80.9%, 50: 70.0%, 100: 52.8%, 200: 37.5%, 300: 32.2% (old: peak 89.7% at lag 2, >56% up to 100)
 
 (old lag 1: 100% / 17.2% / 4.7%; lag 2: 89.7% orig; 'above 56% up to lag ...')
 - rho_k(1) orig range [0.026, 0.264] (old [0.020,0.282]); FGN range [-0.014, 0.023] (old [-0.015,0.058]); t-test FGN rho(1) vs 0: t=5.05, p=7.53e-07 (old t=5.83); orig-null gap 0.099 (old 0.093)

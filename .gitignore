@@ -3,7 +3,14 @@ __pycache__/
 .venv/
 data/vectors/
 results/runs/
-figures/
 *.npz
 .DS_Store
 results/runs/
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+paper/*.bbl
+paper/*.blg

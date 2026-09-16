@@ -1,0 +1,585 @@
+98c98
+< text--component pairs and exceeds the FGN surrogate in $99.4\%$ of
+---
+> text--component pairs and exceeds the FGN surrogate in all
+800c800,801
+< $\alpha$: DFA exponent; $\alpha_0$: FGN bisection parameter;
+---
+> $\alpha$: DFA exponent; $\alpha_0$: FGN bisection parameter
+> (resolved to $\pm0.01$ by the bisection tolerance);
+811c812
+<   0.719 & 0.770 & 0.702$^{***}$ & 1.855 \\
+---
+>   0.721 & 0.76 & 0.702$^{***}$ & 1.855 \\
+813c814
+<   0.769 & 0.804 & 0.294          & 1.888 \\
+---
+>   0.771 & 0.80 & 0.295          & 1.888 \\
+815c816
+<   0.688 & 0.735 & 0.522$^{*}$   & 1.209 \\
+---
+>   0.689 & 0.74 & 0.511$^{*}$   & 1.209 \\
+817c818
+<   0.794 & 0.839 & 0.578$^{**}$  & 1.495 \\
+---
+>   0.763 & 0.80 & 0.571$^{**}$  & 1.495 \\
+847c848
+< is $\alpha=0.719$, and the fitted FGN parameter is $\alpha_0=0.770$.
+---
+> is $\alpha=0.721$, and the fitted FGN parameter is $\alpha_0=0.76$.
+854c855
+<   \includegraphics[width=\textwidth]{figures/wrnpc/eng_wrnpc_02_spectra_comparison.png}
+---
+>   \includegraphics[width=\textwidth]{figures/eng_wrnpc/eng_wrnpc_02_spectra_comparison.png}
+876c877
+<   \includegraphics[width=0.75\textwidth]{figures/wrnpc/eng_wrnpc_07_semantic_pos_poles.png}
+---
+>   \includegraphics[width=0.75\textwidth]{figures/eng_wrnpc/eng_wrnpc_07_semantic_pos_poles.png}
+931,932c932,933
+< $M=58{,}913$ retained tokens, with $\alpha=0.769$ and
+< $\alpha_0=0.804$. PC1 explains $6.61\%$ of the variance, PC2
+---
+> $M=58{,}913$ retained tokens, with $\alpha=0.771$ and
+> $\alpha_0=0.80$. PC1 explains $6.61\%$ of the variance, PC2
+939c940
+<   \includegraphics[width=\textwidth]{figures/darwin/darwin_origin_02_spectra_comparison.png}
+---
+>   \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_02_spectra_comparison.png}
+958c959
+<   \includegraphics[width=0.75\textwidth]{figures/darwin/darwin_origin_07_semantic_pos_poles.png}
+---
+>   \includegraphics[width=0.75\textwidth]{figures/darwin_origin/darwin_origin_07_semantic_pos_poles.png}
+1018,1019c1019,1020
+< $M=64{,}410$ retained tokens, with $\alpha=0.688$ and
+< $\alpha_0=0.735$. PC1, PC2, and the first ten components account for
+---
+> $M=64{,}410$ retained tokens, with $\alpha=0.689$ and
+> $\alpha_0=0.74$. PC1, PC2, and the first ten components account for
+1026c1027
+<   \includegraphics[width=\textwidth]{figures/greatexp/great_expectations_02_spectra_comparison.png}
+---
+>   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_02_spectra_comparison.png}
+1045c1046
+<   \includegraphics[width=0.75\textwidth]{figures/greatexp/great_expectations_07_semantic_pos_poles.png}
+---
+>   \includegraphics[width=0.75\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_07_semantic_pos_poles.png}
+1105c1106
+< retained tokens, with $\alpha=0.794$ and $\alpha_0=0.839$. Its first
+---
+> retained tokens, with $\alpha=0.763$ and $\alpha_0=0.80$. Its first
+1113c1114
+<   \includegraphics[width=\textwidth]{figures/ulysses/eng_ulysses_02_spectra_comparison.png}
+---
+>   \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_02_spectra_comparison.png}
+1132c1133
+<   \includegraphics[width=0.75\textwidth]{figures/ulysses/eng_ulysses_07_semantic_pos_poles.png}
+---
+>   \includegraphics[width=0.75\textwidth]{figures/eng_ulysses/eng_ulysses_07_semantic_pos_poles.png}
+1216c1217
+< $B_3^{\rm FGN}=0.961$). This is consistent with the concentration of
+---
+> $B_3^{\rm FGN}=0.974$). This is consistent with the concentration of
+1223c1224
+<   \includegraphics[width=\textwidth]{figures/wrnpc/eng_wrnpc_03_iet_comparison.png}
+---
+>   \includegraphics[width=\textwidth]{figures/eng_wrnpc/eng_wrnpc_03_iet_comparison.png}
+1234c1235
+<   \includegraphics[width=0.75\textwidth]{figures/wrnpc/eng_wrnpc_04_burstiness_spectrum.png}
+---
+>   \includegraphics[width=0.75\textwidth]{figures/eng_wrnpc/eng_wrnpc_04_burstiness_spectrum.png}
+1252c1253
+< $r=0.294$ ($p=0.209$), shows especially clearly that the direction of
+---
+> $r=0.295$ ($p=0.207$), shows especially clearly that the direction of
+1258c1259
+<   \includegraphics[width=\textwidth]{figures/darwin/darwin_origin_03_iet_comparison.png}
+---
+>   \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_03_iet_comparison.png}
+1267c1268
+<   \includegraphics[width=0.75\textwidth]{figures/darwin/darwin_origin_04_burstiness_spectrum.png}
+---
+>   \includegraphics[width=0.75\textwidth]{figures/darwin_origin/darwin_origin_04_burstiness_spectrum.png}
+1271c1272
+<   burstiness spectra is weak ($r=0.294$, $p=0.209$). This illustrates
+---
+>   burstiness spectra is weak ($r=0.295$, $p=0.207$). This illustrates
+1282c1283
+< near $0.94$--$0.98$. The original remains above both controls over all
+---
+> in $0.95$--$1.00$. The original remains above both controls over all
+1285c1286
+< between eigenvalue and burstiness is $r=0.522$ ($p=0.018$).
+---
+> between eigenvalue and burstiness is $r=0.511$ ($p=0.021$).
+1289c1290
+<   \includegraphics[width=\textwidth]{figures/greatexp/great_expectations_03_iet_comparison.png}
+---
+>   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_03_iet_comparison.png}
+1298c1299
+<   \includegraphics[width=0.75\textwidth]{figures/greatexp/great_expectations_04_burstiness_spectrum.png}
+---
+>   \includegraphics[width=0.75\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_04_burstiness_spectrum.png}
+1314c1315
+< correlation is $r=0.578$ ($p=0.008$).
+---
+> correlation is $r=0.571$ ($p=0.009$).
+1318c1319
+<   \includegraphics[width=\textwidth]{figures/ulysses/eng_ulysses_03_iet_comparison.png}
+---
+>   \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_03_iet_comparison.png}
+1327c1328
+<   \includegraphics[width=0.75\textwidth]{figures/ulysses/eng_ulysses_04_burstiness_spectrum.png}
+---
+>   \includegraphics[width=0.75\textwidth]{figures/eng_ulysses/eng_ulysses_04_burstiness_spectrum.png}
+1336,1341c1337,1342
+< Averaged over the first 20 components, the representative-text
+< burstiness levels are approximately \emph{War and Peace}
+< ($\bar B=1.18$), \emph{Ulysses} ($\bar B\simeq1.13$),
+< \emph{On the Origin of Species} ($\bar B\simeq1.10$), and
+< \emph{Great Expectations} ($\bar B\simeq1.07$). The ordering is not a
+< simple function of either text length or rank-sequence DFA exponent.
+---
+> Averaged over the first 20 components at $q=0.95$, the representative
+> texts have $\bar B^{\rm orig}$ of $1.36$ (\emph{War and Peace}),
+> $1.35$ (\emph{On the Origin of Species}), $1.23$ (\emph{Ulysses}) and
+> $1.18$ (\emph{Great Expectations}), against $\bar B\simeq0.97$--$0.98$
+> for both null models in every case. The ordering is not a simple
+> function of either text length or rank-sequence DFA exponent.
+1360c1361
+<   \includegraphics[width=\textwidth]{figures/wrnpc/eng_wrnpc_06_quantile_sweep.png}
+---
+>   \includegraphics[width=\textwidth]{figures/eng_wrnpc/eng_wrnpc_06_quantile_sweep.png}
+1371c1372
+<   \includegraphics[width=\textwidth]{figures/darwin/darwin_origin_06_quantile_sweep.png}
+---
+>   \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_06_quantile_sweep.png}
+1380c1381
+<   \includegraphics[width=\textwidth]{figures/greatexp/great_expectations_06_quantile_sweep.png}
+---
+>   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_06_quantile_sweep.png}
+1389c1390
+<   \includegraphics[width=\textwidth]{figures/ulysses/eng_ulysses_06_quantile_sweep.png}
+---
+>   \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_06_quantile_sweep.png}
+1417,1418c1418,1419
+< Raw token counts range from approximately $27{,}000$ (Alice in
+< Wonderland) to $565{,}000$ (War and Peace), with filtered token counts
+---
+> Raw token counts range from approximately $56{,}000$ (The Picture of
+> Dorian Gray) to $565{,}000$ (War and Peace), with filtered token counts
+1420,1421c1421,1422
+< $12{,}000$ and $321{,}000$.
+< DFA scaling exponents $\alpha$ lie in the range $[0.61, 0.85]$,
+---
+> $17{,}000$ and $236{,}000$.
+> DFA scaling exponents $\alpha$ lie in the range $[0.63, 0.85]$,
+1428c1429
+< \caption{Corpus of 17 literary and scientific texts.
+---
+> \caption{Corpus of 16 literary and scientific texts.
+1432c1433,1435
+< $\alpha$: DFA scaling exponent of the rank sequence.}
+---
+> $\alpha$: DFA scaling exponent of the rank sequence.
+> $\alpha_0$: FGN generator exponent matched to $\alpha$ (bisection
+> tolerance $0.01$).}
+1435c1438
+< \begin{tabular}{llrrl}
+---
+> \begin{tabular}{llrrll}
+1437c1440
+< Title & Author & $N$ & $M$ & $\alpha$ \\
+---
+> Title & Author & $N$ & $M$ & $\alpha$ & $\alpha_0$ \\
+1439,1455c1442,1457
+< Pride and Prejudice                      & Austen       &    122{,}226 &     42{,}364 & 0.636 \\
+< Alice in Wonderland                      & Carroll      &     26{,}655 &      7{,}237 & 0.609 \\
+< Don Quixote (transl.)                    & Cervantes    &    403{,}152 &    147{,}279 & 0.713 \\
+< On the Origin of Species                 & Darwin       &    151{,}179 &     58{,}913 & 0.769 \\
+< The Voyage of the Beagle                 & Darwin       &    206{,}728 &     84{,}931 & 0.622 \\
+< David Copperfield                        & Dickens      &    363{,}557 &    134{,}409 & 0.728 \\
+< Great Expectations                       & Dickens      &    188{,}925 &     64{,}410 & 0.688 \\
+< Oliver Twist                             & Dickens      &    161{,}529 &     59{,}729 & 0.711 \\
+< Ulysses                                  & Joyce        &    264{,}165 &    101{,}489 & 0.794 \\
+< The Jungle Book                          & Kipling      &    151{,}161 &     49{,}522 & 0.771 \\
+< Moby Dick                                & Melville     &    215{,}652 &     82{,}773 & 0.700 \\
+< Principia Mathematica                    & Newton       &    112{,}225 &     26{,}347 & 0.828 \\
+< The Analysis of Mind                     & Russell      &     88{,}342 &     30{,}449 & 0.735 \\
+< War and Peace                            & Tolstoy      &    564{,}788 &    235{,}933 & 0.719 \\
+< Huckleberry Finn                         & Twain        &    145{,}924 &     52{,}741 & 0.776 \\
+< Tom Sawyer                               & Twain        &     71{,}102 &     22{,}085 & 0.805 \\
+< The Picture of Dorian Gray               & Wilde        &     55{,}619 &     16{,}776 & 0.845 \\
+---
+> Pride and Prejudice        & Austen    & 122{,}226 &  42{,}364 & 0.642 & 0.67 \\
+> Don Quixote (transl.)      & Cervantes & 403{,}152 & 147{,}279 & 0.711 & 0.76 \\
+> On the Origin of Species   & Darwin    & 151{,}179 &  58{,}913 & 0.771 & 0.80 \\
+> The Voyage of the Beagle   & Darwin    & 206{,}728 &  84{,}931 & 0.629 & 0.67 \\
+> David Copperfield          & Dickens   & 363{,}557 & 134{,}409 & 0.727 & 0.78 \\
+> Great Expectations         & Dickens   & 188{,}925 &  64{,}410 & 0.689 & 0.74 \\
+> Oliver Twist               & Dickens   & 161{,}529 &  59{,}729 & 0.711 & 0.76 \\
+> Ulysses                    & Joyce     & 264{,}165 & 101{,}489 & 0.763 & 0.80 \\
+> The Jungle Book            & Kipling   & 151{,}161 &  49{,}522 & 0.775 & 0.83 \\
+> Moby Dick                  & Melville  & 215{,}652 &  82{,}773 & 0.694 & 0.73 \\
+> Principia Mathematica      & Newton    & 112{,}225 &  26{,}347 & 0.815 & 0.85 \\
+> The Analysis of Mind       & Russell   &  88{,}342 &  30{,}449 & 0.743 & 0.76 \\
+> War and Peace              & Tolstoy   & 564{,}788 & 235{,}933 & 0.721 & 0.76 \\
+> Huckleberry Finn           & Twain     & 145{,}924 &  52{,}741 & 0.774 & 0.83 \\
+> Tom Sawyer                 & Twain     &  71{,}102 &  22{,}085 & 0.788 & 0.80 \\
+> The Picture of Dorian Gray & Wilde     &  55{,}619 &  16{,}776 & 0.845 & 0.87 \\
+1461,1464c1463,1466
+< Additional IET distributions and burstiness spectra for individual
+< texts and threshold values are available in the shared Dropbox folders
+< \texttt{iet\_figures} and \texttt{burst\_figures}. The main text reports
+< the aggregated corpus results.
+---
+> Per-text IET distributions and burstiness spectra for all texts and
+> threshold values can be regenerated with \texttt{scripts/run\_text.py}
+> in the code repository. The main text reports the aggregated corpus
+> results.
+1480,1481c1482,1483
+< $\langle B_k^{\rm orig}\rangle_{\rm texts} \in [1.12, 1.37]$
+< (mean $1.22$), while both null models cluster tightly around
+---
+> $\langle B_k^{\rm orig}\rangle_{\rm texts} \in [1.16, 1.54]$
+> (mean $1.26$), while both null models cluster tightly around
+1483,1484c1485,1486
+< $\langle B_k^{\rm surr}\rangle \in [0.972, 0.978]$ and
+< $\langle B_k^{\rm FGN}\rangle \in [0.970, 0.992]$.
+---
+> $\langle B_k^{\rm surr}\rangle \in [0.973, 0.978]$ and
+> $\langle B_k^{\rm FGN}\rangle \in [0.958, 0.983]$.
+1490,1491c1492
+<   \item $B_k^{\rm orig} > B_k^{\rm FGN}$ in $\mathbf{99.4\%}$ of pairs
+<         (2 exceptions out of 320).
+---
+>   \item $B_k^{\rm orig} > B_k^{\rm FGN}$ in $\mathbf{100\%}$ of pairs.
+1493c1494
+<         $\mathbf{95.9\%}$ of pairs.
+---
+>         $\mathbf{95.6\%}$ of pairs.
+1503,1504c1504,1505
+<   \;=\; 1.248 \;\pm\; 0.011,
+<   \qquad t = 22.8,\quad p < 10^{-12},
+---
+>   \;=\; 1.29 \;\pm\; 0.03,
+>   \qquad t = 8.7,\quad p < 10^{-6},
+1507,1511c1508,1515
+< where $\pm$ denotes the standard error of the mean over 16 texts
+< (range $[1.14, 1.30]$).
+< The original texts are thus consistently $\sim 25\%$ more bursty
+< than the geometric null, with very small variability across texts
+< (sd $= 0.044$).
+---
+> where $\pm$ denotes the standard error of the mean over 16 texts.
+> The original texts are thus on average $\sim 30\%$ more bursty
+> than the geometric null. The per-text values range from $1.17$
+> (\emph{Pride and Prejudice}) to $1.39$ (\emph{War and Peace}) for
+> fifteen of the sixteen texts, with \emph{Principia Mathematica} as
+> an outlier at $1.73$; the spread across texts (sd $= 0.13$) is
+> itself a signature of how differently topical structure is organised
+> in different works.
+1513,1514c1517,1518
+< $\langle B_k^{\rm orig}/B_k^{\rm FGN}\rangle = 1.244 \pm 0.010$,
+< statistically indistinguishable from the word-shuffled value.
+---
+> $\langle B_k^{\rm orig}/B_k^{\rm FGN}\rangle = 1.29 \pm 0.03$,
+> indistinguishable from the word-shuffled value.
+1517,1520c1521,1525
+< $\langle B_k^{\rm FGN}/B_k^{\rm surr}\rangle = 1.0035 \pm 0.0012$
+< --- a deviation from unity of $0.35\%$, negligible relative to the
+< $25\%$ orig--null gap, and attributable to estimator noise rather
+< than a systematic effect (Section~\ref{sec:corpus_diffs}).
+---
+> $\langle B_k^{\rm FGN}/B_k^{\rm surr}\rangle = 1.001 \pm 0.001$
+> (range over texts $[0.996, 1.005]$; $t = 1.1$, $p = 0.28$):
+> the FGN surrogate and the word-shuffled null are statistically
+> indistinguishable at the corpus level
+> (Section~\ref{sec:corpus_diffs}).
+1545,1546c1550,1551
+< $B_k^{\rm orig} > B_k^{\rm FGN}$ is satisfied in $\geq 99.4\%$
+< of pairs for all $q \in [0.60, 0.95]$, and at $98.7\%$ at the
+---
+> $B_k^{\rm orig} > B_k^{\rm FGN}$ is satisfied in $100\%$
+> of pairs for all $q \in [0.60, 0.95]$, and in $98.1\%$ of pairs at the
+1549,1550c1554,1556
+< $|B_k^{\rm FGN}/B_k^{\rm surr} - 1| < 0.05$ exceeds $98\%$ for
+< $q \leq 0.90$ and decreases to $85\%$ at $q = 0.99$.
+---
+> $|B_k^{\rm FGN}/B_k^{\rm surr} - 1| < 0.05$ is met by $\geq 99\%$ of
+> pairs for $q \leq 0.90$, by $96\%$ at $q = 0.95$, and decreases to
+> $73\%$ at $q = 0.99$.
+1556c1562,1563
+< at this threshold.
+---
+> at this threshold, and larger still for the shortest texts
+> ($M < 30{,}000$).
+1599,1607c1606,1611
+< is tightly concentrated around 1 (mean $1.0035$, s.e.\ $0.0012$,
+< range $[0.94, 1.11]$).
+< A one-sample $t$-test against ratio\,=\,1 gives $t = 2.88$,
+< $p = 0.011$: the ratio is statistically non-unity, but the
+< deviation ($0.35\%$) is two orders of magnitude smaller than
+< the orig--null gap ($25\%$) and is consistent with estimator
+< noise at finite sample size.
+< The distribution is symmetric with no visible skewness, with
+< no indication of a systematic directional bias.
+---
+> is tightly concentrated around 1 (mean $1.0008$, s.e.\ $0.0012$,
+> range $[0.91, 1.09]$).
+> A one-sample $t$-test against ratio\,=\,1 gives $t = 0.63$,
+> $p = 0.53$: the two null models are statistically indistinguishable,
+> and the distribution is symmetric with no indication of a
+> directional bias.
+1616c1620
+< with a consistent $\sim 25\%$ excess of the original above the
+---
+> with a $\sim 30\%$ mean excess of the original above the
+1632,1635c1636,1638
+<     tightly centred on 1 (mean $1.0035$, s.e.\ $0.0012$;
+<     $t = 2.88$, $p = 0.011$).
+<     The $0.35\%$ deviation from unity is negligible relative to the
+<     $25\%$ orig--null gap, confirming
+---
+>     tightly centred on 1 (mean $1.0008$, s.e.\ $0.0012$;
+>     $t = 0.63$, $p = 0.53$), statistically indistinguishable from
+>     unity, confirming
+1737c1740
+< \emph{Great Expectations} by Dickens ($\alpha = 0.688$), for the original text, the FGN surrogate, and
+---
+> \emph{Great Expectations} by Dickens ($\alpha = 0.689$), for the original text, the FGN surrogate, and
+1744,1745c1747,1748
+< $\pm 1.96/\sqrt{M} \approx \pm 0.006$ at lag $\ell = 1$ for all 20
+< components, with $\rho_k(1) \in [0.042, 0.179]$
+---
+> $\pm 1.96/\sqrt{M} \approx \pm 0.008$ at lag $\ell = 1$ for all 20
+> components, with $\rho_k(1) \in [0.049, 0.208]$
+1754,1755c1757,1758
+< All 20 components have $\rho_k^{\rm FGN}(1) < 0.025$, with 19 of 20
+< inside the i.i.d.\ band.
+---
+> All 20 components have $|\rho_k^{\rm FGN}(1)| \le 0.007$, inside the
+> i.i.d.\ band.
+1758c1761
+< ($\alpha = 0.688$), exhibits only negligible autocorrelation in the projected
+---
+> ($\alpha = 0.689$), exhibits only negligible autocorrelation in the projected
+1772c1775
+< $\pm 0.006$ employed in the ACF calculation.
+---
+> $\pm 0.008$ employed in the ACF calculation.
+1783,1792c1786,1795
+<  1 & \textbf{0.105} & 0.023 && 0.004 & $-$0.001 \\
+<  2 & \textbf{0.179} & 0.001 && \textbf{0.014} & $-$0.008 \\
+<  3 & \textbf{0.126} & 0.004 && \textbf{0.010} & 0.001 \\
+<  4 & \textbf{0.143} & 0.004 && \textbf{0.013} & $-$0.001 \\
+<  5 & \textbf{0.111} & 0.003 && \textbf{0.013} & 0.003 \\
+<  6 & \textbf{0.095} & 0.004 && 0.008 & $-$0.006 \\
+<  7 & \textbf{0.127} & 0.002 && 0.008 & $-$0.007 \\
+<  8 & \textbf{0.117} & $-$0.000 && 0.009 & 0.001 \\
+<  9 & \textbf{0.098} & 0.001 && 0.008 & $-$0.005 \\
+< 10 & \textbf{0.086} & $-$0.004 && \textbf{0.013} & $-$0.004 \\
+---
+>  1 & \textbf{0.060} &    0.004 &&    0.008 &    0.004 \\
+>  2 & \textbf{0.208} &    0.007 && \textbf{0.015} &    0.004 \\
+>  3 & \textbf{0.136} & $-$0.002 && \textbf{0.018} &    0.004 \\
+>  4 & \textbf{0.123} & $-$0.003 &&    0.008 & $-$0.003 \\
+>  5 & \textbf{0.086} & $-$0.002 &&    0.004 & $-$0.004 \\
+>  6 & \textbf{0.121} &    0.004 &&    0.005 & $-$0.001 \\
+>  7 & \textbf{0.127} &    0.002 &&    0.007 & $-$0.003 \\
+>  8 & \textbf{0.103} &    0.001 &&    0.004 &    0.003 \\
+>  9 & \textbf{0.082} & $-$0.002 &&    0.008 &    0.001 \\
+> 10 & \textbf{0.083} &    0.004 &&    0.003 &    0.003 \\
+1794,1795c1797
+<  & \multicolumn{5}{l}{\emph{(k=11..20 all have $|\rho^{\rm FGN}| < 0.007$
+<    at both lags)}} \\
+---
+>  & \multicolumn{5}{l}{\emph{(k=11..20 all have $|\rho^{\rm FGN}(1)| \le 0.007$)}} \\
+1800,1808d1801
+< \begin{remark}
+<   PC1 is the only displayed FGN component marginally outside the
+<   i.i.d.\ band at lag one, with $\rho_1^{\rm FGN}(1)=0.023$.
+<   Because PC1 is also the component most affected by peripheral proper
+<   nouns and transliterations in the GloVe geometry, this short-lag value
+<   is interpreted cautiously. The remaining displayed components lie
+<   within the reference band.
+< \end{remark}
+< 
+1811c1804
+<   \includegraphics[width=\textwidth]{figures/acf_decay_loglag.png}
+---
+>   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_08_acf_decay_loglag.png}
+1826c1819
+<     $\alpha = 0.688$ as the original.
+---
+>     $\alpha = 0.689$ as the original.
+1833c1826
+<   \includegraphics[width=0.72\textwidth]{figures/acf_mean_loglag.png}
+---
+>   \includegraphics[width=0.72\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_09_acf_mean_loglag.png}
+1871c1864
+<   \bar\rho^{\rm orig}(1) = 0.096 \pm 0.044,
+---
+>   \bar\rho^{\rm orig}(1) = 0.100 \pm 0.045,
+1873c1866
+<   \bar\rho^{\rm orig}(10) = 0.026 \pm 0.017,
+---
+>   \bar\rho^{\rm orig}(10) = 0.032 \pm 0.021,
+1875c1868
+<   \bar\rho^{\rm orig}(100) = 0.010 \pm 0.009,
+---
+>   \bar\rho^{\rm orig}(100) = 0.011 \pm 0.011,
+1883c1876
+<   \bar\rho^{\rm FGN}(1) = 0.003 \pm 0.009,
+---
+>   \bar\rho^{\rm FGN}(1) = 0.002 \pm 0.005,
+1888c1881
+< The ratio $\bar\rho^{\rm orig}(1) / \bar\rho^{\rm FGN}(1) \approx 33$
+---
+> The ratio $\bar\rho^{\rm orig}(1) / \bar\rho^{\rm FGN}(1) \approx 50$
+1898,1906c1891,1900
+< $17.2\%$ of FGN pairs, and $4.7\%$ of shuffled pairs.
+< The FGN figure ($17.2\%$) exceeds the expected false-positive rate
+< of $5\%$, but examination of the significant cases reveals that
+< they are overwhelmingly concentrated on PC1 --- the component most
+< affected by the geometric artefact of rare transliterated proper nouns
+< in the GloVe embedding space (Section~\ref{sec:filtering_results}).
+< Excluding PC1 reduces this excess substantially, although a small
+< short-lag residual remains. The effect is nevertheless tiny relative
+< to the separation of the original projections from both controls.
+---
+> $10.9\%$ of FGN pairs, and $4.7\%$ of shuffled pairs.
+> The FGN figure exceeds the expected false-positive rate
+> of $5\%$, but the significant cases are concentrated on PC1
+> (56\% of the PC1 pairs, against 8\% for $k \geq 4$) --- the component
+> most affected by the geometric artefact of rare transliterated proper
+> nouns in the GloVe embedding space (Section~\ref{sec:filtering_results}).
+> From lag $\ell = 2$ onwards the FGN fraction lies between $2.5\%$ and
+> $7\%$, at the false-positive level. The effect is in any case tiny
+> relative to the separation of the original projections from both
+> controls.
+1909c1903
+< $89.7\%$ at lag $\ell = 2$ and remains above $56\%$ up to lag
+---
+> $93\%$ at lag $\ell = 2$ and remains above $50\%$ up to lag
+1921,1923c1915,1917
+< has $\rho_k(1) \in [0.020, 0.282]$ with mean $0.096$, all
+< pairs significant; the FGN has $\rho_k(1) \in [-0.015, 0.058]$
+< with mean $0.003$, the vast majority inside the i.i.d.\ band.
+---
+> has $\rho_k(1) \in [0.026, 0.264]$ with mean $0.100$, all
+> pairs significant; the FGN has $\rho_k(1) \in [-0.014, 0.023]$
+> with mean $0.002$, the vast majority inside the i.i.d.\ band.
+1928,1929c1922,1923
+< $t = 5.83$, $p < 0.001$: the mean is statistically non-zero but
+< negligibly small ($0.003$) relative to the orig--null gap ($0.093$).
+---
+> $t = 5.05$, $p < 10^{-6}$: the mean is statistically non-zero but
+> negligibly small ($0.002$) relative to the orig--null gap ($0.098$).
+1994c1988
+<     Both are centred near zero; a $t$-test gives $t = 5.83$
+---
+>     Both are centred near zero; a $t$-test gives $t = 5.05$
+1996c1990
+<     negligible ($0.003$) relative to the orig--null gap ($0.093$).
+---
+>     negligible ($0.002$) relative to the orig--null gap ($0.098$).
+2031c2025
+< \emph{Great Expectations} by Dickens ($\alpha = 0.688$).
+---
+> \emph{Great Expectations} by Dickens ($\alpha = 0.689$).
+2037c2031
+<         $\bar\alpha^{\rm orig} = 0.637 \pm 0.032$.
+---
+>         $\bar\alpha^{\rm orig} = 0.623 \pm 0.034$.
+2044,2046c2038,2041
+<         $\bar\alpha^{\rm FGN} = 0.502 \pm 0.015$.
+<         Despite having a DFA exponent $\alpha \approx 0.71$
+<         in the rank sequence by construction, the FGN projects
+---
+>         $\bar\alpha^{\rm FGN} = 0.499 \pm 0.014$.
+>         Despite having a matched DFA exponent ($\alpha=0.689$,
+>         generator exponent $\alpha_0=0.74$) in the rank sequence
+>         by construction, the FGN projects
+2050c2045
+<         0.499 \pm 0.002$, consistent with $\alpha = 0.5$
+---
+>         0.499 \pm 0.004$, consistent with $\alpha = 0.5$
+2057c2052
+< $x_t^{(k)}$ for \emph{Great Expectations} (Dickens, $\alpha=0.688$).
+---
+> $x_t^{(k)}$ for \emph{Great Expectations} (Dickens, $\alpha=0.689$).
+2071,2090c2066,2085
+<  1 & 0.607* & 0.547$\sim$ & 0.502 &
+< 11 & 0.620* & 0.488$\sim$ & 0.504 \\
+<  2 & 0.684* & 0.480$\sim$ & 0.500 &
+< 12 & 0.626* & 0.507$\sim$ & 0.501 \\
+<  3 & 0.637* & 0.516$\sim$ & 0.502 &
+< 13 & 0.656* & 0.480$\sim$ & 0.500 \\
+<  4 & 0.698* & 0.507$\sim$ & 0.499 &
+< 14 & 0.590* & 0.503$\sim$ & 0.502 \\
+<  5 & 0.648* & 0.495$\sim$ & 0.496 &
+< 15 & 0.643* & 0.491$\sim$ & 0.499 \\
+<  6 & 0.648* & 0.496$\sim$ & 0.501 &
+< 16 & 0.575* & 0.493$\sim$ & 0.500 \\
+<  7 & 0.630* & 0.496$\sim$ & 0.503 &
+< 17 & 0.682* & 0.513$\sim$ & 0.499 \\
+<  8 & 0.629* & 0.500$\sim$ & 0.497 &
+< 18 & 0.624* & 0.502$\sim$ & 0.497 \\
+<  9 & 0.617* & 0.486$\sim$ & 0.494 &
+< 19 & 0.665* & 0.510$\sim$ & 0.497 \\
+< 10 & 0.665* & 0.510$\sim$ & 0.499 &
+< 20 & 0.595* & 0.522$\sim$ & 0.497 \\
+---
+>  1 & 0.605* & 0.511$\sim$ & 0.501 &
+> 11 & 0.575* & 0.506$\sim$ & 0.500 \\
+>  2 & 0.681* & 0.500$\sim$ & 0.491 &
+> 12 & 0.642* & 0.493$\sim$ & 0.502 \\
+>  3 & 0.693* & 0.518$\sim$ & 0.495 &
+> 13 & 0.564* & 0.512$\sim$ & 0.500 \\
+>  4 & 0.634* & 0.514$\sim$ & 0.499 &
+> 14 & 0.595* & 0.484$\sim$ & 0.497 \\
+>  5 & 0.642* & 0.486$\sim$ & 0.496 &
+> 15 & 0.645* & 0.486$\sim$ & 0.497 \\
+>  6 & 0.633* & 0.515$\sim$ & 0.501 &
+> 16 & 0.579* & 0.505$\sim$ & 0.494 \\
+>  7 & 0.647* & 0.504$\sim$ & 0.498 &
+> 17 & 0.586* & 0.511$\sim$ & 0.493 \\
+>  8 & 0.633* & 0.469$\sim$ & 0.497 &
+> 18 & 0.617* & 0.515$\sim$ & 0.507 \\
+>  9 & 0.643* & 0.482$\sim$ & 0.494 &
+> 19 & 0.595* & 0.489$\sim$ & 0.505 \\
+> 10 & 0.630* & 0.482$\sim$ & 0.503 &
+> 20 & 0.622* & 0.495$\sim$ & 0.502 \\
+2093,2095c2088,2090
+< \multicolumn{4}{l}{$\bar\alpha^{\rm orig}=0.637\pm0.032$ \quad
+<                    $\bar\alpha^{\rm FGN}=0.502\pm0.015$ \quad
+<                    $\bar\alpha^{\rm surr}=0.499\pm0.002$}\\
+---
+> \multicolumn{4}{l}{$\bar\alpha^{\rm orig}=0.623\pm0.034$ \quad
+>                    $\bar\alpha^{\rm FGN}=0.499\pm0.014$ \quad
+>                    $\bar\alpha^{\rm surr}=0.499\pm0.004$}\\
+2103c2098
+< slope $\alpha_k \approx 0.63$--$0.70$, visibly steeper than
+---
+> slope $\alpha_k \approx 0.60$--$0.69$, visibly steeper than
+2109c2104
+<   The exponents $\alpha_k^{\rm orig} \in [0.575, 0.698]$
+---
+>   The exponents $\alpha_k^{\rm orig} \in [0.564, 0.693]$
+2111,2113c2106,2109
+<   Some higher-indexed components (e.g.\ PC17: $\alpha=0.682$,
+<   PC19: $\alpha=0.665$) have stronger long-range correlations
+<   than lower-indexed ones (e.g.\ PC16: $\alpha=0.575$).
+---
+>   Some higher-indexed components (e.g.\ PC12: $\alpha=0.642$,
+>   PC15: $\alpha=0.645$) have stronger long-range correlations
+>   than some lower-indexed ones (e.g.\ PC11: $\alpha=0.575$,
+>   PC13: $\alpha=0.564$).
+2146c2142
+<   \includegraphics[width=\textwidth]{figures/dfa_projections_spectrum.png}
+---
+>   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_10_dfa_projections_spectrum.png}
+2164c2160
+<   \includegraphics[width=\textwidth]{figures/dfa_projections_loglog.png}
+---
+>   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_11_dfa_projections_loglog.png}
