@@ -20,7 +20,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from .dfa import text_alpha, zipf_ranks, zipf_table, dfa_exponent
+from .dfa import DFA_L_MIN, DFA_N_SCALES, dfa_exponent, rank_l_max, text_alpha, zipf_ranks, zipf_table
 
 BISECT_LOW, BISECT_HIGH, BISECT_TOL, BISECT_MAX_ITER = 0.55, 0.92, 1e-2, 20
 
@@ -75,7 +75,9 @@ def fgn_surrogate(tokens: list[str], seed: int = 42,
     """Build the FGN surrogate of a token sequence, matching its DFA exponent."""
     n = len(tokens)
     alpha = text_alpha(tokens)
+    l_max = rank_l_max(n)          # same scale range for text and surrogate
     raw, words = _rank_layout(tokens)
+    measure = lambda r: dfa_exponent(r, DFA_L_MIN, l_max, DFA_N_SCALES)
     log = []
     for restart in range(max_restarts):
         s = seed + restart
@@ -83,8 +85,10 @@ def fgn_surrogate(tokens: list[str], seed: int = 42,
         a1, a2 = low, high
         for it in range(max_iter):
             am = 0.5 * (a1 + a2)
-            a_m = dfa_exponent(surrogate_ranks(am, raw, fx))
+            a_m = measure(surrogate_ranks(am, raw, fx))
             log.append((s, it, am, a_m))
+            if not np.isfinite(a_m):
+                raise RuntimeError(f"DFA of the surrogate is undefined (n={n} tokens too short)")
             if abs(a_m - alpha) < tol:
                 ranks = surrogate_ranks(am, raw, fx)
                 return FGNSurrogate([words[r - 1] for r in ranks], alpha, am, a_m, s, log)

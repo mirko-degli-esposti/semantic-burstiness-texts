@@ -48,18 +48,29 @@ def dfa_fluctuation(profile: np.ndarray, L: int) -> float:
 
 def dfa(series: np.ndarray, l_min: int = DFA_L_MIN, l_max: int = DFA_L_MAX,
         n: int = DFA_N_SCALES) -> tuple[np.ndarray, np.ndarray]:
-    """Return (scales, F) for the order-1 DFA of `series`."""
+    """Return (scales, F) for the order-1 DFA of `series`.
+
+    Scales are restricted to those with at least two non-overlapping windows and a
+    strictly positive fluctuation; short series therefore return fewer than n scales
+    instead of NaNs.
+    """
     x = np.asarray(series, dtype=np.float64)
     profile = np.cumsum(x - x.mean())
-    Ls = dfa_scales(l_min, l_max, n)
+    N = len(x)
+    Ls = np.array([L for L in dfa_scales(l_min, min(l_max, N // 2), n) if N // L >= 2])
+    if len(Ls) == 0:
+        return Ls, np.array([])
     F = np.array([dfa_fluctuation(profile, L) for L in Ls])
-    return Ls, F
+    ok = F > 0
+    return Ls[ok], F[ok]
 
 
 def dfa_exponent(series: np.ndarray, l_min: int = DFA_L_MIN, l_max: int = DFA_L_MAX,
                  n: int = DFA_N_SCALES) -> float:
     """Slope of log F vs log L."""
     Ls, F = dfa(series, l_min, l_max, n)
+    if len(Ls) < 3:
+        return np.nan
     return float(linregress(np.log(Ls), np.log(F)).slope)
 
 
@@ -80,6 +91,15 @@ def projection_alpha(x: np.ndarray, l_min: int = PROJ_L_MIN, n: int = PROJ_N_SCA
     return float(linregress(np.log(Ls[ok]), np.log(F[ok])).slope)
 
 
+def rank_l_max(n_tokens: int, l_max: int = DFA_L_MAX) -> int:
+    """Largest DFA window for a rank series of n_tokens: at most n/4, so that the
+    largest scale still has four windows.  Returns DFA_L_MAX for n >= 40,000, i.e. for
+    every text of the literary corpus."""
+    return min(l_max, max(DFA_L_MIN * 2, n_tokens // 4))
+
+
 def text_alpha(tokens: list[str]) -> float:
-    """DFA exponent of the Zipf-rank series of a token sequence."""
-    return dfa_exponent(zipf_ranks(tokens))
+    """DFA exponent of the Zipf-rank series of a token sequence.
+    The largest scale is capped at N/4 (irrelevant for N >= 40,000, i.e. for the whole
+    literary corpus; it matters for short texts such as encyclopedia entries)."""
+    return dfa_exponent(zipf_ranks(tokens), DFA_L_MIN, rank_l_max(len(tokens)), DFA_N_SCALES)

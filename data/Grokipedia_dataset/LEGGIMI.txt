@@ -1,0 +1,91 @@
+DATASET GROKIPEDIA
+Tesi: "Fra ordine e disordine: proprietà statistiche del linguaggio generato
+da Large Language Model" (Samuele Zurlo, Università di Bologna, Fisica)
+============================================================================
+
+Le stesse 40 voci, abbinate per titolo a quelle di Wikipedia, in due versioni:
+Grokipedia com'è oggi e la prima versione pubblica (v0.1, ottobre 2025).
+
+
+1_grokipedia_attuale/
+---------------------
+  html_originali/   41 pagine HTML scaricate da https://grokipedia.com/page/<titolo>
+                    il 13 agosto 2026 (40 voci) e il 15 agosto 2026 (Istanbul).
+                    Istanbul.html non fa parte dei 40 titoli analizzati.
+
+  testo_estratto/   40 file .txt: il testo effettivamente analizzato, ricavato
+                    dagli HTML con lo stesso estrattore del notebook
+                    altmann_tre_corpora.ipynb (funzione carica_grok_oggi):
+                    - si tiene solo il corpo della voce, cioè i blocchi
+                      <span data-tts-block="true">;
+                    - si tolgono indice di navigazione, footer e marcatori di
+                      citazione [n], che l'estratto di Wikipedia non contiene.
+                    Nei notebook questo testo viene ricalcolato al volo dagli
+                    HTML; qui è salvato su file per comodità di lettura.
+
+  ATTENZIONE: questa versione NON è riscaricabile. Grokipedia non pubblica una
+  cronologia delle revisioni (history/versions/revisions danno 404) e riscrive
+  le voci in loco. Questi file sono l'unica copia del testo usato.
+  dateModified dichiarato dalle pagine: dal 14/01/2026 al 25/04/2026.
+
+
+2_grokipedia_v0.1/
+------------------
+  testo_estratto/          40 file .txt: il corpo delle voci estratto
+                           dall'elemento <article> delle catture Wayback.
+
+  catture_wayback_grezze/  41 file .bin: le catture originali, come restituite
+                           da Internet Archive (in genere compresse gzip; si
+                           leggono con gzip.decompress).
+                           Il nome del file è sha256(url + timestamp)[:16].
+
+  indice_catture_wayback.csv   abbina ogni .bin a titolo, timestamp e URL
+                               della cattura (tutte del 28-30 ottobre 2025).
+
+  NOTA: nella v0.1 la voce "Buddhism" è copiata da Wikipedia per l'84%
+  (3_metadati/paternita_v01.csv). Per questo è esclusa dal confronto sui tre
+  corpora, che usa quindi 39 titoli.
+
+
+3_metadati/
+-----------
+  riepilogo.csv              tabella per titolo: lunghezze, sovrapposizione con
+                             Wikipedia, catture, similarità v0.1-attuale, usabilità
+  riepilogo.txt              sintesi testuale del confronto
+  metadati_grokipedia.csv    dateModified e dicitura "Fact-checked by Grok"
+  revisioni_wayback.csv      catture su Internet Archive, prima e ultima,
+                             similarità fra v0.1 e versione attuale
+  paternita_v01.csv          quanto della v0.1 e dell'attuale è presente in Wikipedia
+  sovrapposizione.csv        sovrapposizione di 8-grammi, versione attuale vs Wikipedia
+  confronto_testo.csv        indicatori di qualità dell'estrazione (camelCase,
+                             frasi per 1000 caratteri, lunghezza dei token, ...)
+
+
+IMPRONTE SHA-256 AGGREGATE
+--------------------------
+Si elencano i file della cartella in ordine alfabetico, una riga
+"nome sha256" ciascuno, e si calcola lo SHA-256 dell'elenco. I valori
+coincidono con quelli dichiarati in FONTI.md.
+
+  1_grokipedia_attuale/html_originali          41 file
+    1570642064d37ab77f87a593175337d60ef7f810c7c2cd94e1bcae3963fd1892
+  1_grokipedia_attuale/testo_estratto          40 file
+    9460080fadb7e5707ccc0c1793371f953514afc16cc3dde1da07ee6ace256f60
+  2_grokipedia_v0.1/testo_estratto             40 file
+    cae1b45cd29990b140ccce0cf70783435ce0f332e96227cec070e6e939597191
+  2_grokipedia_v0.1/catture_wayback_grezze     41 file
+    f8cb016f429f89e49e1b899edfbed21e9cde747d9aebd82fc74a8fbccd6814bf
+
+
+PERCHÉ NON IL DUMP htriedman/grokipedia-v0.1-dump
+-------------------------------------------------
+Nel dump le parole adiacenti ai link risultano incollate
+("relatedautomobileswhich"), e dei 40 titoli usati ne contiene solo uno (Rome).
+Per questo le voci sono state prese dal sito e da Internet Archive.
+
+
+USO
+---
+I testi sono materiale di terzi (Grokipedia). Sono forniti per la valutazione
+della tesi e, come spiegato in FONTI.md, non sono inclusi nel repository
+pubblico per motivi di licenza.

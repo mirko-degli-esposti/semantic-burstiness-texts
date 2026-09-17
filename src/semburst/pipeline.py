@@ -51,6 +51,57 @@ def analyse_text(path: str | Path, wv, params: Params = DEFAULT) -> TextAnalysis
     return TextAnalysis(tt, len(vecs), pca, perms, fgn, proj_fgn, len(vecs_fgn))
 
 
+def analyse_blocks(paths, wv, params: Params = DEFAULT, center_blocks: bool = True,
+                   name: str = "concat") -> TextAnalysis:
+    """Analyse a concatenation of several texts (e.g. encyclopedia entries) as one series.
+
+    With center_blocks=True each block's trajectory is centred on its own mean before
+    concatenation, so the between-block covariance vanishes and the PCA captures
+    within-block semantic directions only.  The word-shuffled null permutes tokens
+    within each block; the FGN surrogate is built on the concatenated token stream
+    (its DFA exponent measured on the concatenation) and re-split into the original
+    block lengths for centring.  Frequency filtering (top-R, min_freq) uses the pooled
+    frequencies of the concatenation.
+    """
+    from collections import Counter
+    from .text import load_raw, tokenise
+
+    toks_all_blocks = [tokenise(load_raw(p)) for p in paths]
+    tokens_all = [t for b in toks_all_blocks for t in b]
+    freq = Counter(tokens_all)
+    stopset = set(w for w, _ in freq.most_common(params.max_freq_rank))
+    keep = lambda t: t not in stopset and freq[t] >= params.min_freq
+    tokens_filtered = [t for t in tokens_all if keep(t)]
+    tt = TokenisedText(name, tokens_all, tokens_filtered, freq, stopset)
+
+    def centred_vecs(token_blocks):
+        blocks, lengths = [], []
+        for b in token_blocks:
+            v, _ = build_trajectory([t for t in b if keep(t)], wv)
+            if len(v) == 0:
+                continue
+            if center_blocks:
+                v = v - v.mean(axis=0)
+            blocks.append(v); lengths.append(len(v))
+        return np.concatenate(blocks), lengths
+
+    vecs, lengths = centred_vecs(toks_all_blocks)
+    pca = fit_pca(vecs, params.k_burst)
+    bounds = np.cumsum([0] + lengths)
+    perms = []
+    for s in range(params.n_surr):
+        rng = np.random.default_rng(seed=s)
+        perms.append(np.concatenate([bounds[i] + rng.permutation(lengths[i]) for i in range(len(lengths))]))
+    fgn = fgn_surrogate(tokens_all, seed=params.fgn_seed)
+    raw_bounds = np.cumsum([0] + [len(b) for b in toks_all_blocks])
+    fgn_blocks = [fgn.tokens[raw_bounds[i]:raw_bounds[i + 1]] for i in range(len(toks_all_blocks))]
+    vecs_fgn, _ = centred_vecs(fgn_blocks)
+    proj_fgn = project(vecs_fgn, pca)
+    a = TextAnalysis(tt, len(vecs), pca, perms, fgn, proj_fgn, len(vecs_fgn))
+    a.block_lengths = lengths
+    return a
+
+
 def _r(x, nd=4):
     return "" if x is None or (isinstance(x, float) and np.isnan(x)) else round(float(x), nd)
 
