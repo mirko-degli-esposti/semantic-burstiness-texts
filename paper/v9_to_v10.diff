@@ -1,0 +1,326 @@
+21a22
+> \usepackage{rotating}
+852,853c853
+< The semantic poles in Figure~\ref{fig:wrnpc_semantic} and
+< Table~\ref{tab:wrnpc_pc} reveal two especially clear contrasts. PC2
+---
+> The semantic poles in Table~\ref{tab:wrnpc_pc} reveal two especially clear contrasts. PC2
+863,872d862
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=0.75\textwidth]{figures/eng_wrnpc/eng_wrnpc_07_semantic_pos_poles.png}
+<   \caption{Positive poles of PC1--PC4 for \emph{War and Peace}
+<   ($R=100$, top-15 word types by projection score). PC2 captures the
+<   military versus personal-emotional contrast, while PC3 contrasts
+<   physical action with philosophical and moral reflection.}
+<   \label{fig:wrnpc_semantic}
+< \end{figure}
+< 
+926,934d915
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_02_spectra_comparison.png}
+<   \caption{Eigenvalue spectra and cumulative explained variance
+<   for \emph{On the Origin of Species}.
+<   Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
+<   \label{fig:darwin_spectra}
+< \end{figure}
+< 
+942,954c923
+< classification and synthesis. These poles are shown in
+< Figure~\ref{fig:darwin_semantic} and Table~\ref{tab:darwin_pc}.
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=0.75\textwidth]{figures/darwin_origin/darwin_origin_07_semantic_pos_poles.png}
+<   \caption{Positive poles of PC1--PC4 for \emph{On the Origin of
+<   Species}.
+<   PC2 separates geographical distribution chapters from
+<   theoretical reasoning chapters; PC3 separates field-observation
+<   passages from abstract synthesis.}
+<   \label{fig:darwin_semantic}
+< \end{figure}
+---
+> classification and synthesis. These poles are listed in Table~\ref{tab:darwin_pc}.
+1013,1021d981
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_02_spectra_comparison.png}
+<   \caption{Eigenvalue spectra and cumulative explained variance
+<   for \emph{Great Expectations}.
+<   Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
+<   \label{fig:greatexp_spectra}
+< \end{figure}
+< 
+1029,1041c989
+< corresponding poles are shown in Figure~\ref{fig:greatexp_semantic} and
+< Table~\ref{tab:greatexp_pc}.
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=0.75\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_07_semantic_pos_poles.png}
+<   \caption{Positive poles of PC1--PC4 for
+<   \emph{Great Expectations}.
+<   PC2 captures the spatial-action vs introspection axis;
+<   PC3 captures the body vs legal-institutional contrast
+<   that structures Pip's social trajectory.}
+<   \label{fig:greatexp_semantic}
+< \end{figure}
+---
+> corresponding poles are listed in Table~\ref{tab:greatexp_pc}.
+1100,1109d1047
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_02_spectra_comparison.png}
+<   \caption{Eigenvalue spectra and cumulative explained variance
+<   for \emph{Ulysses}.
+<   The more gradual eigenvalue decay reflects the greater stylistic
+<   diversity of the 18 episodes compared to the other texts.}
+<   \label{fig:ulysses_spectra}
+< \end{figure}
+< 
+1116,1127c1054
+< semantic poles are shown in Figure~\ref{fig:ulysses_semantic} and
+< Table~\ref{tab:ulysses_pc}.
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=0.75\textwidth]{figures/eng_ulysses/eng_ulysses_07_semantic_pos_poles.png}
+<   \caption{Positive poles of PC1--PC4 for \emph{Ulysses}.
+<   PC2 captures the formal/public vs intimate/private axis;
+<   PC3 captures physical-material description vs relational-domestic
+<   vocabulary.}
+<   \label{fig:ulysses_semantic}
+< \end{figure}
+---
+> semantic poles are listed in Table~\ref{tab:ulysses_pc}.
+1188,1189c1115,1117
+< distributions. Figures~\ref{fig:wrnpc_iet}--\ref{fig:ulysses_burst}
+< show the representative-text evidence. In every text, the original
+---
+> distributions. Figure~\ref{fig:burst_panel} and
+> Figures~\ref{fig:wrnpc_iet}, \ref{fig:darwin_iet}, \ref{fig:greatexp_iet}
+> and \ref{fig:ulysses_iet} show the representative-text evidence. In every text, the original
+1201c1129
+< Figure~\ref{fig:wrnpc_burst} is above both controls for all 20
+---
+> Figure~\ref{fig:burst_panel}A is above both controls for all 20
+1223,1230c1151,1162
+<   \includegraphics[width=0.75\textwidth]{figures/eng_wrnpc/eng_wrnpc_04_burstiness_spectrum.png}
+<   \caption{Component-resolved burstiness spectrum for
+<   \emph{War and Peace} at $q=0.95$. The original (blue circles) is
+<   above the FGN surrogate (green triangles), the word-shuffled
+<   mean$\pm2\sigma$ band (red), and the geometric baseline
+<   $\sqrt{q}\simeq0.975$ for all 20 components. Burstiness is largest
+<   among the first few components but is not monotone in PCA rank.}
+<   \label{fig:wrnpc_burst}
+---
+>   \includegraphics[width=\textwidth]{figures/panel_burstiness_spectra.png}
+>   \caption{Component-resolved burstiness spectra at $q=0.95$ for the four
+>   representative texts: \textbf{A} \emph{War and Peace},
+>   \textbf{B} \emph{On the Origin of Species},
+>   \textbf{C} \emph{Great Expectations}, \textbf{D} \emph{Ulysses}.
+>   In every panel the original (blue circles) lies above the FGN surrogate
+>   (green triangles), the word-shuffled mean$\pm2\sigma$ band (red), and the
+>   geometric baseline $\sqrt{q}\simeq0.975$, for all 20 components.
+>   The position of the maximum differs between texts (PC3, PC6, PC3 and PC2
+>   respectively) and burstiness is not monotone in PCA rank, because PCA
+>   orders components by variance rather than by temporal clustering.}
+>   \label{fig:burst_panel}
+1245,1265d1176
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_03_iet_comparison.png}
+<   \caption{Inter-event time distributions for PC1, PC2, PC3 of
+<   \emph{On the Origin of Species} ($q=0.95$).
+<   Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+<   \label{fig:darwin_iet}
+< \end{figure}
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=0.75\textwidth]{figures/darwin_origin/darwin_origin_04_burstiness_spectrum.png}
+<   \caption{Component-resolved burstiness spectrum for
+<   \emph{On the Origin of Species} at $q=0.95$. The largest value is
+<   at PC2 ($B_2=1.888$), whereas the correlation between eigenvalue and
+<   burstiness spectra is weak ($r=0.295$, $p=0.207$). This illustrates
+<   that semantic variance and temporal clustering are related but
+<   distinct component properties.}
+<   \label{fig:darwin_burst}
+< \end{figure}
+< 
+1272c1183
+< 20 components (Figure~\ref{fig:greatexp_burst}); the spectrum is flatter
+---
+> 20 components (Figure~\ref{fig:burst_panel}C); the spectrum is flatter
+1276,1294d1186
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_03_iet_comparison.png}
+<   \caption{Inter-event time distributions for PC1, PC2, PC3
+<   of \emph{Great Expectations} ($q=0.95$).
+<   Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+<   \label{fig:greatexp_iet}
+< \end{figure}
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=0.75\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_04_burstiness_spectrum.png}
+<   \caption{Component-resolved burstiness spectrum for
+<   \emph{Great Expectations} at $q=0.95$. The original remains above
+<   both controls and the geometric baseline across all 20 components,
+<   with a comparatively flatter spectrum than in \emph{War and Peace}.}
+<   \label{fig:greatexp_burst}
+< \end{figure}
+< 
+1301c1193
+< (Figure~\ref{fig:ulysses_burst}). The original exceeds both controls
+---
+> (Figure~\ref{fig:burst_panel}D). The original exceeds both controls
+1305,1324d1196
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_03_iet_comparison.png}
+<   \caption{Inter-event time distributions for PC1, PC2, PC3
+<   of \emph{Ulysses} ($q=0.95$).
+<   Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+<   \label{fig:ulysses_iet}
+< \end{figure}
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=0.75\textwidth]{figures/eng_ulysses/eng_ulysses_04_burstiness_spectrum.png}
+<   \caption{Component-resolved burstiness spectrum for
+<   \emph{Ulysses} at $q=0.95$. The maximum occurs at PC2
+<   ($B_2=1.495$), the formal-public versus intimate-private direction.
+<   The original exceeds both controls throughout the first 20
+<   components.}
+<   \label{fig:ulysses_burst}
+< \end{figure}
+< 
+1339,1341c1211,1214
+< Figures~\ref{fig:wrnpc_sweep}--\ref{fig:ulysses_sweep} show the mean
+< burstiness over $k=1,\ldots,20$ and the fraction of components for which
+< the original exceeds both controls as $q$ varies from $0.60$ to $0.99$.
+---
+> Figure~\ref{fig:sweep_panel} shows the mean
+> burstiness over $k=1,\ldots,20$ as $q$ varies from $0.60$ to $0.99$;
+> the corpus-level version of the ordering fraction is given in
+> Section~\ref{sec:corpus_robustness}.
+1349,1382c1222,1234
+<   \includegraphics[width=\textwidth]{figures/eng_wrnpc/eng_wrnpc_06_quantile_sweep.png}
+<   \caption{Quantile sweep for \emph{War and Peace}.
+<   Left: mean $B_k$ over $k=1,\ldots,20$ as a function of $q$.
+<   Right: fraction of components satisfying the full ordering
+<   $B_k^{\rm orig} > B_k^{\rm FGN}$ and $B_k^{\rm orig} >
+<   B_k^{\rm surr}$ ($100\%$ across all $q$).}
+<   \label{fig:wrnpc_sweep}
+< \end{figure}
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_06_quantile_sweep.png}
+<   \caption{Quantile sweep for \emph{On the Origin of Species}.
+<   Full ordering satisfied for $100\%$ of components across
+<   all $q \in [0.60, 0.99]$.}
+<   \label{fig:darwin_sweep}
+< \end{figure}
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_06_quantile_sweep.png}
+<   \caption{Quantile sweep for \emph{Great Expectations}.
+<   Full ordering satisfied for $100\%$ of components across
+<   all $q \in [0.60, 0.99]$.}
+<   \label{fig:greatexp_sweep}
+< \end{figure}
+< 
+< \begin{figure}[htbp]
+<   \centering
+<   \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_06_quantile_sweep.png}
+<   \caption{Quantile sweep for \emph{Ulysses}.
+<   Full ordering satisfied for $100\%$ of components across
+<   all $q \in [0.60, 0.99]$.}
+<   \label{fig:ulysses_sweep}
+---
+>   \includegraphics[width=\textwidth]{figures/panel_quantile_sweep.png}
+>   \caption{Mean burstiness over $k=1,\ldots,20$ as a function of the
+>   threshold quantile $q$, for the four representative texts:
+>   \textbf{A} \emph{War and Peace}, \textbf{B} \emph{On the Origin of
+>   Species}, \textbf{C} \emph{Great Expectations}, \textbf{D}
+>   \emph{Ulysses}. The original stays above both controls and above the
+>   geometric baseline $\sqrt{q}$ throughout $q \in [0.60, 0.99]$, and the
+>   full ordering $B_k^{\rm orig} > B_k^{\rm FGN}$ and
+>   $B_k^{\rm orig} > B_k^{\rm surr}$ holds for all 20 components at every
+>   displayed $q$ in each text. Absolute burstiness grows towards more
+>   extreme thresholds, as rare visits to the upper tail accentuate
+>   episode-to-episode clustering.}
+>   \label{fig:sweep_panel}
+2280a2133,2199
+> 
+> \section{Additional per-text figures}
+> \label{app:pertext}
+> 
+> Eigenvalue spectra and inter-event-time distributions for the three
+> representative texts other than \emph{War and Peace}, whose
+> corresponding figures appear in the main text
+> (Figures~\ref{fig:wrnpc_spectra} and~\ref{fig:wrnpc_iet}).
+> Equivalent figures for every text of the corpus, at any threshold
+> quantile, can be regenerated with \texttt{scripts/run\_text.py} in the
+> code repository.
+> 
+> \begin{figure}[htbp]
+>   \centering
+>   \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_02_spectra_comparison.png}
+>   \caption{Eigenvalue spectra and cumulative explained variance
+>   for \emph{On the Origin of Species}.
+>   Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
+>   \label{fig:darwin_spectra}
+> \end{figure}
+> 
+> \begin{figure}[htbp]
+>   \centering
+>   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_02_spectra_comparison.png}
+>   \caption{Eigenvalue spectra and cumulative explained variance
+>   for \emph{Great Expectations}.
+>   Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
+>   \label{fig:greatexp_spectra}
+> \end{figure}
+> 
+> \begin{figure}[htbp]
+>   \centering
+>   \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_02_spectra_comparison.png}
+>   \caption{Eigenvalue spectra and cumulative explained variance
+>   for \emph{Ulysses}.
+>   The more gradual eigenvalue decay reflects the greater stylistic
+>   diversity of the 18 episodes compared to the other texts.}
+>   \label{fig:ulysses_spectra}
+> \end{figure}
+> 
+> \begin{figure}[htbp]
+>   \centering
+>   \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_03_iet_comparison.png}
+>   \caption{Inter-event time distributions for PC1, PC2, PC3 of
+>   \emph{On the Origin of Species} ($q=0.95$).
+>   Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+>   \label{fig:darwin_iet}
+> \end{figure}
+> 
+> \begin{figure}[htbp]
+>   \centering
+>   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_03_iet_comparison.png}
+>   \caption{Inter-event time distributions for PC1, PC2, PC3
+>   of \emph{Great Expectations} ($q=0.95$).
+>   Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+>   \label{fig:greatexp_iet}
+> \end{figure}
+> 
+> \begin{figure}[htbp]
+>   \centering
+>   \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_03_iet_comparison.png}
+>   \caption{Inter-event time distributions for PC1, PC2, PC3
+>   of \emph{Ulysses} ($q=0.95$).
+>   Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+>   \label{fig:ulysses_iet}
+> \end{figure}
+> 

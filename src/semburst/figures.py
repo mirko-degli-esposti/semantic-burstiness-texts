@@ -223,3 +223,111 @@ def fig_dfa_loglog(a: TextAnalysis, n_pc: int = 3):
             ax.set_ylabel("$F(s)$")
     fig.suptitle(f"DFA fluctuation function — {_pretty(a.name)}"); fig.tight_layout()
     return fig
+
+
+# ── Multi-text panels: one figure for the four showcase texts ─────────────────
+def _burstiness_axes(ax, a: TextAnalysis, params: Params = DEFAULT, legend: bool = False):
+    q = params.quantile
+    th = thresholds(a.pca.proj, q)
+    b_o = burstiness_spectrum(a.pca.proj, th)
+    b_sm, b_ss = shuffled_burstiness(a.pca.proj, a.perms, th)
+    b_f = burstiness_spectrum(a.proj_fgn, th)
+    ks = np.arange(1, params.k_burst + 1)
+    ax.plot(ks, b_o, "o-", color=C_ORIG, ms=5, lw=1.6, zorder=4, label="Original")
+    ax.errorbar(ks, b_sm, yerr=2 * b_ss, fmt="s--", color=C_SURR, ms=4, lw=1.1, capsize=3,
+                label=r"Word-shuffled mean $\pm2\sigma$ ($n=%d$)" % len(a.perms))
+    ax.fill_between(ks, b_sm - 2 * b_ss, b_sm + 2 * b_ss, color=C_SURR, alpha=0.12)
+    ax.plot(ks, b_f, "^-", color=C_FGN, ms=5, lw=1.6, zorder=3, label="FGN surrogate")
+    ax.axhline(np.sqrt(q), color="black", lw=1.5, ls="--",
+               label=r"Geometric baseline $\sqrt{q}=%.3f$" % np.sqrt(q))
+    kmax = int(np.argmax(b_o)) + 1
+    ax.set_title(f"{_pretty(a.name)}   ($M={a.M:,}$, max at PC{kmax}: $B={b_o.max():.2f}$)", fontsize=11)
+    ax.set_xticks(ks[::2])
+    ax.grid(alpha=0.25)
+    if legend:
+        ax.legend(fontsize=8, loc="upper right")
+    return b_o
+
+
+def fig_burstiness_panel(analyses, params: Params = DEFAULT, ncols: int = 2, labels: bool = True):
+    """Burstiness spectra of several texts on one figure (2x2 for the four showcase texts)."""
+    n = len(analyses)
+    nrows = int(np.ceil(n / ncols))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(6.4 * ncols, 4.2 * nrows), sharey=True, squeeze=False)
+    flat = axes.ravel()
+    for i, (ax, a) in enumerate(zip(flat, analyses)):
+        _burstiness_axes(ax, a, params, legend=(i == 0))
+        if labels:
+            ax.text(0.02, 0.95, "ABCDEFGH"[i], transform=ax.transAxes, fontsize=13,
+                    fontweight="bold", va="top")
+        if i // ncols == nrows - 1:
+            ax.set_xlabel("PCA component $k$", fontsize=11)
+        if i % ncols == 0:
+            ax.set_ylabel("$B_k$", fontsize=11)
+    for ax in flat[n:]:
+        ax.set_visible(False)
+    fig.suptitle(f"Component-resolved burstiness spectra, $q={params.quantile}$", fontsize=13)
+    fig.tight_layout()
+    return fig
+
+
+def fig_quantile_sweep_panel(analyses, params: Params = DEFAULT, ncols: int = 2):
+    """Quantile sweep for several texts: mean B_k against q, one panel per text."""
+    qs = list(params.q_sweep)
+    n = len(analyses)
+    nrows = int(np.ceil(n / ncols))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(6.0 * ncols, 4.0 * nrows), sharey=True, squeeze=False)
+    flat = axes.ravel()
+    for i, (ax, a) in enumerate(zip(flat, analyses)):
+        mo, ms_, mf = [], [], []
+        for q in qs:
+            th = thresholds(a.pca.proj, q)
+            mo.append(np.nanmean(burstiness_spectrum(a.pca.proj, th)))
+            ms_.append(np.nanmean(shuffled_burstiness(a.pca.proj, a.perms, th)[0]))
+            mf.append(np.nanmean(burstiness_spectrum(a.proj_fgn, th)))
+        ax.plot(qs, mo, "o-", color=C_ORIG, lw=1.8, label="Original")
+        ax.plot(qs, mf, "^-", color=C_FGN, lw=1.6, label="FGN surrogate")
+        ax.plot(qs, ms_, "s--", color=C_SURR, lw=1.2, label="Word-shuffled mean")
+        ax.plot(qs, np.sqrt(qs), "k:", lw=1.5, label=r"Geometric baseline $\sqrt{q}$")
+        ax.set_title(_pretty(a.name), fontsize=11)
+        ax.grid(alpha=0.25)
+        ax.text(0.02, 0.95, "ABCDEFGH"[i], transform=ax.transAxes, fontsize=13, fontweight="bold", va="top")
+        if i == 0:
+            ax.legend(fontsize=8, loc="upper left")
+        if i // ncols == nrows - 1:
+            ax.set_xlabel("Quantile threshold $q$", fontsize=11)
+        if i % ncols == 0:
+            ax.set_ylabel(r"mean $B_k$ over $k=1..%d$" % params.k_burst, fontsize=11)
+    for ax in flat[n:]:
+        ax.set_visible(False)
+    fig.suptitle("Mean burstiness against the threshold quantile", fontsize=13)
+    fig.tight_layout()
+    return fig
+
+
+# ── Semantic poles as a LaTeX table (replaces the four bar-chart figures) ─────
+def semantic_poles_table(analyses, wv, n_pc: int = 3, n_top: int = 10,
+                         label: str = "tab:poles") -> str:
+    """LaTeX source of a table with the top-n word types on PC1..PC_n_pc for each text."""
+    caption = (
+        "Positive semantic poles of the leading principal directions: the %d word types "
+        "with the largest projection on each component, for the four representative texts. "
+        "Percentages are the explained variance of the component. Function words "
+        "(top $R=%d$) and types with fewer than %d occurrences are excluded."
+        % (n_top, DEFAULT.max_freq_rank, DEFAULT.min_freq)
+    )
+    out = [r"\begin{table}[htbp]", r"\centering", r"\small",
+           r"\caption{%s}" % caption,
+           r"\label{%s}" % label,
+           r"\begin{tabular}{llrp{0.58\textwidth}}", r"\toprule",
+           r"Text & Comp. & \% var. & Top word types \\", r"\midrule"]
+    for j, a in enumerate(analyses):
+        if j:
+            out.append(r"\midrule")
+        for k in range(n_pc):
+            words = [w for w, _ in sorted(word_scores(a, wv, k).items(), key=lambda x: -x[1])[:n_top]]
+            evr = 100 * a.pca.explained_variance_ratio[k]
+            name = _pretty(a.name) if k == 0 else ""
+            out.append(r"%s & PC%d & %.1f & %s \\" % (name, k + 1, evr, ", ".join(words)))
+    out += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
+    return "\n".join(out)

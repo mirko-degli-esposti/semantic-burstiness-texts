@@ -19,6 +19,7 @@
 \usepackage{natbib}
 \usepackage{microtype}
 \usepackage{placeins}
+\usepackage{rotating}
 \usepackage{geometry}
 \usepackage{hyperref}
 \geometry{margin=2.5cm}
@@ -849,8 +850,7 @@ components account for $27.2\%$.
   \label{fig:wrnpc_spectra}
 \end{figure}
 
-The semantic poles in Figure~\ref{fig:wrnpc_semantic} and
-Table~\ref{tab:wrnpc_pc} reveal two especially clear contrasts. PC2
+The semantic poles in Table~\ref{tab:wrnpc_pc} reveal two especially clear contrasts. PC2
 separates military vocabulary (\emph{regiment}, \emph{infantry},
 \emph{cavalry}, \emph{battalion}) from personal and emotional discourse
 (\emph{really}, \emph{yourself}, \emph{feel}, \emph{understand}). PC3
@@ -859,16 +859,6 @@ moral reflection. PC1 partly reflects the known GloVe artefact in which
 transliterated Russian names and emotionally inflected rare words lie
 at the periphery of the embedding cloud; it is retained in the spectra
 but interpreted cautiously.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{figures/eng_wrnpc/eng_wrnpc_07_semantic_pos_poles.png}
-  \caption{Positive poles of PC1--PC4 for \emph{War and Peace}
-  ($R=100$, top-15 word types by projection score). PC2 captures the
-  military versus personal-emotional contrast, while PC3 contrasts
-  physical action with philosophical and moral reflection.}
-  \label{fig:wrnpc_semantic}
-\end{figure}
 
 \begin{table}[htbp]
 \centering
@@ -923,15 +913,6 @@ $3.58\%$, and the first ten components $26.4\%$. The original,
 shuffled, and FGN spectra are again closely aligned
 (Figure~\ref{fig:darwin_spectra}).
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_02_spectra_comparison.png}
-  \caption{Eigenvalue spectra and cumulative explained variance
-  for \emph{On the Origin of Species}.
-  Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
-  \label{fig:darwin_spectra}
-\end{figure}
-
 PC1 is dominated by specialised nineteenth-century biological and
 geological terminology at one pole and pronouns or conversational
 markers at the other, and therefore contains a register-related
@@ -939,19 +920,7 @@ embedding artefact. PC2 is a substantive geographical-versus-epistemic
 direction: spatial and biogeographical terms are opposed to the
 language of inference and theoretical reasoning. PC3 contrasts
 first-person field observations and concrete specimens with abstract
-classification and synthesis. These poles are shown in
-Figure~\ref{fig:darwin_semantic} and Table~\ref{tab:darwin_pc}.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{figures/darwin_origin/darwin_origin_07_semantic_pos_poles.png}
-  \caption{Positive poles of PC1--PC4 for \emph{On the Origin of
-  Species}.
-  PC2 separates geographical distribution chapters from
-  theoretical reasoning chapters; PC3 separates field-observation
-  passages from abstract synthesis.}
-  \label{fig:darwin_semantic}
-\end{figure}
+classification and synthesis. These poles are listed in Table~\ref{tab:darwin_pc}.
 
 \begin{table}[htbp]
 \centering
@@ -1010,15 +979,6 @@ $6.54\%$, $4.34\%$, and $27.2\%$ of the variance, respectively. The
 three covariance spectra are again nearly coincident
 (Figure~\ref{fig:greatexp_spectra}).
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_02_spectra_comparison.png}
-  \caption{Eigenvalue spectra and cumulative explained variance
-  for \emph{Great Expectations}.
-  Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
-  \label{fig:greatexp_spectra}
-\end{figure}
-
 The positive pole of PC1 contains character names and Dickensian
 dialect, opposed to generic vocabulary, and is treated as an embedding
 artefact. PC2 contrasts spatial and kinetic language associated with
@@ -1026,19 +986,7 @@ the river, marshes, and forge with introspective and conversational
 language. PC3 opposes embodied physical description to legal and
 institutional vocabulary, reflecting the tension between Pip's lived
 world and the machinery of inheritance and social advancement. The
-corresponding poles are shown in Figure~\ref{fig:greatexp_semantic} and
-Table~\ref{tab:greatexp_pc}.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_07_semantic_pos_poles.png}
-  \caption{Positive poles of PC1--PC4 for
-  \emph{Great Expectations}.
-  PC2 captures the spatial-action vs introspection axis;
-  PC3 captures the body vs legal-institutional contrast
-  that structures Pip's social trajectory.}
-  \label{fig:greatexp_semantic}
-\end{figure}
+corresponding poles are listed in Table~\ref{tab:greatexp_pc}.
 
 \begin{table}[htbp]
 \centering
@@ -1097,34 +1045,13 @@ fraction among the four texts, consistent with the diversity of
 registers across its eighteen episodes
 (Figure~\ref{fig:ulysses_spectra}).
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_02_spectra_comparison.png}
-  \caption{Eigenvalue spectra and cumulative explained variance
-  for \emph{Ulysses}.
-  The more gradual eigenvalue decay reflects the greater stylistic
-  diversity of the 18 episodes compared to the other texts.}
-  \label{fig:ulysses_spectra}
-\end{figure}
-
 PC1 is strongly affected by Dublin-specific proper names,
 multilingual fragments, and neologisms. PC2 provides a more substantive
 formal-public versus intimate-private contrast, separating titles,
 institutional names, and parodic catalogue language from colloquial and
 sensory interior discourse. PC3 contrasts physical-material description
 with vocabulary of family, religion, and literary identity. These
-semantic poles are shown in Figure~\ref{fig:ulysses_semantic} and
-Table~\ref{tab:ulysses_pc}.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{figures/eng_ulysses/eng_ulysses_07_semantic_pos_poles.png}
-  \caption{Positive poles of PC1--PC4 for \emph{Ulysses}.
-  PC2 captures the formal/public vs intimate/private axis;
-  PC3 captures physical-material description vs relational-domestic
-  vocabulary.}
-  \label{fig:ulysses_semantic}
-\end{figure}
+semantic poles are listed in Table~\ref{tab:ulysses_pc}.
 
 \begin{table}[htbp]
 \centering
@@ -1185,8 +1112,9 @@ directions occur regularly or in concentrated textual episodes.
 
 We now turn from static geometry to temporal organisation. For each
 component, threshold crossings define event sequences and IET
-distributions. Figures~\ref{fig:wrnpc_iet}--\ref{fig:ulysses_burst}
-show the representative-text evidence. In every text, the original
+distributions. Figure~\ref{fig:burst_panel} and
+Figures~\ref{fig:wrnpc_iet}, \ref{fig:darwin_iet}, \ref{fig:greatexp_iet}
+and \ref{fig:ulysses_iet} show the representative-text evidence. In every text, the original
 series has broader IET distributions and larger $B_k$ than either
 control. The spectra are component dependent and generally largest
 among the early PCs, but the decay with component rank is not monotone.
@@ -1198,7 +1126,7 @@ than burstiness.
 For PC1--PC3, the original IET distributions extend well beyond the
 geometric reference, whereas the shuffled and FGN controls closely
 follow it (Figure~\ref{fig:wrnpc_iet}). The burstiness spectrum in
-Figure~\ref{fig:wrnpc_burst} is above both controls for all 20
+Figure~\ref{fig:burst_panel}A is above both controls for all 20
 components. PC3 has the largest value, $B_3=2.045$, approximately
 $2.1$ times the geometric baseline and more than twice the corresponding
 null values ($B_3^{\rm surr}=0.976$,
@@ -1220,14 +1148,18 @@ $r=0.702$ ($p=0.0006$).
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.75\textwidth]{figures/eng_wrnpc/eng_wrnpc_04_burstiness_spectrum.png}
-  \caption{Component-resolved burstiness spectrum for
-  \emph{War and Peace} at $q=0.95$. The original (blue circles) is
-  above the FGN surrogate (green triangles), the word-shuffled
-  mean$\pm2\sigma$ band (red), and the geometric baseline
-  $\sqrt{q}\simeq0.975$ for all 20 components. Burstiness is largest
-  among the first few components but is not monotone in PCA rank.}
-  \label{fig:wrnpc_burst}
+  \includegraphics[width=\textwidth]{figures/panel_burstiness_spectra.png}
+  \caption{Component-resolved burstiness spectra at $q=0.95$ for the four
+  representative texts: \textbf{A} \emph{War and Peace},
+  \textbf{B} \emph{On the Origin of Species},
+  \textbf{C} \emph{Great Expectations}, \textbf{D} \emph{Ulysses}.
+  In every panel the original (blue circles) lies above the FGN surrogate
+  (green triangles), the word-shuffled mean$\pm2\sigma$ band (red), and the
+  geometric baseline $\sqrt{q}\simeq0.975$, for all 20 components.
+  The position of the maximum differs between texts (PC3, PC6, PC3 and PC2
+  respectively) and burstiness is not monotone in PCA rank, because PCA
+  orders components by variance rather than by temporal clustering.}
+  \label{fig:burst_panel}
 \end{figure}
 
 \subsubsection{\emph{On the Origin of Species}}
@@ -1242,55 +1174,15 @@ $r=0.295$ ($p=0.207$), shows especially clearly that the direction of
 greatest semantic variance need not be the direction of greatest
 temporal clustering.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_03_iet_comparison.png}
-  \caption{Inter-event time distributions for PC1, PC2, PC3 of
-  \emph{On the Origin of Species} ($q=0.95$).
-  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
-  \label{fig:darwin_iet}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{figures/darwin_origin/darwin_origin_04_burstiness_spectrum.png}
-  \caption{Component-resolved burstiness spectrum for
-  \emph{On the Origin of Species} at $q=0.95$. The largest value is
-  at PC2 ($B_2=1.888$), whereas the correlation between eigenvalue and
-  burstiness spectra is weak ($r=0.295$, $p=0.207$). This illustrates
-  that semantic variance and temporal clustering are related but
-  distinct component properties.}
-  \label{fig:darwin_burst}
-\end{figure}
-
 \subsubsection{\emph{Great Expectations}}
 
 The original PC1--PC3 IET distributions again have broader tails than
 the controls (Figure~\ref{fig:greatexp_iet}). At $q=0.95$,
 $B_1=1.228$, $B_2=1.209$, and $B_3=1.244$, while the null values lie
 in $0.95$--$1.00$. The original remains above both controls over all
-20 components (Figure~\ref{fig:greatexp_burst}); the spectrum is flatter
+20 components (Figure~\ref{fig:burst_panel}C); the spectrum is flatter
 and lower overall than for \emph{War and Peace}. The correlation
 between eigenvalue and burstiness is $r=0.511$ ($p=0.021$).
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_03_iet_comparison.png}
-  \caption{Inter-event time distributions for PC1, PC2, PC3
-  of \emph{Great Expectations} ($q=0.95$).
-  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
-  \label{fig:greatexp_iet}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_04_burstiness_spectrum.png}
-  \caption{Component-resolved burstiness spectrum for
-  \emph{Great Expectations} at $q=0.95$. The original remains above
-  both controls and the geometric baseline across all 20 components,
-  with a comparatively flatter spectrum than in \emph{War and Peace}.}
-  \label{fig:greatexp_burst}
-\end{figure}
 
 \subsubsection{\emph{Ulysses}}
 
@@ -1298,29 +1190,9 @@ For \emph{Ulysses}, the original IET distributions are broad for all
 three displayed components, while both controls collapse towards the
 geometric reference (Figure~\ref{fig:ulysses_iet}). The spectrum peaks
 at PC2, $B_2=1.495$, with $B_1=1.290$ and $B_3=1.329$
-(Figure~\ref{fig:ulysses_burst}). The original exceeds both controls
+(Figure~\ref{fig:burst_panel}D). The original exceeds both controls
 throughout the first 20 components, and the eigenvalue--burstiness
 correlation is $r=0.571$ ($p=0.009$).
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_03_iet_comparison.png}
-  \caption{Inter-event time distributions for PC1, PC2, PC3
-  of \emph{Ulysses} ($q=0.95$).
-  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
-  \label{fig:ulysses_iet}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{figures/eng_ulysses/eng_ulysses_04_burstiness_spectrum.png}
-  \caption{Component-resolved burstiness spectrum for
-  \emph{Ulysses} at $q=0.95$. The maximum occurs at PC2
-  ($B_2=1.495$), the formal-public versus intimate-private direction.
-  The original exceeds both controls throughout the first 20
-  components.}
-  \label{fig:ulysses_burst}
-\end{figure}
 
 Averaged over the first 20 components at $q=0.95$, the representative
 texts have $\bar B^{\rm orig}$ of $1.36$ (\emph{War and Peace}),
@@ -1336,9 +1208,10 @@ original semantic trajectories and absent from both null models.
 \label{sec:single_text_robustness}
 
 The component separation is not tied to the default $q=0.95$.
-Figures~\ref{fig:wrnpc_sweep}--\ref{fig:ulysses_sweep} show the mean
-burstiness over $k=1,\ldots,20$ and the fraction of components for which
-the original exceeds both controls as $q$ varies from $0.60$ to $0.99$.
+Figure~\ref{fig:sweep_panel} shows the mean
+burstiness over $k=1,\ldots,20$ as $q$ varies from $0.60$ to $0.99$;
+the corpus-level version of the ordering fraction is given in
+Section~\ref{sec:corpus_robustness}.
 For each of the four representative texts, the ordering holds for all
 20 components throughout the displayed range. As expected, the
 absolute burstiness increases towards more extreme thresholds because
@@ -1346,40 +1219,19 @@ rare visits to the upper tail accentuate episode-to-episode clustering.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{figures/eng_wrnpc/eng_wrnpc_06_quantile_sweep.png}
-  \caption{Quantile sweep for \emph{War and Peace}.
-  Left: mean $B_k$ over $k=1,\ldots,20$ as a function of $q$.
-  Right: fraction of components satisfying the full ordering
-  $B_k^{\rm orig} > B_k^{\rm FGN}$ and $B_k^{\rm orig} >
-  B_k^{\rm surr}$ ($100\%$ across all $q$).}
-  \label{fig:wrnpc_sweep}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_06_quantile_sweep.png}
-  \caption{Quantile sweep for \emph{On the Origin of Species}.
-  Full ordering satisfied for $100\%$ of components across
-  all $q \in [0.60, 0.99]$.}
-  \label{fig:darwin_sweep}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_06_quantile_sweep.png}
-  \caption{Quantile sweep for \emph{Great Expectations}.
-  Full ordering satisfied for $100\%$ of components across
-  all $q \in [0.60, 0.99]$.}
-  \label{fig:greatexp_sweep}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_06_quantile_sweep.png}
-  \caption{Quantile sweep for \emph{Ulysses}.
-  Full ordering satisfied for $100\%$ of components across
-  all $q \in [0.60, 0.99]$.}
-  \label{fig:ulysses_sweep}
+  \includegraphics[width=\textwidth]{figures/panel_quantile_sweep.png}
+  \caption{Mean burstiness over $k=1,\ldots,20$ as a function of the
+  threshold quantile $q$, for the four representative texts:
+  \textbf{A} \emph{War and Peace}, \textbf{B} \emph{On the Origin of
+  Species}, \textbf{C} \emph{Great Expectations}, \textbf{D}
+  \emph{Ulysses}. The original stays above both controls and above the
+  geometric baseline $\sqrt{q}$ throughout $q \in [0.60, 0.99]$, and the
+  full ordering $B_k^{\rm orig} > B_k^{\rm FGN}$ and
+  $B_k^{\rm orig} > B_k^{\rm surr}$ holds for all 20 components at every
+  displayed $q$ in each text. Absolute burstiness grows towards more
+  extreme thresholds, as rare visits to the upper tail accentuate
+  episode-to-episode clustering.}
+  \label{fig:sweep_panel}
 \end{figure}
 
 \FloatBarrier
@@ -2278,6 +2130,73 @@ For $p = 0.05$, $\CV_{\rm geom} = 0.975 \approx 1$, so the Poisson
 approximation is adequate.
 For $p = 0.5$, $\CV_{\rm geom} = 0.707$, and the Poisson
 approximation fails badly.
+
+\section{Additional per-text figures}
+\label{app:pertext}
+
+Eigenvalue spectra and inter-event-time distributions for the three
+representative texts other than \emph{War and Peace}, whose
+corresponding figures appear in the main text
+(Figures~\ref{fig:wrnpc_spectra} and~\ref{fig:wrnpc_iet}).
+Equivalent figures for every text of the corpus, at any threshold
+quantile, can be regenerated with \texttt{scripts/run\_text.py} in the
+code repository.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_02_spectra_comparison.png}
+  \caption{Eigenvalue spectra and cumulative explained variance
+  for \emph{On the Origin of Species}.
+  Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
+  \label{fig:darwin_spectra}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_02_spectra_comparison.png}
+  \caption{Eigenvalue spectra and cumulative explained variance
+  for \emph{Great Expectations}.
+  Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
+  \label{fig:greatexp_spectra}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_02_spectra_comparison.png}
+  \caption{Eigenvalue spectra and cumulative explained variance
+  for \emph{Ulysses}.
+  The more gradual eigenvalue decay reflects the greater stylistic
+  diversity of the 18 episodes compared to the other texts.}
+  \label{fig:ulysses_spectra}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_03_iet_comparison.png}
+  \caption{Inter-event time distributions for PC1, PC2, PC3 of
+  \emph{On the Origin of Species} ($q=0.95$).
+  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+  \label{fig:darwin_iet}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_03_iet_comparison.png}
+  \caption{Inter-event time distributions for PC1, PC2, PC3
+  of \emph{Great Expectations} ($q=0.95$).
+  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+  \label{fig:greatexp_iet}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_03_iet_comparison.png}
+  \caption{Inter-event time distributions for PC1, PC2, PC3
+  of \emph{Ulysses} ($q=0.95$).
+  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
+  \label{fig:ulysses_iet}
+\end{figure}
+
 
 %\section{Corpus text list}
 %\label{app:corpus}
