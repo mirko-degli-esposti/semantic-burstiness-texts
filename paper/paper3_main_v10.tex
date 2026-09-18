@@ -163,7 +163,8 @@ along semantic directions, measured through the inter-event-time
 coefficient of variation, together with the autocorrelation and DFA of
 the projected series.
 
-\subsection{The Altmann et al.\ mechanism}
+
+\subsection{From word-level burstiness to topical organisation}
 
 A mechanism connecting topical organisation to long-range correlations
 was developed by \citet{Altmann2012}.
@@ -173,11 +174,12 @@ Correlations can propagate down this hierarchy, whereas burstiness is
 visible most clearly at semantically relevant levels and can be lost
 under projection to lower levels.
 
-Formally, a local matching condition $\alpha$ maps a text to a binary
-sequence $u_t^{(\alpha)}\in\{0,1\}$.
-For example, $u_t^{(\alpha)}=1$ may indicate that token $t$ is the word
-``prince''.
-The gaps $\tau$ between successive events define an inter-event-time
+Formally, a local matching condition $\mathcal{C}$ maps a text to a
+binary sequence $u_t^{(\mathcal{C})}\in\{0,1\}$.
+For example, $u_t^{(\mathcal{C})}=1$ may indicate that token $t$ is the
+word ``prince''.
+The gaps $\tau$ between successive events, i.e.\ between consecutive
+positions with $u_t^{(\mathcal{C})}=1$, define an inter-event-time
 (IET) distribution, whose coefficient of variation
 \begin{equation}
   \CV=\frac{\sigmatau}{\meantau}
@@ -187,17 +189,18 @@ Topically relevant words tend to occur in concentrated textual domains
 and therefore show broad IET distributions and elevated burstiness,
 whereas common function words are distributed more regularly even when
 long-range correlations remain visible in lower-level observables.
-
 This framework suggests a natural extension.
-A topic such as war, philosophical reflection, biological variation, or
-social interaction is not expressed by one keyword alone.
+A topic such as war, philosophical reflection, geographical
+distribution, or social interaction is not expressed by one keyword
+alone.
 It activates a distributed set of semantically related words.
 A suitable topic-level observable should therefore respond to a region
 or direction of semantic space rather than to the exact recurrence of a
 single word type.
 
+ 
 \subsection{Motivation and contribution}
-
+ 
 We represent a text as an embedding trajectory
 $(\mathbf{e}_t)_{t=1}^M$ in $\R^d$, where each retained token is mapped
 to a pre-trained static word vector
@@ -210,8 +213,11 @@ binary event sequence to which the IET construction of
 \citet{Altmann2012} can be applied.
 The resulting spectrum $\{B_k\}_{k=1}^K$ measures burstiness separately
 along the first $K$ principal semantic directions.
-
-This construction supports a positive, component-resolved question:
+Throughout the paper we retain $K=20$; extending the analysis to
+higher-order components adds progressively less semantic variance and
+leaves the qualitative picture unchanged.
+ 
+This construction supports a component-resolved question:
 how is semantic burstiness distributed across the principal directions
 of a text?
 The principal components are ordered by variance, but PCA does not
@@ -222,24 +228,22 @@ whether directions of strong semantic variation are also directions of
 strong temporal clustering.
 The analyses below show interpretable semantic contrasts along the
 leading components, broad IET distributions in the original texts, and
-elevated burstiness throughout the first 20 components examined.
+elevated burstiness throughout the retained components.
 They also show that the strength of association between semantic
 variance and burstiness is text dependent: the two quantities are
 related in some texts but are not interchangeable.
-
+ 
 We then use two complementary null models to determine which statistical
 properties produce this behaviour.
-The word-shuffled null preserves the multiset of embedded tokens and
-therefore preserves the empirical covariance, PCA eigensystem, and
-marginal projected distributions exactly, while destroying temporal
-order.
+The word-shuffled null permutes the retained tokens, preserving the
+static embedding geometry exactly while destroying temporal order.
 The FGN surrogate retains the empirical rank-frequency structure and is
 tuned to match the original rank-sequence DFA exponent, but generates
 that scaling through a stationary rank-level process.
 The comparison separates static semantic geometry from ordered semantic
 dynamics, and global rank-level memory from burstiness in embedding
 space.
-
+ 
 Across the analysed corpus, both controls remain close to the geometric
 IET baseline, whereas the original text is more bursty across essentially
 all text--component pairs and over a broad range of threshold quantiles.
@@ -249,6 +253,7 @@ trajectory but disappears from both controls, including the FGN
 surrogate whose rank sequence retains the original global DFA exponent.
 Thus matching lexical frequencies and rank-level long-range scaling is
 not sufficient to reproduce semantic burstiness.
+ 
 
 \subsection{Structure of the paper}
 
@@ -274,16 +279,16 @@ and limitations.
 Following \citet{Altmann2012}, let a text be a symbolic sequence
 $\mathbf{s}=(s_1,s_2,\ldots,s_N)$ over a finite vocabulary
 $\mathcal{A}$.
-A local matching condition $\alpha$ defines a binary observable
+A local matching condition $\mathcal{C}$ defines a binary observable
 \begin{equation}
-  u_t^{(\alpha)}=\mathbf{1}[s_t\text{ satisfies }\alpha].
+  u_t^{(\mathcal{C})}=\mathbf{1}[s_t\text{ satisfies }\mathcal{C}].
   \label{eq:binary_indicator}
 \end{equation}
-The autocorrelation of this sequence and the diffusion exponent
-$\gamma$, defined by $\sigma_X^2(t)\sim t^\gamma$ for
-$X(t)=\sum_{j=1}^t u_j^{(\alpha)}$, characterise its long-range
-structure.
-
+The autocorrelation of this sequence and the diffusion exponent of the
+cumulative count $X(t)=\sum_{j=1}^t u_j^{(\mathcal{C})}$, defined by
+$\sigma_X^2(t)\sim t^{2H}$, characterise its long-range structure.
+Here $H$ coincides with the DFA exponent $\alpha$ of the stationary
+series $u_t^{(\mathcal{C})}$, the quantity used throughout this paper.
 We generalise the local lexical condition to a distributed semantic
 observable.
 Let $\phi:\mathcal{A}\to\R^d$ be a pre-trained static word embedding.
@@ -368,7 +373,8 @@ the text moves along these directions.
 
 A key property of $\Sig$ is its invariance under permutation of the
 token sequence.
-For a permutation $\pi$ of $\{1,\ldots,M\}$,
+For a permutation $\pi$ of $\{1,\ldots,M\}$ the mean is unchanged,
+$\ebar^{\pi}=\ebar$, and therefore
 \begin{equation}
   \Sig^{\pi}
   =\frac{1}{M}\sum_{t=1}^M
@@ -377,15 +383,22 @@ For a permutation $\pi$ of $\{1,\ldots,M\}$,
   =\Sig.
   \label{eq:sigma_invariant}
 \end{equation}
+
 It follows that a word-shuffled surrogate has the same eigenvalues,
 eigenvectors, and marginal distribution of every projected series as
 the original.
+This does not hold for the FGN surrogate, whose token multiset differs;
+throughout the paper all surrogates are projected onto the eigenvectors
+$\{\vk\}$ of the original text, so that every comparison is made along
+identical semantic directions (Section~\ref{sec:null_model_fgn}).
 PCA therefore defines a static geometry of the embedded lexical
 composition, whereas burstiness, autocorrelation, and DFA probe the
 ordering of visits through that geometry.
 
 \subsection{The burstiness spectrum}
 \label{sec:burstiness_spectrum}
+
+
 
 For component $k$, the projected series is thresholded at its empirical
 $q$-quantile:
@@ -396,11 +409,11 @@ $q$-quantile:
   \right].
   \label{eq:binary_k}
 \end{equation}
-The event rate is $p=1-q$ by construction.
+The event rate is $p=1-q$ up to discretisation.
 Let $\tau_1^{(k)},\tau_2^{(k)},\ldots$ be the gaps between successive
 positions for which $b_t^{(k)}=1$.
-The burstiness parameter is the coefficient of variation of the IET
-sequence \citep{GohBarabasi2008,Altmann2012}:
+The burstiness of component $k$ is measured by the coefficient of
+variation of the IET sequence, following \citet{Altmann2012}:
 \begin{equation}
   \bk
   =\CV\!\left(\tau^{(k)}\right)
@@ -409,6 +422,11 @@ sequence \citep{GohBarabasi2008,Altmann2012}:
 \end{equation}
 The collection $\{\bk\}_{k=1}^K$ is the \emph{burstiness spectrum} of
 the text.
+We use the unnormalised coefficient of variation rather than the
+bounded burstiness parameter of \citet{GohBarabasi2008},
+$B^{\rm GB}=(\CV-1)/(\CV+1)\in[-1,1]$, since the former compares
+directly with the finite-rate reference derived below; the two are
+related by a monotone transformation and induce the same ordering.
 
 At finite event rate, the appropriate independent-event reference is a
 geometric distribution rather than an exponential distribution.
@@ -419,11 +437,14 @@ For an i.i.d. Bernoulli$(p)$ event sequence,
 \end{equation}
 which gives
 \begin{equation}
-  \CV_{\rm geom}(p)=\sqrt{1-p}.
+   \CV_{\rm geom}(p)=\sqrt{1-p}=\sqrt{q}.
   \label{eq:cv_geometric}
 \end{equation}
 For the default $q=0.95$, $p=0.05$ and
 $\CV_{\rm geom}=\sqrt{0.95}\simeq0.975$.
+\citet{Altmann2012} adopt the continuous-time convention $\CV>1$; at
+the event rates used here the discrete correction matters, since
+independent events at $q=0.95$ give $0.975$ rather than $1$.
 Values of $B_k$ above this reference indicate more irregular,
 clustered recurrence than expected from independent events at the same
 rate.
@@ -439,8 +460,8 @@ Section~\ref{sec:fgn_pipeline}.
 \subsection{Semantic variance and burstiness across components}
 \label{sec:component_structure}
 
-The PCA index $k$ orders directions by decreasing variance, whereas
-$B_k$ orders no quantity by construction.
+The PCA index $k$ orders directions by decreasing variance, 
+whereas the same index carries no ordering of $B_k$, which need not be monotone in $k$.
 The pair of spectra
 \begin{equation}
   \{\lambda_k\}_{k=1}^K,
@@ -466,13 +487,24 @@ We quantify the last relation by the Pearson correlation
 \end{equation}
 where $\bar\lambda$ and $\bar B$ denote component means over the retained
 range.
+
+The $K$ pairs $(\lambda_k,B_k)$ are not independent draws: $\{\lambda_k\}$
+is ordered by construction and both spectra derive from the same
+trajectory. We therefore do not use the parametric significance test for
+$r$. Significance is assessed by a permutation test over the pairing
+between the two spectra ($10^5$ random pairings), and we report the
+Spearman rank correlation $\rho$ alongside $r$, since the eigenvalue
+spectrum is strongly skewed and $r$ is otherwise dominated by the leading
+components. Permutation $P$-values are denoted $P$ throughout, to avoid
+confusion with the event rate $p=1-q$.
+
+
 A positive value indicates that high-variance directions tend also to
-be more bursty, but even a positive correlation does not identify the
-two spectra: a lower-variance component can be highly bursty if it is
+be more bursty, but even a positive correlation does not make the two spectra interchangeable:
+a lower-variance component can be highly bursty if it is
 associated with a topic concentrated in a limited number of textual
 regions.
-The analyses below retain $K=20$ components and report both the full
-burstiness spectrum and its relation to the eigenvalue spectrum.
+We report both the full burstiness spectrum and its relation to the eigenvalue spectrum.
 
 \subsection{The word-shuffled null model}
 \label{sec:null_model_shuffle}
@@ -724,7 +756,7 @@ The FGN surrogate is constructed using the pipeline of
         DFA exponent of the surrogate matches $\alpha$.
   \item The rank sequence of the surrogate is mapped back to words via
         the inverse Zipf mapping, producing a word sequence
-        $\tilde{\mathbf{s}}$.
+        $\mathbf{s}^{\rm FGN}$.
 \end{enumerate}
 The resulting word sequence is then processed through the same
 frequency filter (Section~\ref{sec:preprocessing}), embedding
@@ -1133,7 +1165,7 @@ null values ($B_3^{\rm surr}=0.976$,
 $B_3^{\rm FGN}=0.974$). This is consistent with the concentration of
 philosophical-reflection passages in particular parts of the novel.
 The eigenvalue--burstiness correlation is positive but imperfect,
-$r=0.702$ ($p=0.0006$).
+$r=0.702$ ($P=0.0006$).
 
 \begin{figure}[htbp]
   \centering
@@ -1170,7 +1202,7 @@ and PC3, while both controls remain close to geometric
 $B_2=1.888$, followed by PC3 with $B_3=1.727$; PC1 is lower at
 $B_1=1.255$. The full original-over-control ordering holds for all 20
 components. The weak eigenvalue--burstiness correlation,
-$r=0.295$ ($p=0.207$), shows especially clearly that the direction of
+$r=0.295$ ($P=0.207$), shows especially clearly that the direction of
 greatest semantic variance need not be the direction of greatest
 temporal clustering.
 
@@ -1182,7 +1214,7 @@ $B_1=1.228$, $B_2=1.209$, and $B_3=1.244$, while the null values lie
 in $0.95$--$1.00$. The original remains above both controls over all
 20 components (Figure~\ref{fig:burst_panel}C); the spectrum is flatter
 and lower overall than for \emph{War and Peace}. The correlation
-between eigenvalue and burstiness is $r=0.511$ ($p=0.021$).
+between eigenvalue and burstiness is $r=0.511$ ($P=0.021$).
 
 \subsubsection{\emph{Ulysses}}
 
@@ -1192,7 +1224,7 @@ geometric reference (Figure~\ref{fig:ulysses_iet}). The spectrum peaks
 at PC2, $B_2=1.495$, with $B_1=1.290$ and $B_3=1.329$
 (Figure~\ref{fig:burst_panel}D). The original exceeds both controls
 throughout the first 20 components, and the eigenvalue--burstiness
-correlation is $r=0.571$ ($p=0.009$).
+correlation is $r=0.571$ ($P=0.009$).
 
 Averaged over the first 20 components at $q=0.95$, the representative
 texts have $\bar B^{\rm orig}$ of $1.36$ (\emph{War and Peace}),
@@ -1359,7 +1391,7 @@ indistinguishable from the word-shuffled value.
 
 The two null models satisfy
 $\langle B_k^{\rm FGN}/B_k^{\rm surr}\rangle = 1.001 \pm 0.001$
-(range over texts $[0.996, 1.005]$; $t = 1.1$, $p = 0.28$):
+(range over texts $[0.996, 1.005]$; $t = 1.1$, $P = 0.28$):
 the FGN surrogate and the word-shuffled null are statistically
 indistinguishable at the corpus level
 (Section~\ref{sec:corpus_diffs}).
@@ -1446,7 +1478,7 @@ Panel~B isolates the ratio $B^{\rm FGN}/B^{\rm surr}$, which
 is tightly concentrated around 1 (mean $1.0008$, s.e.\ $0.0012$,
 range $[0.91, 1.09]$).
 A one-sample $t$-test against ratio\,=\,1 gives $t = 0.63$,
-$p = 0.53$: the two null models are statistically indistinguishable,
+$P = 0.53$: the two null models are statistically indistinguishable,
 and the distribution is symmetric with no indication of a
 directional bias.
 
@@ -1474,7 +1506,7 @@ and choice of quantile threshold.
     two null models are equivalently far below the original.
     \textbf{Panel B}: distribution of $B_k^{\rm FGN}/B_k^{\rm surr}$,
     tightly centred on 1 (mean $1.0008$, s.e.\ $0.0012$;
-    $t = 0.63$, $p = 0.53$), statistically indistinguishable from
+    $t = 0.63$, $P = 0.53$), statistically indistinguishable from
     unity, confirming
     $B_k^{\rm FGN} \approx B_k^{\rm surr}$ across the entire corpus.
   }
