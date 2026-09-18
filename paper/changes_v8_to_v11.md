@@ -17,26 +17,34 @@ applied. Nothing marked `pending` should be taken as final.
 
 ---
 
-## 0. What matters most, in three points
+## 0. What matters most, in four points
 
 1. **The pipeline is reproducible.** The four Pearson correlations
    regenerate exactly (0.702, 0.295, 0.511, 0.571), verified against
    `scipy` by an assertion inside `paper_numbers.py`. Everything else in
    this document rests on that.
 
-2. **The significance tests changed, and two marks moved.** The parametric
+2. **The FGN surrogate is a permutation of the original text.** The
+   rank-to-word mapping reproduces the empirical rank histogram exactly,
+   so all three sequences — original, word-shuffled, FGN — share the same
+   token multiset and therefore the same embedding covariance, PCA
+   eigensystem and projected marginals, *exactly*. They differ only in the
+   ordering. This is stronger than what the paper currently claims, and it
+   exposed three stale passages that survived from v8 (§3.6).
+
+3. **The significance tests changed, and two marks moved.** The parametric
    $t$-test on $r$ assumes bivariate normality; the eigenvalue spectrum is
    strongly skewed, so it was replaced by a permutation test over the
    pairing of the two spectra. *War and Peace* drops from `***` to `**`,
    *Ulysses* from `**` to `*`. The substantive conclusions are unchanged.
 
-3. **One factual error was found and corrected.** The body text claimed
-   PC2 is the burstiest direction of *On the Origin of Species*; the
-   maximum is at PC6 ($B_6 = 1.900$ vs $B_2 = 1.888$). The v10 figure
-   caption already said PC6, so the paper contradicted itself. This also
-   gave us a better argument — see §3.5.
-
----
+4. **Four factual errors were found, all traceable to v8.** The burstiest
+   direction of *Origin of Species* (PC2 → PC6, §3.5); the OOV rate
+   ("5–15%" → under 2%, §3.9); the number of shuffled realisations behind
+   the ACF curve (10 → 1, §3.9); and the claim that the FGN and original
+   covariance structures differ by a few percent (they are identical,
+   §3.6). Three of the four were contradicted by the paper's own tables or
+   captions.
 
 ## 1. v8 → v9 — regenerated numbers
 
@@ -256,7 +264,154 @@ and holds in every text (PC3, PC6, PC3, PC2 — never PC1). The subsection
 is rewritten around that fact, with the two correlations reported as
 description rather than as the argument.
 
-### 3.6 Editorial changes (status: done)
+### 3.6 The FGN surrogate is a permutation — and three stale passages (status: pending)
+
+Verified directly: `Counter(tokens_all)` of the FGN surrogate equals that
+of the original, for every showcase text, and the filtered counts agree to
+the token at $R = 100$, $150$ and $200$. Multiset identity at the
+unfiltered level makes the result independent of $R$ by construction, not
+by observation.
+
+| text | $M$ | $M_{\rm FGN}$ | ratio | multiset identical |
+|---|---|---|---|---|
+| War and Peace | 235,933 | 235,933 | 1.0000 | yes |
+| Origin of Species | 58,913 | 58,913 | 1.0000 | yes |
+| Great Expectations | 64,410 | 64,410 | 1.0000 | yes |
+| Ulysses | 101,489 | 101,489 | 1.0000 | yes |
+
+Consequences. By Eq. `sigma_invariant`, $\Sigma_{\rm FGN} =
+\Sigma_{\rm orig}$ **exactly**: the original eigenvectors *are* the
+surrogate's own principal directions. The design can now be stated in one
+line — *the three sequences are permutations of one another and differ
+only in the ordering of visits through a fixed semantic geometry* — and
+the two null models differ in exactly one ingredient, the rank-level
+scaling.
+
+Three passages assert the opposite and are all v8 leftovers, from when the
+FGN was tokenised with a different regex and the multisets genuinely
+differed:
+
+- `rem:fgn_cov`: "does not impose covariance invariance as an algebraic
+  constraint … empirically very close" → the invariance *is* algebraic.
+- §Text preprocessing: "increasing $R$ to 150 or 200 … begins to degrade
+  the alignment between the original and FGN covariance structures" → no
+  such degradation is possible; sentence deleted.
+- §FGN surrogate generation: "any residual difference is below $3\%$ in
+  eigenvalue and below $5\%$ in eigenvector angle" → the difference is
+  zero.
+
+A fourth passage becomes redundant rather than wrong: the sentence added
+earlier today noting that $M_{\rm FGN}$ need not equal $M$ is removed,
+since the two are equal by construction.
+
+One further consequence, in the paper's favour. The code computes the
+event threshold once from the original series and applies it to all three
+(`th = thresholds(an.pca.proj, q)`), whereas §2.3 describes each series
+being thresholded at its own quantile. The two conventions coincide
+exactly, because permutations share a marginal distribution — so the
+event rate is exactly $1-q$ for all three sequences, and this can now be
+stated as a consequence rather than assumed.
+
+### 3.7 Does the frequency filter destroy the rank-level scaling? (status: new result)
+
+A referee can reasonably ask whether the FGN's projected series show
+$\bar\alpha = 0.499$ because rank-level memory does not reach embedding
+space — the paper's claim — or simply because the top-$R$ filter destroyed
+that memory before the projection. The question was settled by measuring
+the DFA exponent of the *filtered* rank sequence for both the original and
+the surrogate.
+
+| text | unfiltered | $\alpha$ (pipeline) | original, filtered | FGN, filtered |
+|---|---|---|---|---|
+| War and Peace | 0.693 | 0.721 | 0.674 | 0.633 |
+| Origin of Species | 0.726 | 0.771 | 0.694 | 0.645 |
+| Great Expectations | 0.672 | 0.689 | 0.609 | 0.567 |
+| Ulysses | 0.805 | 0.763 | 0.772 | 0.629 |
+
+**The filter does not destroy the scaling.** Every filtered value stays
+well above $0.5$; the FGN arrives at the projection stage still carrying
+rank-level memory of $\alpha \simeq 0.57$–$0.65$, and its projections
+nevertheless show none. The claim is supported, now with a number behind
+it.
+
+**But the filter degrades the surrogate more than the original**, in every
+text, and markedly so for *Ulysses* ($-0.176$ against $-0.033$). The
+matching $\alpha_{\rm FGN} \simeq \alpha_{\rm orig}$ is imposed before
+the filter, so at the level where the comparison is made the null carries
+somewhat less memory than intended. This is a handicap to the null model,
+not a licence for it, and is worth stating rather than leaving to be
+found.
+
+Caveat on these four columns: they were computed with `projection_alpha`,
+which does not reproduce the pipeline's own `alpha_text` (discrepancies up
+to 0.045, and of opposite sign for *Ulysses*). The three columns are
+comparable with one another but should not be printed alongside $\alpha$
+and $\alpha_0$ until recomputed with the estimator used inside
+`fgn_surrogate`.
+
+### 3.8 Burstiness beyond the retained $K = 20$ (status: new result)
+
+The paper retains $K = 20$ components. Whether anything changes beyond
+that was previously asserted without evidence; it has now been measured by
+refitting the PCA with $K = 50$.
+
+| text | cum. var. 20 | 50 | 100 | mean $B$ 1–20 | 21–50 | min $B$ 21–50 |
+|---|---|---|---|---|---|---|
+| War and Peace | 37.8% | 57.1% | 76.4% | 1.358 | 1.138 | 1.085 |
+| Origin of Species | 38.1% | 59.0% | 78.6% | 1.350 | 1.188 | 1.095 |
+| Great Expectations | 38.5% | 59.0% | 78.7% | 1.176 | 1.112 | 1.041 |
+| Ulysses | 35.0% | 53.2% | 72.7% | 1.234 | 1.120 | 1.041 |
+
+Every component up to $K = 50$ stays above the independent-event baseline
+$\CV_{\rm geom} = 0.975$ in every text; the worst case, 1.041, is still
+$6.8\%$ above it. Variance per component decays from $1.9\%$ over the
+first twenty to $0.65\%$ over components 21–50 and $0.39\%$ over 51–100,
+and mean burstiness falls by 36–61% of its excess over the baseline.
+
+So the qualitative picture does hold, and the honest formulation states
+both halves: burstiness persists well beyond the retained range while
+decreasing in magnitude. $K = 20$ is a choice about interpretability, not
+a claim that nothing happens further out.
+
+The refit reproduces the stored projections to $10^{-6}$, which is the
+float32 precision floor of the GloVe vectors — not a sign flip, which
+would have produced an error of order unity and would have changed $B_k$,
+since the threshold is applied to the upper tail only.
+
+### 3.9 Errors in the pipeline description (status: pending)
+
+Four statements in the methodology do not describe the code that produced
+the results.
+
+- **OOV rate.** "The OOV rate after filtering is typically $5$–$15\%$ for
+  Victorian English texts" — the paper's own summary table reports 1.6%,
+  0.4%, 1.3% and 0.7%, confirmed independently from the pre- and
+  post-lookup token counts (1.58 / 0.44 / 1.34 / 0.73%). Wrong by an order
+  of magnitude, and contradicted fifteen pages later.
+- **Number of shuffled realisations.** The code uses three different
+  conventions — 20 realisations for the burstiness spectrum
+  (`n_surr = 20`), a single realisation for the ACF
+  (`a.pca.proj[a.perms[0]]`, so labelled in the source), and 10 for the
+  DFA band (`N_SURR_DFA`). The methodology describes a single permutation
+  throughout, and the ACF figure caption claims "mean over 10
+  realisations", which is wrong on both counts. The DFA caption is
+  correct.
+- **PCA dimensions.** "$K_{\rm show} = 50$ components for eigenvalue
+  analysis" and $\mathbf{P} \in \R^{M \times K_{\rm show}}$ describe
+  nothing in the code: `fit_pca` retains all 300 eigenvalues but only $K$
+  eigenvectors, $K$ entries of `explained_variance_ratio`, and an
+  $M \times K$ projection matrix, with $K = 20$.
+- **$\alpha_{\rm FGN}$** in Eq. `fgn_dfa_match` appears exactly once in
+  the paper and conflates the generator exponent $\alpha_0$ with the
+  measured exponent $\alpha$; the pipeline section states the
+  relationship correctly.
+
+Also stale, inside commented-out source that the authors intend to keep:
+the shuffle block states $N_{\rm surr} = 10$ against `n_surr = 20` in
+`config.py`, and contains a sentence missing its first half. Both should
+carry a `% STALE` marker so they are not restored unexamined.
+
+### 3.10 Editorial changes (status: done)
 
 - §1.2 retitled *The Altmann et al. mechanism* → *From word-level
   burstiness to topical organisation*. The mechanism is joint work and the
@@ -264,32 +419,52 @@ description rather than as the argument.
 - "biological variation" → "geographical distribution" in the list of
   example topics, so the examples match the semantic poles actually found
   (Darwin's PC2 is geographical).
-- $K = 20$ stated once, where the burstiness spectrum is defined, with a
-  note that higher-order components add progressively less variance and
-  leave the qualitative picture unchanged.
+- $K = 20$ stated once, where the burstiness spectrum is defined. The
+  accompanying claim about higher-order components was initially written
+  without evidence; it has since been measured and restated with figures
+  (§3.8), and is a candidate for the robustness section of the Results
+  rather than the introduction.
 - Redundant restatements of "PCA maximises variance, not burstiness"
   and of the word-shuffled null's properties compressed.
+- §Logical role of the null models now opens with a table
+  (`tab:null_taxonomy`) setting out which statistical ingredient each
+  sequence retains, and closes with the joint conclusion that both
+  answers are negative and non-redundant. Given §3.6, the embedding
+  geometry row reads *exact* for both null models, so the two differ in
+  exactly one ingredient.
+- `rem:fgn_entropy` concerns rank proximity versus semantic proximity and
+  mentions no entropy; the label should be renamed while it is cited in
+  only one place.
 
 ---
 
 ## 4. Open items
 
-1. Apply the four remaining `p` → `P` (§3.1) and the three symbol
+Ordered by consequence, not by effort.
+
+1. Rewrite `rem:fgn_cov`, delete the $R = 150$/$200$ degradation sentence
+   and the "below 3% / below 5%" passage (§3.6). These upgrade three
+   hedges into an exact statement.
+2. Correct the OOV rate, the ACF caption's realisation count, the
+   $K_{\rm show}$ passage and $\alpha_{\rm FGN}$ (§3.9).
+3. Rewrite the *Origin of Species* subsection around the PC6 maximum
+   (§3.5), and check the other three per-text subsections for the same
+   class of error.
+4. Apply the four remaining `p` → `P` (§3.1) and the three symbol
    renames (§3.2).
-2. Table `tab:single_text_summary`: new marks on $r$, new $\rho$ column,
+5. Table `tab:single_text_summary`: new marks on $r$, new $\rho$ column,
    caption naming the permutation test.
-3. Rewrite of the *Origin of Species* subsection (§3.5).
-4. Check the other three per-text subsections for the same class of
-   error — any claim that PC1, or the wrong PC, is the burstiest.
-5. `paper_numbers.py` sections 2–5 still carry hardcoded "(old …)"
+6. State the three shuffled-realisation conventions in the methodology,
+   and the fixed seeds (`pca_seed=42`, `fgn_seed=42`, `n_surr=20` with
+   seeds 0–19, $10^5$ permutations with seed 0).
+7. Recompute the filtered-rank DFA of §3.7 with the estimator used inside
+   `fgn_surrogate` before quoting those numbers in the paper.
+8. Decide where the $K = 50$ result belongs: the robustness section of
+   the Results, beside the quantile sweep, is the natural home.
+9. `paper_numbers.py` sections 2–5 still carry hardcoded "(old …)"
    strings from v8. The `.tex` itself is correct and in sync; only the
    script's comparison column is stale, so its output for those sections
    currently flags differences that do not exist.
-6. Decide whether $\rho$ goes in the table as its own column or is
-   mentioned once in the methodology. Current recommendation: the column,
-   since $\rho$ says something $r$ does not.
-
----
 
 ## 5. Reproducing everything
 
@@ -305,3 +480,11 @@ between the two code paths cannot go unnoticed.
 
 Permutation parameters are fixed: $10^5$ pairings, seed 0. Both belong in
 the methodology section alongside the test itself.
+
+Section 6 of `results/paper_numbers.md` now carries the verifications
+introduced above: $M$ against $M_{\rm FGN}$, multiset identity at three
+values of $R$, the filtered-rank DFA exponents, and the $K = 50$
+burstiness refit. Each carries its own guard — a calibration column for
+the DFA estimator, an assertion that the refit reproduces the stored
+projections, and an assertion on the number of components returned, so
+that a silent truncation cannot be mistaken for a result.
