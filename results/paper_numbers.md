@@ -2,38 +2,38 @@
 
 ## 1. Four showcase texts (Table tab:single_text_summary and per-text sections)
 
-| text | N | M | OOV (old) | alpha (old) | alpha0 (old) | r(lambda,B) p (old) | B2 (old) |
-|---|---|---|---|---|---|---|---|
-| War and Peace | 564,788 | 235,933 | 1.6% (1.6%) | 0.721 (0.719) | 0.76 (0.77) | 0.702, p=0.0006 (0.702, 0.0006) | 1.855 (1.855) |
-| Origin of Species | 151,179 | 58,913 | 0.4% (0.4%) | 0.771 (0.769) | 0.80 (0.804) | 0.295, p=0.2070 (0.294, 0.209) | 1.888 (1.888) |
-| Great Expectations | 188,925 | 64,410 | 1.3% (1.3%) | 0.689 (0.688) | 0.74 (0.735) | 0.511, p=0.0213 (0.522, 0.018) | 1.209 (1.209) |
-| Ulysses | 264,165 | 101,489 | 0.7% (0.7%) | 0.763 (0.794) | 0.80 (0.839) | 0.571, p=0.0086 (0.578, 0.008) | 1.495 (1.495) |
+| text | N | M | OOV (old) | alpha (old) | alpha0 (old) | r(lambda,B), P (old) | rho, P | B2 (old) | LaTeX |
+|---|---|---|---|---|---|---|---|---|---|
+| War and Peace | 564,788 | 235,933 | 1.6% (1.6%) | 0.721 (0.721) | 0.76 (0.76) | 0.702, P=0.0055 (0.702, 0.0006) | 0.850, P=0.0000 | 1.855 (1.855) | 0.702$^{**}$ |
+| Origin of Species | 151,179 | 58,913 | 0.4% (0.4%) | 0.771 (0.771) | 0.80 (0.8) | 0.295, P=0.1694 (0.295, 0.207) | 0.460, P=0.0421 | 1.888 (1.888) | 0.295 |
+| Great Expectations | 188,925 | 64,410 | 1.3% (1.3%) | 0.689 (0.689) | 0.74 (0.74) | 0.511, P=0.0136 (0.511, 0.021) | 0.579, P=0.0085 | 1.209 (1.209) | 0.511$^{*}$ |
+| Ulysses | 264,165 | 101,489 | 0.7% (0.7%) | 0.763 (0.763) | 0.80 (0.8) | 0.571, P=0.0406 (0.571, 0.009) | 0.817, P=0.0000 | 1.495 (1.495) | 0.571$^{*}$ |
 
 ### War and Peace
 - EVR PC1 6.98% (old 6.98), PC2 4.21% (old 4.21), PC3 2.97%, first ten 27.2% (old 27.2)
 - q=0.95: B1=1.643, B2=1.855, B3=2.045; largest at PC3 (B=2.045); null at that k: surr 0.976, FGN 0.974
-- mean over k=1..20: B_orig 1.358 (old Bbar 1.18), B_surr 0.974, B_FGN 0.973; null range surr [0.970,0.977], FGN [0.959,0.996]
+- mean over k=1..20: B_orig 1.358 (old Bbar 1.36), B_surr 0.974, B_FGN 0.973; null range surr [0.970,0.977], FGN [0.959,0.996]
 - ordering B_orig > B_FGN and > B_surr at q=0.95: 20/20
 - quantile sweep, full ordering: q=0.6: 20/20, q=0.7: 20/20, q=0.8: 20/20, q=0.9: 20/20, q=0.95: 20/20, q=0.99: 20/20
 
 ### Origin of Species
 - EVR PC1 6.61% (old 6.61), PC2 3.58% (old 3.58), PC3 2.99%, first ten 26.4% (old 26.4)
 - q=0.95: B1=1.255, B2=1.888, B3=1.727; largest at PC6 (B=1.900); null at that k: surr 0.967, FGN 0.975
-- mean over k=1..20: B_orig 1.350 (old Bbar 1.1), B_surr 0.974, B_FGN 0.978; null range surr [0.967,0.982], FGN [0.945,1.012]
+- mean over k=1..20: B_orig 1.350 (old Bbar 1.35), B_surr 0.974, B_FGN 0.978; null range surr [0.967,0.982], FGN [0.945,1.012]
 - ordering B_orig > B_FGN and > B_surr at q=0.95: 20/20
 - quantile sweep, full ordering: q=0.6: 20/20, q=0.7: 20/20, q=0.8: 20/20, q=0.9: 20/20, q=0.95: 20/20, q=0.99: 20/20
 
 ### Great Expectations
 - EVR PC1 6.54% (old 6.54), PC2 4.34% (old 4.34), PC3 3.00%, first ten 27.2% (old 27.2)
 - q=0.95: B1=1.228, B2=1.209, B3=1.244; largest at PC3 (B=1.244); null at that k: surr 0.982, FGN 1.002
-- mean over k=1..20: B_orig 1.176 (old Bbar 1.07), B_surr 0.975, B_FGN 0.977; null range surr [0.965,0.982], FGN [0.949,1.009]
+- mean over k=1..20: B_orig 1.176 (old Bbar 1.18), B_surr 0.975, B_FGN 0.977; null range surr [0.965,0.982], FGN [0.949,1.009]
 - ordering B_orig > B_FGN and > B_surr at q=0.95: 20/20
 - quantile sweep, full ordering: q=0.6: 20/20, q=0.7: 20/20, q=0.8: 20/20, q=0.9: 20/20, q=0.95: 20/20, q=0.99: 20/20
 
 ### Ulysses
 - EVR PC1 6.76% (old None), PC2 3.43% (old None), PC3 3.06%, first ten 25.0% (old 25.0)
 - q=0.95: B1=1.286, B2=1.495, B3=1.329; largest at PC2 (B=1.495); null at that k: surr 0.976, FGN 0.969
-- mean over k=1..20: B_orig 1.234 (old Bbar 1.13), B_surr 0.976, B_FGN 0.976; null range surr [0.970,0.981], FGN [0.936,0.997]
+- mean over k=1..20: B_orig 1.234 (old Bbar 1.23), B_surr 0.976, B_FGN 0.976; null range surr [0.970,0.981], FGN [0.936,0.997]
 - ordering B_orig > B_FGN and > B_surr at q=0.95: 20/20
 - quantile sweep, full ordering: q=0.6: 20/20, q=0.7: 20/20, q=0.8: 20/20, q=0.9: 20/20, q=0.95: 20/20, q=0.99: 20/20
 
@@ -184,3 +184,37 @@ means ± sd: orig 0.623 ± 0.034 (old 0.637±0.032); FGN 0.499 ± 0.014 (old 0.5
 
 ### Corpus
 - mean ± sd over 320 pairs: orig 0.666 ± 0.054; FGN 0.504 ± 0.019; surr 0.499 ± 0.004; orig>0.5 in 100.0%, |FGN-0.5|<0.05 in 97.5%
+
+## 6. Verification: does the frequency filter preserve rank-level scaling?
+
+Calibration column: `a(rank,unfilt)` is `projection_alpha` applied to the
+unfiltered rank sequence, to be compared with `alpha_text` computed by the
+pipeline. If the two disagree, the remaining columns are not comparable.
+
+| text | M | M_FGN | M_FGN/M | a(rank,unfilt) | alpha_text | a(rank orig,filt) | a(rank FGN,filt) |
+|---|---|---|---|---|---|---|---|
+| War and Peace | 235,933 | 235,933 | 1.0000 | 0.693 | 0.721 | 0.674 | 0.633 |
+| Origin of Species | 58,913 | 58,913 | 1.0000 | 0.726 | 0.771 | 0.694 | 0.645 |
+| Great Expectations | 64,410 | 64,410 | 1.0000 | 0.672 | 0.689 | 0.609 | 0.567 |
+| Ulysses | 101,489 | 101,489 | 1.0000 | 0.805 | 0.763 | 0.772 | 0.629 |
+  - multiset identical to original: True
+
+### Multiset identity vs the high-frequency cutoff R
+
+| text | unfiltered | R=100 | R=150 | R=200 |
+|---|---|---|---|---|
+| War and Peace | True | True (239,725/239,725) | True (210,240/210,240) | True (188,835/188,835) |
+| Origin of Species | True | True (59,173/59,173) | True (51,075/51,075) | True (45,424/45,424) |
+| Great Expectations | True | True (65,285/65,285) | True (54,085/54,085) | True (46,309/46,309) |
+| Ulysses | True | True (102,234/102,234) | True (91,229/91,229) | True (83,362/83,362) |
+- PCA components retained: 300
+- eigenvalues 300, proj (101489, 20), attrs ['K', 'components', 'eigenvalues', 'explained_variance_ratio', 'mean', 'proj']
+
+### Burstiness beyond the retained K=20 (PCA refitted with K=50)
+
+| text | cum.var 20 | 50 | 100 | mean B 1..20 | 21..50 | min B 21..50 | all > geom | refit err |
+|---|---|---|---|---|---|---|---|---|
+| War and Peace | 37.8% | 57.1% | 76.4% | 1.358 | 1.138 | 1.085 | True | 9.5e-07 |
+| Origin of Species | 38.1% | 59.0% | 78.6% | 1.350 | 1.188 | 1.095 | True | 9.5e-07 |
+| Great Expectations | 38.5% | 59.0% | 78.7% | 1.176 | 1.112 | 1.041 | True | 9.5e-07 |
+| Ulysses | 35.0% | 53.2% | 72.7% | 1.234 | 1.120 | 1.041 | True | 9.5e-07 |

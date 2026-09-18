@@ -449,14 +449,20 @@ Values of $B_k$ above this reference indicate more irregular,
 clustered recurrence than expected from independent events at the same
 rate.
 
-All comparisons use the same quantile convention for the original,
-word-shuffled, and FGN projected series, so the geometric reference is
-common to the three sequences.
-For the word-shuffled surrogate, the equality of projected marginal
-distributions is exact by Eq.~\eqref{eq:sigma_invariant}; implementation
-details for the FGN construction are given in
-Section~\ref{sec:fgn_pipeline}.
+% All comparisons use the same quantile convention for the original,
+% word-shuffled, and FGN projected series, so the geometric reference is
+% common to the three sequences.
+% For the word-shuffled surrogate, the equality of projected marginal
+% distributions is exact by Eq.~\eqref{eq:sigma_invariant}; implementation
+% details for the FGN construction are given in
+% Section~\ref{sec:fgn_pipeline}.
 
+Because all three sequences are permutations of the same embedded token
+multiset, their projected series share an identical marginal
+distribution: the empirical $q$-quantile is the same number for each, so
+thresholding each series at its own quantile and thresholding all three
+at the original's are the same operation, and the event rate is exactly
+$1-q$ in every case.
 \subsection{Semantic variance and burstiness across components}
 \label{sec:component_structure}
 
@@ -495,8 +501,8 @@ $r$. Significance is assessed by a permutation test over the pairing
 between the two spectra ($10^5$ random pairings), and we report the
 Spearman rank correlation $\rho$ alongside $r$, since the eigenvalue
 spectrum is strongly skewed and $r$ is otherwise dominated by the leading
-components. Permutation $P$-values are denoted $P$ throughout, to avoid
-confusion with the event rate $p=1-q$.
+components. Throughout, $P$ denotes a significance level, to avoid confusion with
+the event rate $p=1-q$.
 
 
 A positive value indicates that high-variance directions tend also to
@@ -515,7 +521,13 @@ Given the retained token sequence $(\tilde s_1,\ldots,\tilde s_M)$, a
 surrogate is formed by a uniformly random permutation
 $\pi\in S_M$.
 Its embedding trajectory is therefore a permutation of the original
-trajectory.
+trajectory. Because a single permutation is itself a random draw, the reported
+word-shuffled quantities are averaged over $N_{\rm surr}$ independent
+permutations, the spread across realisations giving the mean$\pm2\sigma$
+bands shown in the figures. The burstiness spectrum and the DFA
+exponents are averaged in this way; the autocorrelation is reported for
+a single realisation, which suffices because the shuffled ACF is
+indistinguishable from zero at every lag.
 
 By Eq.~\eqref{eq:sigma_invariant}, the surrogate preserves exactly the
 word counts of the retained sequence, the embedding covariance matrix
@@ -535,17 +547,29 @@ null model.
 Starting from the Zipf-rank sequence
 $\mathbf{r}=(r_1,\ldots,r_N)$, a fractional Gaussian noise process is
 mapped onto the empirical rank-frequency structure.
-Its parameter is chosen by bisection so that the DFA exponent of the
-surrogate rank sequence matches that of the original:
+%Its parameter is chosen by bisection so that the DFA exponent of the
+%surrogate rank sequence matches that of the original:
+%\begin{equation}
+%  \alpha_{\rm FGN}\simeq\alpha_{\rm orig}.
+ % \label{eq:fgn_dfa_match}
+%\end{equation}
+
+Its generator exponent $\alpha_0$ is chosen by bisection so that the DFA
+exponent measured on the surrogate rank sequence matches that of the
+original,
 \begin{equation}
-  \alpha_{\rm FGN}\simeq\alpha_{\rm orig}.
+  \alpha(\mathbf{r}^{\rm FGN})\simeq\alpha(\mathbf{r}),
   \label{eq:fgn_dfa_match}
 \end{equation}
+where $\alpha_0>\alpha$ in general because the rank-to-word mapping is
+not exponent-preserving; Table~\ref{tab:corpus} reports both.
+
+
 The resulting ranks are mapped back to words and processed through the
 same filtering, embedding, and projection pipeline as the original.
 
-The construction preserves the text length and empirical frequency
-structure and reproduces the global rank-sequence DFA exponent by
+The construction preserves the raw token count $N$ and the empirical
+frequency structure, and reproduces the rank-level DFA exponent by
 design.
 Unlike the word-shuffled null, its defining constraint is long-range
 rank-level scaling rather than exact permutation of the retained
@@ -554,8 +578,18 @@ It therefore tests whether stationary correlations between word ranks
 are sufficient to produce the burstiness observed along semantic
 projections.
 
+Two features of the construction require comment.
+First, the exponent is matched on the unfiltered rank sequence, of
+length $N$, whereas burstiness, autocorrelation and DFA of the
+projections are measured on the filtered trajectory, whose length
+$M_{\rm FGN}$ need not equal $M$.
+Second, the frequency filter applied to the surrogate is the one derived
+from the original text, so that both series are restricted to an
+identical vocabulary.
+
 \begin{remark}
 \label{rem:fgn_cov}
+(MIRKO: cut!!.......SEE NEXT ONE)
   The FGN construction does not impose covariance invariance as an
   algebraic constraint in the way that word shuffling does.
   In the analysed data, however, the leading FGN and original
@@ -564,6 +598,19 @@ projections.
   The surrogates are therefore compared along the original PCA
   directions, while the word-shuffled case remains the exact
   geometry-preserving control.
+\end{remark}
+
+\begin{remark}
+\label{rem:fgn_cov}
+  The rank-to-word mapping reproduces the empirical rank histogram
+  exactly, so the FGN surrogate is a permutation of the original token
+  sequence. By Eq.~\eqref{eq:sigma_invariant} it therefore preserves the
+  embedding covariance matrix, the complete PCA eigensystem, and the
+  marginal distribution of every projected series exactly, as the
+  word-shuffled null does. The three sequences are permutations of one
+  another and differ only in the ordering of visits through a fixed
+  semantic geometry. Projecting the surrogates onto the original PCA
+  directions is therefore not an approximation but the natural choice.
 \end{remark}
 
 \begin{remark}
@@ -581,16 +628,26 @@ projections.
 \subsection{Logical role of the null models}
 \label{sec:taxonomy}
 
-The original, shuffled, and FGN sequences isolate different statistical
-ingredients.
-The original contains its lexical composition, static embedding
-geometry, temporal ordering through that geometry, and observed
-rank-level scaling.
-The word-shuffled sequence preserves the first two exactly while
-removing temporal order.
-The FGN surrogate preserves the frequency structure and rank-level DFA
-scaling while imposing no semantic organisation beyond that inherited
-from the rank-to-word mapping.
+The three sequences differ in which statistical ingredients they retain;
+Table~\ref{tab:null_taxonomy} summarises the differences.
+
+\begin{table}[htbp]
+\centering
+\caption{Statistical ingredients retained by each sequence.}
+
+\label{tab:null_taxonomy}
+\small
+\begin{tabular}{lccc}
+\toprule
+Ingredient & Original & Word-shuffled & FGN \\
+\midrule
+Lexical composition, frequency structure & present & exact & exact \\
+Static embedding geometry ($\Sig$, eigensystem) & present & exact & exact \\
+Temporal ordering in embedding space & present & destroyed & destroyed \\
+Rank-level long-range scaling & present & destroyed & matched \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 The comparisons therefore address two distinct questions.
 First, does the ordered original trajectory produce component-level
@@ -598,9 +655,16 @@ burstiness that is absent when the same embedded tokens are randomly
 permuted?
 Second, is matching the global DFA exponent of the rank sequence
 sufficient to reproduce that semantic burstiness?
-The Results answer both questions by comparing IET distributions,
-burstiness spectra, autocorrelation functions, and projection-level DFA
-exponents across the three sequences.
+The Results answer both by comparing IET distributions, burstiness
+spectra, autocorrelation functions and projection-level DFA exponents
+across the three sequences.
+
+Both answers are negative, and the two negatives are not redundant:
+neither the static geometry of the embedded vocabulary nor global
+rank-level memory is sufficient to generate the observed
+component-level burstiness, which therefore requires the ordering of
+visits through semantic space.
+
 
 
 \section{Computational Pipeline}
@@ -645,10 +709,13 @@ The choice $R = 100$ is empirically motivated by direct inspection of
 word scores along PC1: with $R = 100$, function words are removed
 from the vocabulary and the principal components reflect genuine
 topical directions.
+%We verified that increasing $R$ to 150 or 200 does not change the
+%qualitative results but begins to degrade the alignment between the
+%original and FGN covariance structures for higher components
 We verified that increasing $R$ to 150 or 200 does not change the
-qualitative results but begins to degrade the alignment between the
-original and FGN covariance structures for higher components
-(Remark~\ref{rem:fgn_cov}).
+qualitative results.
+
+%(Remark~\ref{rem:fgn_cov}).
 
 A known residual artefact persists in PC1 for texts whose vocabulary
 contains many rare transliterated proper nouns or archaic forms
@@ -686,9 +753,9 @@ We defer contextual embedding analysis to future work
 
 Out-of-vocabulary tokens are skipped; their original positions are not
 used in the trajectory or in IET computations.
-The OOV rate after filtering is typically $5$--$15\%$ for Victorian
-English texts, consisting mainly of proper nouns, archaic forms, and
-dialect words.
+The OOV rate after filtering is below $2\%$ for the four representative
+texts (Table~\ref{tab:single_text_summary}), consisting mainly of
+proper nouns, archaic forms, and dialect words.
 
 \subsection{PCA and projection}
 \label{sec:pca_pipeline}
@@ -697,7 +764,7 @@ The embedding trajectory $(e_1, \ldots, e_M) \subset \R^d$ is
 assembled as a matrix $\mathbf{V} \in \R^{M \times d}$.
 After mean-centring, $\mathbf{X} = \mathbf{V} - \mathbf{1}\ebar^\top$,
 PCA is computed via \texttt{sklearn.decomposition.PCA} retaining
-$K_{\rm show} = 50$ components for eigenvalue analysis and
+$K_{\rm show} = 50$ {\bf{MIRKO: controllare !|!!!}} components for eigenvalue analysis and
 $K_{\rm burst} = 20$ for the burstiness spectrum.
 The projected series matrix $\mathbf{P} \in \R^{M \times K_{\rm show}}$
 with $P_{tk} = \xtk$ is used for all subsequent analyses.
@@ -765,9 +832,15 @@ The surrogate is projected onto the \emph{original} PCA eigenvectors
 $\{\vk\}$ to ensure comparability along identical semantic directions.
 Because $\Sig_{\rm FGN} \approx \Sig_{\rm orig}$ (Remark~\ref{rem:fgn_cov}),
 the original eigenvectors are a near-optimal basis for the FGN
-trajectory as well; any residual difference is below $3\%$ in
-eigenvalue and below $5\%$ in eigenvector angle for $k \leq 20$
-at $R = 100$.
+trajectory as well; 
+%any residual difference is below $3\%$ in
+%eigenvalue and below $5\%$ in eigenvector angle for $k \leq 20$
+%at $R = 100$.
+Because the FGN surrogate is a permutation of the original token
+sequence (Remark~\ref{rem:fgn_cov}), $\Sig_{\rm FGN}=\Sig_{\rm orig}$
+exactly: the original eigenvectors \emph{are} the surrogate's own
+principal directions, and projecting onto them involves no
+approximation.
 
 %\subsection{Word-shuffled surrogate generation}
 %\label{sec:shuffle_pipeline}
@@ -820,26 +893,29 @@ $N$: raw tokens; $M$: filtered tokens (R=100, $F_{\min}=5$);
 OOV: out-of-vocabulary rate after filtering;
 $\alpha$: DFA exponent; $\alpha_0$: FGN bisection parameter
 (resolved to $\pm0.01$ by the bisection tolerance);
-$r(\lambda, B)$: Pearson correlation between eigenvalue and
-burstiness spectra; $B_2$: burstiness of PC2 at $q=0.95$.}
+$r(\lambda, B)$ and $\rho(\lambda, B)$: Pearson and Spearman
+correlation between the eigenvalue and burstiness spectra, with
+significance from a permutation test over component pairings
+($10^5$ pairings, seed 0);
+$B_2$: burstiness of PC2 at $q=0.95$.}
 \label{tab:single_text_summary}
 \small
-\begin{tabular}{lrrrrrrr}
+\begin{tabular}{lrrrrrrrr}
 \toprule
 Text & $N$ & $M$ & OOV & $\alpha$ & $\alpha_0$ &
-      $r(\lambda,B)$ & $B_2$ \\
+      $r(\lambda,B)$ & $\rho(\lambda,B)$ & $B_2$ \\
 \midrule
-War and Peace     & 564{,}788 & 235{,}933 & 1.6\% &
-  0.721 & 0.76 & 0.702$^{***}$ & 1.855 \\
-Origin of Species & 151{,}179 &  58{,}913 & 0.4\% &
-  0.771 & 0.80 & 0.295          & 1.888 \\
-Great Expectations & 188{,}925 & 64{,}410 & 1.3\% &
-  0.689 & 0.74 & 0.511$^{*}$   & 1.209 \\
-Ulysses           & 264{,}165 & 101{,}489 & 0.7\% &
-  0.763 & 0.80 & 0.571$^{**}$  & 1.495 \\
+War and Peace      & 564{,}788 & 235{,}933 & 1.6\% &
+  0.721 & 0.76 & 0.702$^{**}$ & 0.850$^{***}$ & 1.855 \\
+Origin of Species  & 151{,}179 &  58{,}913 & 0.4\% &
+  0.771 & 0.80 & 0.295         & 0.460$^{*}$   & 1.888 \\
+Great Expectations & 188{,}925 &  64{,}410 & 1.3\% &
+  0.689 & 0.74 & 0.511$^{*}$   & 0.579$^{**}$  & 1.209 \\
+Ulysses            & 264{,}165 & 101{,}489 & 0.7\% &
+  0.763 & 0.80 & 0.571$^{*}$   & 0.817$^{***}$ & 1.495 \\
 \bottomrule
-\multicolumn{8}{l}{\small $^*p<0.05$;\; $^{**}p<0.01$;\;
-  $^{***}p<0.001$;\; no mark: $p>0.05$.}
+\multicolumn{9}{l}{\small $^*P<0.05$;\; $^{**}P<0.01$;\;
+  $^{***}P<0.001$;\; no mark: $P>0.05$.}
 \end{tabular}
 \end{table}
 
@@ -1196,15 +1272,20 @@ $r=0.702$ ($P=0.0006$).
 
 \subsubsection{\emph{On the Origin of Species}}
 
-The original projections have broad IET tails, particularly for PC2
-and PC3, while both controls remain close to geometric
-(Figure~\ref{fig:darwin_iet}). PC2 is the burstiest direction,
-$B_2=1.888$, followed by PC3 with $B_3=1.727$; PC1 is lower at
+The original projections have broad IET tails, particularly for PC2,
+PC3 and PC6, while both controls remain close to geometric
+(Figure~\ref{fig:darwin_iet}). Burstiness is high across the leading
+directions but peaks away from the leading eigenvalue: the maximum is
+at PC6, $B_6=1.900$, with PC2 and PC3 immediately behind at
+$B_2=1.888$ and $B_3=1.727$, while PC1 is markedly lower at
 $B_1=1.255$. The full original-over-control ordering holds for all 20
-components. The weak eigenvalue--burstiness correlation,
-$r=0.295$ ($P=0.207$), shows especially clearly that the direction of
-greatest semantic variance need not be the direction of greatest
-temporal clustering.
+components. The linear eigenvalue--burstiness correlation is weak,
+$r=0.295$ ($P=0.169$), while the rank correlation is moderate,
+$\rho=0.460$ ($P=0.042$): the association is monotone but not linear.
+The displacement of the burstiness maximum to PC6 states the point
+without recourse to any correlation measure — the direction of
+greatest semantic variance is not the direction of greatest temporal
+clustering.
 
 \subsubsection{\emph{Great Expectations}}
 
@@ -1374,7 +1455,7 @@ text and then averaging over the 16 texts:
   \left\langle \frac{B_k^{\rm orig}}{B_k^{\rm surr}}
   \right\rangle_{\rm texts}
   \;=\; 1.29 \;\pm\; 0.03,
-  \qquad t = 8.7,\quad p < 10^{-6},
+  \qquad t = 8.7,\quad P < 10^{-6},
   \label{eq:ratio_corpus}
 \end{equation}
 where $\pm$ denotes the standard error of the mean over 16 texts.
@@ -1791,7 +1872,7 @@ with mean $0.002$, the vast majority inside the i.i.d.\ band.
 Panel~B zooms on the FGN and shuffled distributions.
 Both are centred near zero and overlap substantially.
 A one-sample $t$-test of $\bar\rho^{\rm FGN}(1) = 0$ gives
-$t = 5.05$, $p < 10^{-6}$: the mean is statistically non-zero but
+$t = 5.05$, $P < 10^{-6}$: the mean is statistically non-zero but
 negligibly small ($0.002$) relative to the orig--null gap ($0.098$).
 As with the burstiness differences (Section~\ref{sec:corpus_diffs}),
 the statistical significance at this sample size reflects estimator
