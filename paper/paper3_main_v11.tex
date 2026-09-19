@@ -213,9 +213,8 @@ binary event sequence to which the IET construction of
 \citet{Altmann2012} can be applied.
 The resulting spectrum $\{B_k\}_{k=1}^K$ measures burstiness separately
 along the first $K$ principal semantic directions.
-Throughout the paper we retain $K=20$; extending the analysis to
-higher-order components adds progressively less semantic variance and
-leaves the qualitative picture unchanged.
+Throughout the paper we retain $K=20$; 
+robustness to this choice is examined in Section~\ref{sec:single_text_robustness}.
  
 This construction supports a component-resolved question:
 how is semantic burstiness distributed across the principal directions
@@ -589,19 +588,6 @@ identical vocabulary.
 
 \begin{remark}
 \label{rem:fgn_cov}
-(MIRKO: cut!!.......SEE NEXT ONE)
-  The FGN construction does not impose covariance invariance as an
-  algebraic constraint in the way that word shuffling does.
-  In the analysed data, however, the leading FGN and original
-  eigenvalue spectra and directions are empirically very close, as
-  illustrated by the spectrum comparisons in the Results.
-  The surrogates are therefore compared along the original PCA
-  directions, while the word-shuffled case remains the exact
-  geometry-preserving control.
-\end{remark}
-
-\begin{remark}
-\label{rem:fgn_cov}
   The rank-to-word mapping reproduces the empirical rank histogram
   exactly, so the FGN surrogate is a permutation of the original token
   sequence. By Eq.~\eqref{eq:sigma_invariant} it therefore preserves the
@@ -738,12 +724,12 @@ approximately $400{,}000$ words. The implementation uses the
 \texttt{gensim.\allowbreak downloader}.
 
 The choice of static (non-contextual) embeddings is deliberate.
-For static embeddings, $\et = \phi(s_t)$ depends only on the word
+For static embeddings, $\et = \phi(\tilde s_t)$ depends only on the word
 \emph{type} $s_t$, making the trajectory a deterministic function of
 the token sequence.
 Shuffling the token sequence thus has an unambiguous effect: it
-permutes the trajectory while leaving the multiset $\{\et\}$
-unchanged.
+permutes the trajectory while leaving the multiset $\{\et\}$ unchanged
+--- as does the FGN surrogate (Remark~\ref{rem:fgn_cov}).
 Contextual embeddings (BERT, GPT) would assign different vectors to
 the same word type depending on local context, introducing dependencies
 between the embedding and the ordering that would complicate the
@@ -760,14 +746,15 @@ proper nouns, archaic forms, and dialect words.
 \subsection{PCA and projection}
 \label{sec:pca_pipeline}
 
-The embedding trajectory $(e_1, \ldots, e_M) \subset \R^d$ is
-assembled as a matrix $\mathbf{V} \in \R^{M \times d}$.
+The embedding trajectory is assembled as a matrix
+$\mathbf{V} \in \R^{M \times d}$ with rows $\et^\top$.
 After mean-centring, $\mathbf{X} = \mathbf{V} - \mathbf{1}\ebar^\top$,
-PCA is computed via \texttt{sklearn.decomposition.PCA} retaining
-$K_{\rm show} = 50$ {\bf{MIRKO: controllare !|!!!}} components for eigenvalue analysis and
-$K_{\rm burst} = 20$ for the burstiness spectrum.
-The projected series matrix $\mathbf{P} \in \R^{M \times K_{\rm show}}$
-with $P_{tk} = \xtk$ is used for all subsequent analyses.
+PCA is computed via \texttt{sklearn.decomposition.PCA}.
+The full eigenvalue spectrum $\{\lambda_k\}_{k=1}^{d}$ is retained for
+the spectral analysis, while eigenvectors and projections are formed for
+the first $K = 20$ components, giving the projected series matrix
+$\mathbf{P} \in \R^{M \times K}$, $P_{tk} = \xtk$, used in all
+subsequent analyses.
 
 %\subsection{Quantile thresholding and burstiness computation}
 %\label{sec:thresholding}
@@ -813,34 +800,29 @@ with $P_{tk} = \xtk$ is used for all subsequent analyses.
 The FGN surrogate is constructed using the pipeline of
 \citet{DegliEsposti2025}:
 \begin{enumerate}
-  \item The text is tokenised and each token is replaced by its Zipf
-        rank, producing a rank sequence $\mathbf{r}$.
+  \item The unfiltered token stream is tokenised and each token is
+        replaced by its Zipf rank, producing a rank sequence
+        $\mathbf{r}$ of length $N$.
   \item The DFA exponent $\alpha$ of the original text is estimated
         from $\mathbf{r}$.
   \item A FGN process with parameter $\alpha_0$ is generated and
         mapped onto the empirical rank histogram.
         The parameter $\alpha_0$ is found by bisection so that the
         DFA exponent of the surrogate matches $\alpha$.
-  \item The rank sequence of the surrogate is mapped back to words via
-        the inverse Zipf mapping, producing a word sequence
-        $\mathbf{s}^{\rm FGN}$.
+  \item The surrogate rank sequence is mapped back to words via the
+        inverse Zipf mapping. This reproduces the empirical rank
+        histogram, so the resulting word sequence
+        $\mathbf{s}^{\rm FGN}$ is a permutation of the original.
 \end{enumerate}
 The resulting word sequence is then processed through the same
-frequency filter (Section~\ref{sec:preprocessing}), embedding
-lookup, and projection pipeline as the original text.
-The surrogate is projected onto the \emph{original} PCA eigenvectors
-$\{\vk\}$ to ensure comparability along identical semantic directions.
-Because $\Sig_{\rm FGN} \approx \Sig_{\rm orig}$ (Remark~\ref{rem:fgn_cov}),
-the original eigenvectors are a near-optimal basis for the FGN
-trajectory as well; 
-%any residual difference is below $3\%$ in
-%eigenvalue and below $5\%$ in eigenvector angle for $k \leq 20$
-%at $R = 100$.
-Because the FGN surrogate is a permutation of the original token
-sequence (Remark~\ref{rem:fgn_cov}), $\Sig_{\rm FGN}=\Sig_{\rm orig}$
-exactly: the original eigenvectors \emph{are} the surrogate's own
-principal directions, and projecting onto them involves no
-approximation.
+frequency filter (Section~\ref{sec:preprocessing}), embedding lookup,
+and projection pipeline as the original text, and projected onto the
+original PCA eigenvectors $\{\vk\}$.
+Because $\mathbf{s}^{\rm FGN}$ is a permutation of the original token
+sequence, $\Sig_{\rm FGN}=\Sig_{\rm orig}$ exactly
+(Remark~\ref{rem:fgn_cov},): the original eigenvectors \emph{are} the
+surrogate's own principal directions, and projecting onto them involves
+no approximation.
 
 %\subsection{Word-shuffled surrogate generation}
 %\label{sec:shuffle_pipeline}
@@ -897,44 +879,64 @@ $r(\lambda, B)$ and $\rho(\lambda, B)$: Pearson and Spearman
 correlation between the eigenvalue and burstiness spectra, with
 significance from a permutation test over component pairings
 ($10^5$ pairings, seed 0);
-$B_2$: burstiness of PC2 at $q=0.95$.}
+$B_{\max}$: largest burstiness over the $K=20$ components at $q=0.95$,
+with the component at which it occurs.}
 \label{tab:single_text_summary}
 \small
 \begin{tabular}{lrrrrrrrr}
 \toprule
 Text & $N$ & $M$ & OOV & $\alpha$ & $\alpha_0$ &
-      $r(\lambda,B)$ & $\rho(\lambda,B)$ & $B_2$ \\
+      $r(\lambda,B)$ & $\rho(\lambda,B)$ & $B_{\max}$ \\
 \midrule
 War and Peace      & 564{,}788 & 235{,}933 & 1.6\% &
-  0.721 & 0.76 & 0.702$^{**}$ & 0.850$^{***}$ & 1.855 \\
+  0.721 & 0.76 & 0.702$^{**}$ & 0.850$^{***}$ & 2.045 (PC3) \\
 Origin of Species  & 151{,}179 &  58{,}913 & 0.4\% &
-  0.771 & 0.80 & 0.295         & 0.460$^{*}$   & 1.888 \\
+  0.771 & 0.80 & 0.295         & 0.460$^{*}$   & 1.900 (PC6) \\
 Great Expectations & 188{,}925 &  64{,}410 & 1.3\% &
-  0.689 & 0.74 & 0.511$^{*}$   & 0.579$^{**}$  & 1.209 \\
+  0.689 & 0.74 & 0.511$^{*}$   & 0.579$^{**}$  & 1.244 (PC3) \\
 Ulysses            & 264{,}165 & 101{,}489 & 0.7\% &
-  0.763 & 0.80 & 0.571$^{*}$   & 0.817$^{***}$ & 1.495 \\
+  0.763 & 0.80 & 0.571$^{*}$   & 0.817$^{***}$ & 1.495 (PC2) \\
 \bottomrule
 \multicolumn{9}{l}{\small $^*P<0.05$;\; $^{**}P<0.01$;\;
   $^{***}P<0.001$;\; no mark: $P>0.05$.}
 \end{tabular}
 \end{table}
 
-Across the four texts, the original projection sequences are more
-bursty than both controls for all $K=20$ components at $q=0.95$. The
-correlation $r(\lambda_k,B_k)$ varies from $0.294$ to $0.702$, showing
-that captured semantic variance and temporal clustering are neither
-independent in every text nor interchangeable.
+Across the four texts, the original projection sequences are more bursty
+than both controls for all $K=20$ components at $q=0.95$. Semantic
+variance and temporal clustering are monotonically associated in every
+text ($\rho$ from $0.460$ to $0.850$, significant in all four) but are
+not interchangeable: the linear correlation is considerably weaker
+($r$ from $0.295$ to $0.702$), and the burstiest direction is never the
+first principal component, falling at PC3, PC6, PC3 and PC2
+respectively.
 
 \subsection{Static semantic geometry and interpretable directions}
 \label{sec:semantic_geometry_results}
 
+
+
 The eigenvalue spectra describe the geometry of the retained embedded
 vocabulary. As established in Section~\ref{sec:pca}, word shuffling
-leaves this geometry exactly invariant. The FGN spectra are also
-empirically close to the originals over the displayed range, although
-that agreement is not imposed algebraically. The semantic poles of the
+leaves this geometry exactly invariant.Both surrogates leave this geometry 
+exactly invariant, being permutations of the original token sequence. 
+The semantic poles of the
 leading components provide a separate empirical test of whether those
 directions correspond to interpretable contrasts.
+
+Taken together, the four texts show that PCA produces an ordered static
+geometry whose leading directions are only partly text-specific. Each
+low-order component pairs a pole that is characteristic of the
+individual work with a pole that recurs across texts: the positive pole
+of PC2 is military in \emph{War and Peace}, riverine in \emph{Great
+Expectations}, geographical in \emph{On the Origin of Species} and
+titular in \emph{Ulysses}, whereas its negative pole is the same
+colloquial register (\emph{really}, \emph{yourself}, \emph{feel}) in
+every novel. PC1 is common to all four texts in both poles and reflects
+the geometry of the embedding space rather than the organisation of any
+individual work. The temporal question is separate: whether visits
+along these directions occur regularly or in concentrated textual
+episodes.
 
 \subsubsection{\emph{War and Peace}}
 \label{sec:wrnpc}
@@ -951,10 +953,11 @@ components account for $27.2\%$.
   \centering
   \includegraphics[width=\textwidth]{figures/eng_wrnpc/eng_wrnpc_02_spectra_comparison.png}
   \caption{Eigenvalue spectra and cumulative explained variance for
-  \emph{War and Peace}: original (blue), word-shuffled (red), and
-  FGN surrogate (green). The shuffled spectrum is identical to the
-  original by permutation invariance; the FGN spectrum is empirically
-  very close over the displayed range (Remark~\ref{rem:fgn_cov}).}
+  \emph{War and Peace}. The three curves coincide: both surrogates are
+  permutations of the original token sequence, so all three share the
+  same covariance matrix and hence the same spectrum
+  (Remark~\ref{rem:fgn_cov}). The figure therefore verifies the
+  construction rather than reporting a comparison.}
   \label{fig:wrnpc_spectra}
 \end{figure}
 
@@ -970,43 +973,46 @@ but interpreted cautiously.
 
 \begin{table}[htbp]
 \centering
-\caption{Top-10 word types at the positive and negative poles
-of PC1, PC2, and PC3 for \emph{War and Peace} ($R=100$,
-$F_{\min}=5$).
-Frequencies in the filtered token sequence.}
+\caption{Top-6 word types at the positive and negative poles of PC1,
+PC2 and PC3 for \emph{War and Peace} ($R=100$, $F_{\min}=5$),
+with frequencies in the filtered token sequence.
+$B_k$ is a property of the component, not of the pole, and is therefore
+shown once per pair; the largest value over the $K=20$ components is
+shown in bold.}
 \label{tab:wrnpc_pc}
 \small
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{ll p{6cm} p{6cm}}
+\begin{tabular}{llr p{5.4cm} p{4.4cm}}
 \toprule
-PC & Pole & Top words (freq) & Interpretation \\
+PC & Pole & $B_k$ & Top words (freq) & Interpretation \\
 \midrule
-PC1 & $+$ &
-  \emph{gerasim} (26), \emph{pavlovna} (151), \emph{petya} (268),
-  \emph{dmitrievna} (105), \emph{piteously} (7), \emph{irritably} (6)
-  & Russian proper names + emotional adverbs (GloVe artefact) \\
-PC1 & $-$ &
-  \emph{any} (465), \emph{government} (63), \emph{people} (557),
-  \emph{can} (631), \emph{our} (619), \emph{country} (106)
-  & High-frequency function/abstract English (GloVe artefact) \\
+PC1 & $+$ & 1.643 &
+  \emph{gerasim} (26), \emph{maidservant} (5), \emph{irritably} (6),
+  \emph{piteously} (7), \emph{nikolaevich} (5), \emph{andreevich} (8)
+  & Rare transliterated names and low-frequency emotive vocabulary
+    (GloVe artefact) \\
+PC1 & $-$ & &
+  \emph{any} (465), \emph{government} (63), \emph{than} (533),
+  \emph{its} (567), \emph{people} (557), \emph{us} (422)
+  & High-frequency function words and abstract nouns (GloVe artefact) \\
 \midrule
-PC2 & $+$ &
+PC2 & $+$ & 1.855 &
   \emph{regiment} (226), \emph{infantry} (82), \emph{cavalry} (77),
-  \emph{battalion} (44), \emph{squadron} (64), \emph{army} (663)
-  & Military narrative (War) \\
-PC2 & $-$ &
+  \emph{battalion} (44), \emph{squadron} (64), \emph{brigade} (5)
+  & Military units and formations (War) \\
+PC2 & $-$ & &
   \emph{really} (203), \emph{yourself} (117), \emph{feel} (133),
-  \emph{myself} (148), \emph{think} (357), \emph{understand} (347)
-  & Personal/emotional discourse (Peace) \\
+  \emph{myself} (148), \emph{laugh} (60), \emph{everybody} (118)
+  & Personal and emotional discourse (Peace) \\
 \midrule
-PC3 & $+$ &
+PC3 & $+$ & \textbf{2.045} &
   \emph{walked} (70), \emph{sat} (345), \emph{feet} (112),
-  \emph{screaming} (6), \emph{legs} (101), \emph{bed} (118)
-  & Physical action, embodied presence \\
-PC3 & $-$ &
-  \emph{principles} (7), \emph{obligations} (6), \emph{moral} (32),
-  \emph{justification} (11), \emph{renounce} (8), \emph{unjust} (7)
-  & Philosophical/moral reflection \\
+  \emph{yards} (20), \emph{screaming} (6), \emph{clutching} (12)
+  & Physical action and embodied presence \\
+PC3 & $-$ & &
+  \emph{principles} (7), \emph{undertake} (10), \emph{renounce} (8),
+  \emph{utmost} (12), \emph{justification} (11), \emph{obligations} (6)
+  & Moral obligation and abstract reasoning \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1014,12 +1020,14 @@ PC3 & $-$ &
 \subsubsection{\emph{On the Origin of Species}}
 \label{sec:darwin}
 
+
+
 \emph{On the Origin of Species} contains $N=151{,}179$ raw tokens and
 $M=58{,}913$ retained tokens, with $\alpha=0.771$ and
 $\alpha_0=0.80$. PC1 explains $6.61\%$ of the variance, PC2
-$3.58\%$, and the first ten components $26.4\%$. The original,
-shuffled, and FGN spectra are again closely aligned
-(Figure~\ref{fig:darwin_spectra}).
+$3.58\%$, and the first ten components $26.4\%$. All three spectra
+coincide, both surrogates being permutations of the original token
+sequence (Figure~\ref{fig:darwin_spectra}).
 
 PC1 is dominated by specialised nineteenth-century biological and
 geological terminology at one pole and pronouns or conversational
@@ -1028,51 +1036,62 @@ embedding artefact. PC2 is a substantive geographical-versus-epistemic
 direction: spatial and biogeographical terms are opposed to the
 language of inference and theoretical reasoning. PC3 contrasts
 first-person field observations and concrete specimens with abstract
-classification and synthesis. These poles are listed in Table~\ref{tab:darwin_pc}.
+classification and synthesis. Table~\ref{tab:darwin_pc} also lists PC6,
+the burstiest direction of this text.
 
 \begin{table}[htbp]
 \centering
-\caption{Top-10 word types at the positive and negative poles
-of PC1, PC2, and PC3 for \emph{On the Origin of Species}
-($R=100$, $F_{\min}=5$).}
+\caption{Top-6 word types at the positive and negative poles of PC1,
+PC2, PC3 and PC6 for \emph{On the Origin of Species} ($R=100$,
+$F_{\min}=5$), with frequencies in the filtered token sequence.
+PC4 and PC5 are omitted; PC6 is included because it carries the largest
+burstiness of this text.
+$B_k$ is a property of the component, not of the pole, and is therefore
+shown once per pair; the largest value over the $K=20$ components is
+shown in bold.}
 \label{tab:darwin_pc}
 \small
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{ll p{6cm} p{5.5cm}}
+\begin{tabular}{llr p{5.4cm} p{4.4cm}}
 \toprule
-PC & Pole & Top words (freq) & Interpretation \\
+PC & Pole & $B_k$ & Top words (freq) & Interpretation \\
 \midrule
-PC1 & $+$ &
+PC1 & $+$ & 1.255 &
   \emph{sessile} (11), \emph{faunas} (14), \emph{ovules} (6),
-  \emph{polymorphic} (9), \emph{insectivorous} (6),
-  \emph{larvae} (26), \emph{palaeozoic} (15)
+  \emph{plumage} (9), \emph{polymorphic} (9), \emph{insectivorous} (6)
   & Specialised 19th-c.\ natural history lexicon \\
-PC1 & $-$ &
+PC1 & $-$ & &
   \emph{he} (163), \emph{him} (17), \emph{said} (47),
-  \emph{us} (104), \emph{my} (150), \emph{who} (75)
-  & Pronouns / interpersonal register (GloVe artefact) \\
+  \emph{us} (104), \emph{she} (24), \emph{his} (90)
+  & Pronouns and interpersonal register (GloVe artefact) \\
 \midrule
-PC2 & $+$ &
+PC2 & $+$ & 1.888 &
   \emph{northern} (37), \emph{islands} (131), \emph{sea} (100),
-  \emph{southern} (43), \emph{tropical} (16),
-  \emph{archipelago} (37), \emph{coast} (18)
-  & Geographical distribution chapters \\
-PC2 & $-$ &
-  \emph{understand} (74), \emph{infer} (31),
-  \emph{necessarily} (27), \emph{plainly} (43),
-  \emph{suppose} (63), \emph{ought} (40)
+  \emph{southern} (43), \emph{eastern} (13), \emph{island} (60)
+  & Places and biogeographical setting \\
+PC2 & $-$ & &
+  \emph{innate} (7), \emph{slightest} (7), \emph{understand} (74),
+  \emph{infer} (31), \emph{absolutely} (25), \emph{judgment} (12)
   & Scientific reasoning and theoretical inference \\
 \midrule
-PC3 & $+$ &
-  \emph{beaks} (10), \emph{ants} (27), \emph{legs} (37),
-  \emph{dog} (20), \emph{flowers} (61),
-  \emph{beetles} (17), \emph{me} (153)
-  & Field observations, specific specimens, first-person \\
-PC3 & $-$ &
-  \emph{geographical} (42), \emph{distribution} (55),
-  \emph{proportional} (16), \emph{classification} (49),
-  \emph{development} (28), \emph{fundamental} (9)
-  & Abstract synthesis, quantitative generalisation \\
+PC3 & $+$ & 1.727 &
+  \emph{me} (153), \emph{eat} (5), \emph{beaks} (10),
+  \emph{squirrels} (5), \emph{legs} (37), \emph{rabbit} (5)
+  & Field observations, specific specimens, first person \\
+PC3 & $-$ & &
+  \emph{geographical} (42), \emph{reduction} (5),
+  \emph{proportional} (16), \emph{increased} (27),
+  \emph{increase} (66), \emph{corresponding} (36)
+  & Quantitative comparison and proportional reasoning \\
+\midrule
+PC6 & $+$ & \textbf{1.900} &
+  \emph{seas} (13), \emph{arctic} (38), \emph{climate} (85),
+  \emph{warmer} (12), \emph{deserts} (6), \emph{shores} (24)
+  & Climate and physical environment (glacial-period chapters) \\
+PC6 & $-$ & &
+  \emph{character} (136), \emph{named} (12), \emph{female} (24),
+  \emph{written} (7), \emph{characters} (170), \emph{original} (24)
+  & Taxonomic description and nomenclature (partly register-driven) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1084,61 +1103,55 @@ PC3 & $-$ &
 $M=64{,}410$ retained tokens, with $\alpha=0.689$ and
 $\alpha_0=0.74$. PC1, PC2, and the first ten components account for
 $6.54\%$, $4.34\%$, and $27.2\%$ of the variance, respectively. The
-three covariance spectra are again nearly coincident
+three covariance spectra are again coincident
 (Figure~\ref{fig:greatexp_spectra}).
 
-The positive pole of PC1 contains character names and Dickensian
-dialect, opposed to generic vocabulary, and is treated as an embedding
-artefact. PC2 contrasts spatial and kinetic language associated with
-the river, marshes, and forge with introspective and conversational
-language. PC3 opposes embodied physical description to legal and
-institutional vocabulary, reflecting the tension between Pip's lived
-world and the machinery of inheritance and social advancement. The
-corresponding poles are listed in Table~\ref{tab:greatexp_pc}.
+The positive pole of PC1 contains character names and Victorian
+dialect, opposed to generic and abstract vocabulary, and is treated as
+an embedding artefact. PC2 contrasts the spatial and kinetic language
+of the river and the open country with introspective and conversational
+language. PC3 opposes bodily action and gesture to a formal Latinate
+register. The corresponding poles are listed in
+Table~\ref{tab:greatexp_pc}.
 
 \begin{table}[htbp]
 \centering
-\caption{Top-10 word types at the positive and negative poles
+\caption{Top-6 word types at the positive and negative poles
 of PC1, PC2, and PC3 for \emph{Great Expectations}
 ($R=100$, $F_{\min}=5$).}
 \label{tab:greatexp_pc}
 \small
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{ll p{6cm} p{5.5cm}}
+\begin{tabular}{llr p{5.4cm} p{4.4cm}}
 \toprule
-PC & Pole & Top words (freq) & Interpretation \\
+PC & Pole & $B_k$ & Top words (freq) & Interpretation \\
 \midrule
-PC1 & $+$ &
-  \emph{jaggers} (242), \emph{estella} (270), \emph{biddy} (231),
-  \emph{provis} (70), \emph{magwitch} (26),
-  \emph{limekiln} (6), \emph{tickler} (10)
-  & Character names + Victorian dialect (GloVe artefact) \\
-PC1 & $-$ &
-  \emph{will} (174), \emph{any} (268), \emph{their} (175),
-  \emph{two} (254), \emph{last} (185), \emph{other} (201)
-  & High-frequency generic vocabulary \\
+PC1 & $+$ & 1.228 &
+  \emph{jaggers} (242), \emph{townsman} (6), \emph{stammered} (6),
+  \emph{peeped} (5), \emph{biddy} (231), \emph{provis} (70)
+  & Character names and Victorian dialect (GloVe artefact) \\
+PC1 & $-$ & &
+  \emph{will} (174), \emph{its} (151), \emph{government} (5),
+  \emph{their} (175), \emph{any} (268), \emph{year} (25)
+  & High-frequency generic and abstract vocabulary \\
 \midrule
-PC2 & $+$ &
+PC2 & $+$ & 1.209 &
   \emph{river} (59), \emph{near} (66), \emph{opened} (41),
-  \emph{fell} (55), \emph{port} (7), \emph{yards} (9),
-  \emph{miles} (17)
-  & Spatial/kinetic (Thames, marshes, forge) \\
-PC2 & $-$ &
-  \emph{really} (41), \emph{think} (241), \emph{myself} (235),
-  \emph{understand} (53), \emph{feel} (28),
-  \emph{ashamed} (15), \emph{want} (93)
-  & Introspective/conversational register \\
+  \emph{fell} (55), \emph{port} (7), \emph{yards} (9)
+  & Spatial and kinetic language (river, marshes, forge) \\
+PC2 & $-$ & &
+  \emph{really} (41), \emph{understand} (53), \emph{think} (241),
+  \emph{anybody} (30), \emph{myself} (235), \emph{yourself} (51)
+  & Introspective and conversational register \\
 \midrule
-PC3 & $+$ &
+PC3 & $+$ & \textbf{1.244} &
   \emph{legs} (35), \emph{walked} (45), \emph{feet} (34),
-  \emph{knees} (15), \emph{fingers} (31),
-  \emph{shoulder} (54), \emph{bed} (74)
-  & Physical, embodied description \\
-PC3 & $-$ &
-  \emph{authority} (8), \emph{constitutional} (5),
-  \emph{law} (9), \emph{appointed} (11),
-  \emph{established} (13), \emph{derived} (13)
-  & Legal/institutional machinery \\
+  \emph{crying} (15), \emph{knees} (15), \emph{staring} (26)
+  & Bodily action and gesture \\
+PC3 & $-$ & &
+  \emph{concerning} (13), \emph{expressly} (5), \emph{regarding} (8),
+  \emph{relation} (12), \emph{undertake} (5), \emph{subordinate} (6)
+  & Formal Latinate register \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1154,56 +1167,57 @@ registers across its eighteen episodes
 (Figure~\ref{fig:ulysses_spectra}).
 
 PC1 is strongly affected by Dublin-specific proper names,
-multilingual fragments, and neologisms. PC2 provides a more substantive
-formal-public versus intimate-private contrast, separating titles,
-institutional names, and parodic catalogue language from colloquial and
-sensory interior discourse. PC3 contrasts physical-material description
-with vocabulary of family, religion, and literary identity. These
-semantic poles are listed in Table~\ref{tab:ulysses_pc}.
+multilingual fragments, and neologisms. PC2 separates formal titles and
+institutional naming from colloquial and intimate discourse. PC3
+contrasts physical and material description with the vocabulary of
+kinship, marriage and literary identity. These semantic poles are
+listed in Table~\ref{tab:ulysses_pc}.
 
 \begin{table}[htbp]
 \centering
-\caption{Top-10 word types at the positive and negative poles
-of PC1, PC2, and PC3 for \emph{Ulysses} ($R=100$, $F_{\min}=5$).}
+\caption{Top-6 word types at the positive and negative poles of PC1,
+PC2 and PC3 for \emph{Ulysses} ($R=100$, $F_{\min}=5$), with
+frequencies in the filtered token sequence.
+$B_k$ is a property of the component, not of the pole, and is therefore
+shown once per pair; the largest value over the $K=20$ components is
+shown in bold.
+A word type may appear at opposite poles of different components: the
+components are orthogonal directions, not a partition of the
+vocabulary.}
 \label{tab:ulysses_pc}
 \small
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{ll p{6.2cm} p{5.3cm}}
+\begin{tabular}{llr p{5.4cm} p{4.4cm}}
 \toprule
-PC & Pole & Top words (freq) & Interpretation \\
+PC & Pole & $B_k$ & Top words (freq) & Interpretation \\
 \midrule
-PC1 & $+$ &
-  \emph{dedalus} (174), \emph{dignam} (83),
-  \emph{lenehan} (107), \emph{gerty} (64),
-  \emph{virag} (43), \emph{voglio} (9)
-  & Dublin proper names + multilingual fragments (GloVe artefact) \\
-PC1 & $-$ &
-  \emph{government} (14), \emph{people} (78),
-  \emph{country} (54), \emph{world} (155),
-  \emph{united} (10), \emph{china} (9)
-  & Abstract political vocabulary (GloVe artefact) \\
+PC1 & $+$ & 1.286 &
+  \emph{wonderworker} (6), \emph{dedalus} (174), \emph{maggy} (9),
+  \emph{purefoy} (20), \emph{dignam} (83), \emph{voglio} (9)
+  & Dublin proper names, neologisms and multilingual fragments
+    (GloVe artefact) \\
+PC1 & $-$ & &
+  \emph{government} (14), \emph{any} (191), \emph{than} (169),
+  \emph{people} (78), \emph{because} (219), \emph{year} (71)
+  & Generic and institutional English (GloVe artefact) \\
 \midrule
-PC2 & $+$ &
-  \emph{sir} (219), \emph{william} (40), \emph{john} (196),
-  \emph{royal} (47), \emph{edward} (17),
-  \emph{founded} (8), \emph{lieutenant} (13)
-  & Formal titles, institutional names, parodic chapters \\
-PC2 & $-$ &
-  \emph{yourself} (38), \emph{feel} (104),
-  \emph{myself} (71), \emph{really} (49),
-  \emph{laugh} (37), \emph{smell} (50), \emph{awfully} (22)
-  & Intimate register, internal monologue episodes \\
+PC2 & $+$ & \textbf{1.495} &
+  \emph{st} (6), \emph{william} (40), \emph{edward} (17),
+  \emph{sir} (219), \emph{attended} (7), \emph{frederick} (10)
+  & Formal titles and institutional naming \\
+PC2 & $-$ & &
+  \emph{yourself} (38), \emph{really} (49), \emph{feel} (104),
+  \emph{stupid} (11), \emph{stuff} (24), \emph{ourselves} (10)
+  & Colloquial and intimate register \\
 \midrule
-PC3 & $+$ &
-  \emph{thick} (26), \emph{surface} (10), \emph{mud} (6),
-  \emph{feet} (82), \emph{yellow} (50),
-  \emph{sand} (32), \emph{shells} (14)
-  & Physical-material description (Sandymount Strand, streets) \\
-PC3 & $-$ &
-  \emph{married} (56), \emph{son} (113), \emph{wife} (140),
-  \emph{brother} (66), \emph{god} (247),
-  \emph{dear} (83), \emph{friend} (68)
-  & Family, religion, literary identity (Telemachus, Nostos) \\
+PC3 & $+$ & 1.329 &
+  \emph{thick} (26), \emph{inches} (7), \emph{surface} (10),
+  \emph{tail} (24), \emph{mud} (6), \emph{sloping} (9)
+  & Physical and material description \\
+PC3 & $-$ & &
+  \emph{married} (56), \emph{marry} (10), \emph{poet} (29),
+  \emph{sir} (219), \emph{son} (113), \emph{brother} (66)
+  & Kinship, marriage and literary identity \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1235,13 +1249,14 @@ For PC1--PC3, the original IET distributions extend well beyond the
 geometric reference, whereas the shuffled and FGN controls closely
 follow it (Figure~\ref{fig:wrnpc_iet}). The burstiness spectrum in
 Figure~\ref{fig:burst_panel}A is above both controls for all 20
-components. PC3 has the largest value, $B_3=2.045$, approximately
-$2.1$ times the geometric baseline and more than twice the corresponding
-null values ($B_3^{\rm surr}=0.976$,
-$B_3^{\rm FGN}=0.974$). This is consistent with the concentration of
-philosophical-reflection passages in particular parts of the novel.
+components. PC3 has the largest value, $B_3=2.045$, approximately $2.1$ times the
+geometric baseline and more than twice the corresponding null values
+($B_3^{\rm surr}=0.976$, $B_3^{\rm FGN}=0.974$). Because events are
+threshold crossings of the upper tail, this measures the clustering of
+the positive pole of PC3: passages of physical action and embodied
+movement, which are concentrated in the battle and campaign chapters.
 The eigenvalue--burstiness correlation is positive but imperfect,
-$r=0.702$ ($P=0.0006$).
+$r=0.702$ ($P=0.0055$).
 
 \begin{figure}[htbp]
   \centering
@@ -1257,55 +1272,77 @@ $r=0.702$ ($P=0.0006$).
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{figures/panel_burstiness_spectra.png}
-  \caption{Component-resolved burstiness spectra at $q=0.95$ for the four
+ \caption{Component-resolved burstiness spectra at $q=0.95$ for the four
   representative texts: \textbf{A} \emph{War and Peace},
   \textbf{B} \emph{On the Origin of Species},
   \textbf{C} \emph{Great Expectations}, \textbf{D} \emph{Ulysses}.
   In every panel the original (blue circles) lies above the FGN surrogate
-  (green triangles), the word-shuffled mean$\pm2\sigma$ band (red), and the
-  geometric baseline $\sqrt{q}\simeq0.975$, for all 20 components.
-  The position of the maximum differs between texts (PC3, PC6, PC3 and PC2
-  respectively) and burstiness is not monotone in PCA rank, because PCA
-  orders components by variance rather than by temporal clustering.}
+  (green triangles), the word-shuffled mean$\pm2\sigma$ band over 20
+  realisations (red), and the geometric baseline
+  $\CV_{\rm geom}=\sqrt{q}\simeq0.975$, for all 20 components.
+  Events are crossings of the upper tail, so $B_k$ measures the
+  clustering of visits to the \emph{positive} pole of each component
+  (Tables~\ref{tab:wrnpc_pc}--\ref{tab:ulysses_pc}).
+  Burstiness is not monotone in PCA rank, because PCA orders components
+  by variance rather than by temporal clustering: the maximum falls at
+  PC3, PC6, PC3 and PC2 respectively, and never at PC1 --- although in
+  \textbf{B} and \textbf{C} the leading values are closely spaced.}
   \label{fig:burst_panel}
 \end{figure}
 
+
 \subsubsection{\emph{On the Origin of Species}}
 
-The original projections have broad IET tails, particularly for PC2,
-PC3 and PC6, while both controls remain close to geometric
+The original projections have broad IET tails, particularly for PC2 and
+PC3, while both controls remain close to geometric
 (Figure~\ref{fig:darwin_iet}). Burstiness is high across the leading
-directions but peaks away from the leading eigenvalue: the maximum is
-at PC6, $B_6=1.900$, with PC2 and PC3 immediately behind at
-$B_2=1.888$ and $B_3=1.727$, while PC1 is markedly lower at
-$B_1=1.255$. The full original-over-control ordering holds for all 20
-components. The linear eigenvalue--burstiness correlation is weak,
-$r=0.295$ ($P=0.169$), while the rank correlation is moderate,
-$\rho=0.460$ ($P=0.042$): the association is monotone but not linear.
-The displacement of the burstiness maximum to PC6 states the point
-without recourse to any correlation measure — the direction of
-greatest semantic variance is not the direction of greatest temporal
-clustering.
+directions but peaks away from the leading eigenvalue: the two largest
+values, $B_6=1.900$ and $B_2=1.888$, differ by less than one per cent
+and are followed by $B_3=1.727$, while PC1 is markedly lower at
+$B_1=1.255$. Both PC6 and PC2 have positive poles tied to specific
+parts of the book --- climate and the glacial period, and places and
+biogeography respectively (Table~\ref{tab:darwin_pc}) --- which is what
+concentrates their threshold crossings. The full
+original-over-control ordering holds for all 20 components. The linear
+eigenvalue--burstiness correlation is weak, $r=0.295$ ($P=0.169$),
+while the rank correlation is moderate, $\rho=0.460$ ($P=0.042$): the
+association is monotone but not linear. That the burstiness maximum
+lies well away from PC1 states the point without recourse to any
+correlation measure --- the direction of greatest semantic variance is
+not the direction of greatest temporal clustering.
 
 \subsubsection{\emph{Great Expectations}}
 
 The original PC1--PC3 IET distributions again have broader tails than
 the controls (Figure~\ref{fig:greatexp_iet}). At $q=0.95$,
-$B_1=1.228$, $B_2=1.209$, and $B_3=1.244$, while the null values lie
-in $0.95$--$1.00$. The original remains above both controls over all
-20 components (Figure~\ref{fig:burst_panel}C); the spectrum is flatter
-and lower overall than for \emph{War and Peace}. The correlation
-between eigenvalue and burstiness is $r=0.511$ ($P=0.021$).
+$B_1=1.228$, $B_2=1.209$ and $B_3=1.244$, while the null values lie in
+$0.95$--$1.01$. The original remains above both controls over all 20
+components (Figure~\ref{fig:burst_panel}C), but the spectrum is flatter
+and lower overall than for \emph{War and Peace}: the largest value
+exceeds $B_1$ by only $1.3\%$, against $25\%$ in Tolstoy, and the mean
+over the twenty components, $1.18$, is the lowest of the four texts.
+Component-level burstiness is therefore present throughout the spectrum
+without being concentrated in any particular direction. The
+eigenvalue--burstiness correlation is $r=0.511$ ($P=0.014$), with a
+rank correlation $\rho=0.579$ ($P=0.009$).
+
+
 
 \subsubsection{\emph{Ulysses}}
 
 For \emph{Ulysses}, the original IET distributions are broad for all
 three displayed components, while both controls collapse towards the
 geometric reference (Figure~\ref{fig:ulysses_iet}). The spectrum peaks
-at PC2, $B_2=1.495$, with $B_1=1.290$ and $B_3=1.329$
-(Figure~\ref{fig:burst_panel}D). The original exceeds both controls
-throughout the first 20 components, and the eigenvalue--burstiness
-correlation is $r=0.571$ ($P=0.009$).
+at PC2, $B_2=1.495$, with $B_1=1.286$ and $B_3=1.329$
+(Figure~\ref{fig:burst_panel}D); the positive pole of PC2 is the
+register of formal titles and institutional naming
+(Table~\ref{tab:ulysses_pc}), which the novel deploys in concentrated
+parodic passages rather than evenly. The original exceeds both controls
+throughout the first 20 components. Here the two correlation measures
+diverge most strongly: $r=0.571$ ($P=0.041$) against $\rho=0.817$
+($P<10^{-4}$), so that the association between semantic variance and
+burstiness is close to monotone while being poorly described by a
+linear fit.
 
 Averaged over the first 20 components at $q=0.95$, the representative
 texts have $\bar B^{\rm orig}$ of $1.36$ (\emph{War and Peace}),
@@ -1317,7 +1354,8 @@ The common feature is that component-level burstiness is present in the
 original semantic trajectories and absent from both null models.
 
 \FloatBarrier
-\subsection{Robustness to the threshold quantile}
+\subsection{Robustness to the threshold quantile and to the number of
+components}
 \label{sec:single_text_robustness}
 
 The component separation is not tied to the default $q=0.95$.
@@ -1347,6 +1385,22 @@ rare visits to the upper tail accentuate episode-to-episode clustering.
   \label{fig:sweep_panel}
 \end{figure}
 
+The separation is likewise not an artefact of truncating the spectrum at
+$K=20$. 
+The retained components account for $35$--$38\%$ of the embedding
+variance; refitting the PCA with $K=50$ and recomputing the spectrum at
+$q=0.95$ leaves every component above the independent-event baseline in
+all four texts, with a minimum of $B_k=1.041$, some $7\%$ above
+$\CV_{\rm geom}$. Burstiness does decline with component index: the mean
+falls from $1.18$--$1.36$ over the first twenty components to
+$1.11$--$1.19$ over components $21$--$50$, while the variance carried per
+component falls from $1.9\%$ to $0.65\%$. 
+The choice $K=20$ is conventional rather than principled; what the
+extension to $K=50$ shows is that it does not act as a threshold beyond
+which component-level burstiness disappears. The leading components are
+also the ones for which the semantic poles were examined
+(Section~\ref{sec:semantic_geometry_results}).
+
 \FloatBarrier
 \section{Corpus-level generalisation}
 \label{sec:corpus}
@@ -1365,8 +1419,8 @@ generality across the full corpus.
 \label{sec:corpus_texts}
 
 The corpus comprises 16 English literary texts from Project Gutenberg,
-spanning novels, scientific treatises, and travel writing published
-between the eighteenth and early twentieth centuries
+sspanning novels, scientific treatises and travel writing, in English editions 
+and translations published between the eighteenth and early twentieth centuries.
 (Table~\ref{tab:corpus}).
 Raw token counts range from approximately $56{,}000$ (The Picture of
 Dorian Gray) to $565{,}000$ (War and Peace), with filtered token counts
@@ -1394,10 +1448,10 @@ Title & Author & $N$ & $M$ & $\alpha$ & $\alpha_0$ \\
 \midrule
 Pride and Prejudice        & Austen    & 122{,}226 &  42{,}364 & 0.642 & 0.67 \\
 Don Quixote (transl.)      & Cervantes & 403{,}152 & 147{,}279 & 0.711 & 0.76 \\
-On the Origin of Species   & Darwin    & 151{,}179 &  58{,}913 & 0.771 & 0.80 \\
+On the Origin of Species   & Darwin    & 151{,}179 &  58{,}913 & 0.770 & 0.80 \\
 The Voyage of the Beagle   & Darwin    & 206{,}728 &  84{,}931 & 0.629 & 0.67 \\
 David Copperfield          & Dickens   & 363{,}557 & 134{,}409 & 0.727 & 0.78 \\
-Great Expectations         & Dickens   & 188{,}925 &  64{,}410 & 0.689 & 0.74 \\
+Great Expectations         & Dickens   & 188{,}925 &  64{,}410 & 0.689 & 0.73 \\
 Oliver Twist               & Dickens   & 161{,}529 &  59{,}729 & 0.711 & 0.76 \\
 Ulysses                    & Joyce     & 264{,}165 & 101{,}489 & 0.763 & 0.80 \\
 The Jungle Book            & Kipling   & 151{,}161 &  49{,}522 & 0.775 & 0.83 \\
@@ -1460,12 +1514,16 @@ text and then averaging over the 16 texts:
 \end{equation}
 where $\pm$ denotes the standard error of the mean over 16 texts.
 The original texts are thus on average $\sim 30\%$ more bursty
-than the geometric null. The per-text values range from $1.17$
-(\emph{Pride and Prejudice}) to $1.39$ (\emph{War and Peace}) for
-fifteen of the sixteen texts, with \emph{Principia Mathematica} as
-an outlier at $1.73$; the spread across texts (sd $= 0.13$) is
-itself a signature of how differently topical structure is organised
-in different works.
+than the word-shuffled null, which itself sits at the geometric baseline.
+ The per-text values range from $1.17$ (\emph{Pride and Prejudice}) to
+$1.73$ (\emph{Principia Mathematica}), with a spread across texts
+(sd $= 0.13$) that is uncorrelated with text length
+($r=-0.04$ against $M$). The four expository texts of the corpus
+occupy four of the five highest positions (mean $1.45$ against $1.24$
+for the twelve narrative works), which is consistent with the
+chapter-level topical segmentation of expository prose; with four
+non-fiction texts this is an observation to be tested on a larger and
+deliberately balanced corpus, not a result.
 The analogous ratio for the FGN surrogate is
 $\langle B_k^{\rm orig}/B_k^{\rm FGN}\rangle = 1.29 \pm 0.03$,
 indistinguishable from the word-shuffled value.
@@ -1492,7 +1550,7 @@ indistinguishable at the corpus level
 \end{figure}
 
 
-\subsection{Robustness across quantile threshold}
+\subsection{Robustness to the threshold quantile}
 \label{sec:corpus_robustness}
 
 Figure~\ref{fig:corpus_robustness} shows the fraction of
@@ -1507,16 +1565,18 @@ The null-model indistinguishability criterion
 $|B_k^{\rm FGN}/B_k^{\rm surr} - 1| < 0.05$ is met by $\geq 99\%$ of
 pairs for $q \leq 0.90$, by $96\%$ at $q = 0.95$, and decreases to
 $73\%$ at $q = 0.99$.
-This degradation at the extreme threshold is expected: with
-$p = 0.01$ and $M \approx 80{,}000$ filtered tokens, there are
-on average only $\sim 800$ events per series, giving an IET
-estimator with relative error $\sim 1/\sqrt{800} \approx 3.5\%$
---- comparable to the magnitude of $B^{\rm FGN} - B^{\rm surr}$
-at this threshold, and larger still for the shortest texts
-($M < 30{,}000$).
-For $q = 0.95$ ($n_{\rm events} \approx 4{,}000$, relative error
-$\sim 1.6\%$), the estimator is well within the regime where the
-null-model comparison is reliable.
+
+This degradation at the extreme threshold is expected: at the corpus
+median, $M \approx 59{,}000$, the event rate $p = 0.01$ leaves only
+$\sim 590$ events per series, giving a relative error on the IET
+estimator of $\sim 4\%$, rising to $\sim 8\%$ for the shortest text
+($M = 16{,}776$) --- comparable to or larger than the magnitude of
+$B^{\rm FGN} - B^{\rm surr}$ at this threshold.
+For $q = 0.95$ the same texts give $\sim 3{,}000$ and $\sim 840$ events,
+with relative errors of $1.8\%$ and $3.5\%$, well within the regime
+where the null-model comparison is reliable.
+
+The same estimator noise accounts for the six pairs out of 320 that fail the full ordering at $q=0.99$.
 
 \begin{figure}[htbp]
   \centering
@@ -1548,20 +1608,21 @@ $B^{\rm orig}/B^{\rm surr}$, $B^{\rm orig}/B^{\rm FGN}$, and
 $B^{\rm FGN}/B^{\rm surr}$ over all 320 $({\rm text}, k)$ pairs
 at $q = 0.95$.
 
-Panel~A shows that both orig--null ratios are concentrated
-well above 1, with virtually no mass below 1.
+Panel~A shows that both orig--null ratios are concentrate
+well above 1, with no mass below 1.
 The two distributions (orig/surr and orig/FGN) are nearly
 identical in shape and location, confirming that the FGN and
 word-shuffled null models are equally poor surrogates for the
 original burstiness.
 
-Panel~B isolates the ratio $B^{\rm FGN}/B^{\rm surr}$, which
-is tightly concentrated around 1 (mean $1.0008$, s.e.\ $0.0012$,
-range $[0.91, 1.09]$).
-A one-sample $t$-test against ratio\,=\,1 gives $t = 0.63$,
-$P = 0.53$: the two null models are statistically indistinguishable,
-and the distribution is symmetric with no indication of a
-directional bias.
+
+Panel~B isolates the ratio $B^{\rm FGN}/B^{\rm surr}$, which is tightly
+concentrated around 1 over the 320 pairs (mean $1.0008$, sd $0.022$,
+range $[0.91, 1.09]$). Because components within a text are not
+independent, the test is performed on the 16 per-text means: a
+one-sample $t$-test against unity gives $t = 1.13$, $P = 0.28$. The two
+null models are statistically indistinguishable, and the distribution
+is symmetric with no indication of a directional bias.
 
 Together, Figures~\ref{fig:corpus_spectrum}--\ref{fig:corpus_diffs}
 establish the corpus-level result:
@@ -1570,9 +1631,13 @@ establish the corpus-level result:
   \qquad \forall\, k,\; \forall\, \text{text in corpus},
   \label{eq:ordering_corpus}
 \end{equation}
-with a $\sim 30\%$ mean excess of the original above the
-geometric null, independent of text length, genre, DFA exponent,
-and choice of quantile threshold.
+with a mean excess of the original over the word-shuffled null of
+$\sim 30\%$. The ordering holds for every text and every component
+irrespective of length, genre, DFA exponent and choice of quantile
+threshold; its magnitude, by contrast, varies systematically between
+texts (Section~\ref{sec:corpus_ordering}).
+
+
 
 \begin{figure}[htbp]
   \centering
@@ -1607,8 +1672,53 @@ autocorrelation functions and DFA. An information-theoretic argument
 explains why the long-range correlations imposed on the FGN rank
 sequence need not survive the mapping into embedding space.
 
+
+% ============================================================
+% NOTE TO CO-AUTHOR (M.DE.) --- Sec. "Conditional entropy": decide
+% whether to develop this argument or drop it.  As written it does not
+% work, for one reason:
+%
+%   The embedding trajectory is a RELABELLING of the token sequence.
+%   phi is injective on word types, so
+%       H(e_t | e_{t-1},...) = H(s_t | s_{t-1},...) = H(r_t | r_{t-1},...)
+%   exactly.  Entropy is invariant under bijections.  But the FGN
+%   surrogate has rank memory BY CONSTRUCTION, so H_l^FGN < H(e_t),
+%   which is the opposite of Eq. (entropy_ordering).  No deterministic
+%   map can destroy that information; entropy is blind to the geometry
+%   of the embedding space, and the geometry is the whole point.
+%
+% TWO WAYS FORWARD.
+%
+% (a) DROP the entropy formalisation and keep the mechanism, which is
+%     correct and which our own data already confirm.  Rank is a scalar
+%     ordering by frequency, so FGN memory is memory along the one
+%     direction that encodes frequency -- and in all four texts that
+%     direction is PC1 (rare proper nouns vs generic high-frequency
+%     vocabulary).  Prediction: the FGN keeps a residual correlation on
+%     PC1 and none on the thematic directions.  Sec. corpus ACF reports
+%     exactly this: 56% of PC1 pairs significant at lag one, against 8%
+%     for k >= 4.  At present that number is presented as a GloVe
+%     artefact footnote; it is in fact the verified prediction of the
+%     mechanism, and connecting the two costs one paragraph.
+%
+% (b) KEEP the entropy argument but make the coarse-graining explicit.
+%     The claim only holds for an entropy estimated with a
+%     metric-aware estimator (k-NN differential entropy on the vectors,
+%     or a quantisation of embedding space into semantic cells).  Then
+%     the geometry enters through the estimator and the ordering can be
+%     recovered -- but it has to be stated, and ideally measured, not
+%     asserted.  This is a paper of its own, not a subsection.
+%
+% Recommendation: (a) for this paper, (b) as a separate study.
+%
+% Minor, independent of the above: "\et[t-1]" does not typeset as
+% e_{t-1} unless \et takes an optional argument -- check the macro.
+% Label "sec:entropy" no longer matches the section title.
+% ============================================================
 \subsection{Conditional entropy of the embedding trajectory}
 \label{sec:cond_entropy}
+\TODO{Mirko: drop it or develop it !  See \% comments in tex file....}
+
 
 The qualitative argument of Remark~\ref{rem:fgn_entropy} can be cast
 in information-theoretic terms.
@@ -1673,15 +1783,16 @@ Section~\ref{sec:cond_entropy} predicts $\rho_k(\ell) \approx 0$
 despite the long-range correlations in the rank sequence.
 
 \begin{remark}
-  The ACF proxy is connected to the burstiness spectrum via the
+  The ACF proxy is connected to the burstiness spectrum through the
   Wiener--Khintchine theorem: a slowly decaying $\rho_k(\ell)$
   corresponds to excess power at low frequencies in the spectral
-  density of $x_t^{(k)}$, which drives the temporal clustering of
-  threshold crossings and hence large $\bk$.
-  The burstiness spectrum and the ACF decay are therefore two
-  complementary views of the same underlying temporal structure:
-  the former is a non-linear (binary) summary, the latter a
-  second-order (quadratic) characterisation.
+  density of $x_t^{(k)}$. For a Gaussian process the level-crossing
+  statistics are determined by the autocorrelation; in general the two
+  are related but not equivalent, since $\bk$ depends on the full IET
+  distribution while $\rho_k$ is a second-order statistic. In the
+  present data they move together: the original has both elevated
+  $\bk$ and slowly decaying $\rho_k$, and both null models have
+  neither.
 \end{remark}
 
 
@@ -1711,11 +1822,9 @@ All 20 components have $|\rho_k^{\rm FGN}(1)| \le 0.007$, inside the
 i.i.d.\ band.
 At lag $\ell = 100$ all values are inside the band.
 The FGN surrogate, despite matching the DFA exponent of the original
-($\alpha = 0.689$), exhibits only negligible autocorrelation in the projected
-embedding series.
-This is the computational confirmation of
-equation~\eqref{eq:entropy_ordering}: frequency-domain long-range
-memory does not propagate to semantic projections.
+($\alpha = 0.689$), exhibits only negligible autocorrelation in the
+projected series: rank-level memory does not reach the thematic
+directions of semantic space.
 
 \paragraph{Word-shuffled null.}
 As expected, $\rho_k^{\rm surr}(\ell) \approx 0$ for all $k$ and
@@ -1723,10 +1832,10 @@ $\ell$, consistent with the random-permutation reference.
 
 \begin{table}[htbp]
 \centering
-\caption{ACF of projections at lags $\ell = 1$ and $\ell = 100$
-for \emph{Great Expectations}, using the i.i.d.\ reference band
-$\pm 0.008$ employed in the ACF calculation.
-Values outside the band are in bold.}
+\caption{ACF of projections at lags $\ell = 1$ and $\ell = 100$ for
+\emph{Great Expectations}. The i.i.d.\ reference band is
+$\pm 1.96/\sqrt{M} = \pm 0.0077$. Values clearly outside the band are
+in bold; values that round to the band edge are left unmarked.}
 \label{tab:acf_summary}
 \small
 \begin{tabular}{r rr r rr}
@@ -1762,7 +1871,7 @@ $k$ & Orig & FGN && Orig & FGN \\
     Each panel shows one PCA component (PC1, PC2, PC3).
     Blue: original filtered text.
     Green: FGN surrogate.
-    Red dashed: word-shuffled null (mean over 10 realisations).
+    Red dashed: word-shuffled null.
     Grey band: $\pm 1.96/\sqrt{M}$ i.i.d.\ reference (95\% CI).
     The original text has substantial positive ACF that decays slowly
     on a log scale, remaining above the i.i.d.\ band up to
@@ -1785,9 +1894,9 @@ $k$ & Orig & FGN && Orig & FGN \\
     beyond the i.i.d.\ band across the full range of lags shown.
     The FGN surrogate and word-shuffled null are
     indistinguishable from the i.i.d.\ reference at all lags,
-    confirming that frequency-domain long-range memory
-    (present in the FGN) does not propagate to the semantic
-    projection space.
+    confirming that rank-level long-range memory
+    (present in the FGN by construction) does not propagate to the
+    semantic projection space.
   }
   \label{fig:acf_mean}
 \end{figure}
@@ -1857,9 +1966,8 @@ $93\%$ at lag $\ell = 2$ and remains above $50\%$ up to lag
 $\ell = 100$, providing a clean corpus-level version of the
 single-text result.
 The original text maintains detectable semantic autocorrelation
-at scales of order $100$ tokens, corresponding to passages of
-roughly a paragraph, consistent with the topical structure of
-literary narrative.
+at scales of order $100$ filtered tokens, corresponding to roughly $300$ tokens 
+of running text --- a few paragraphs.
 
 \paragraph{Distribution of $\rho_k(1)$.}
 Figure~\ref{fig:acf_corpus_rho1} shows the distribution of
@@ -1878,20 +1986,21 @@ As with the burstiness differences (Section~\ref{sec:corpus_diffs}),
 the statistical significance at this sample size reflects estimator
 sensitivity rather than a scientifically meaningful effect.
 
+
 \begin{remark}
-  The PC1 anomaly --- where $\rho_1^{\rm FGN}(1)$ is occasionally
-  significant --- is a known limitation of the current pipeline.
-  PC1 is partially dominated by a geometric cluster of
-  low-frequency words in GloVe that are distant from the main
-  vocabulary cloud (proper nouns, transliterations, archaic forms).
-  Both the original text and the FGN surrogate generate sequences
-  that alternate between this cluster and the main cloud, producing
-  spurious short-range autocorrelation in PC1 for both.
-  This artefact is independent of topical burstiness and disappears
-  when the frequency filter is tightened to $R = 150$
-  or higher.
-  All results for $k \geq 2$ are unaffected.
+  The residual FGN autocorrelation on PC1 is expected rather than
+  anomalous. Rank is an ordering by frequency, so the long-range memory
+  imposed on $\mathbf{r}$ is memory along whichever direction of
+  embedding space encodes frequency --- and in every text of the corpus
+  that direction is PC1, whose poles oppose rare proper nouns and
+  transliterations to generic high-frequency vocabulary
+  (Section~\ref{sec:semantic_geometry_results}).
+  The observation that $56\%$ of PC1 pairs but only $8\%$ of pairs with
+  $k \geq 4$ show significant lag-one autocorrelation is therefore the
+  signature of rank-level memory reaching the one direction it can
+  reach, and failing to reach the thematic ones.
 \end{remark}
+
 
 \begin{figure}[htbp]
   \centering
@@ -1933,9 +2042,10 @@ sensitivity rather than a scientifically meaningful effect.
   \caption{%
     \textbf{Distribution of $\rho_k(1)$ over $320$ (text, $k$) pairs.}
     \textbf{Panel A}: original (blue) and FGN (green).
-    The two distributions are completely separated: all original
-    pairs have $\rho_k(1) > 0.007$ (above the i.i.d.\ band),
-    while nearly all FGN pairs are inside the band.
+    The two distributions are completely separated: every original pair
+    exceeds its own text-specific i.i.d.\ band (which ranges from
+    $0.004$ to $0.015$ across the corpus), while nearly all FGN pairs
+    fall inside it.
     \textbf{Panel B}: FGN (green) and word-shuffled (red) on an
     expanded scale.
     Both are centred near zero; a $t$-test gives $t = 5.05$
@@ -1967,8 +2077,7 @@ For each PCA component $k$ and each of the three series
 (original, FGN, word-shuffled), we apply DFA to the scalar
 time series $x_t^{(k)}$ and estimate the scaling exponent
 $\alpha_k$ from $F(s) \sim s^{\alpha_k}$, where $F(s)$ is the
-detrended fluctuation function at box size $s$
-(Appendix~\ref{app:geometric}).
+detrended fluctuation function at box size $s$.
 Box sizes range from $s_{\min} = 10$ to $s_{\max} = M/4$
 on a logarithmic grid.
 
@@ -2003,9 +2112,9 @@ The results confirm the prediction precisely:
 \centering
 \caption{DFA scaling exponents $\alpha_k$ of projected series
 $x_t^{(k)}$ for \emph{Great Expectations} (Dickens, $\alpha=0.689$).
-Asterisk (*): $\alpha_k^{\rm orig}$ exceeds the shuffled
-reference by $>2\sigma$.
-Tilde ($\sim$): $|\alpha_k^{\rm FGN} - 0.5| < 0.05$.}
+Every original value exceeds the shuffled reference by more than
+$2\sigma$ (the spread over the ten shuffled realisations is
+$\sigma\simeq0.004$), and every FGN value lies within $0.05$ of $0.5$.}
 \label{tab:dfa_proj}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -2016,26 +2125,26 @@ $k$ & $\alpha^{\rm orig}$ & $\alpha^{\rm FGN}$ &
 $k$ & $\alpha^{\rm orig}$ & $\alpha^{\rm FGN}$ &
     $\alpha^{\rm surr}$ \\
 \midrule
- 1 & 0.605* & 0.511$\sim$ & 0.501 &
-11 & 0.575* & 0.506$\sim$ & 0.500 \\
- 2 & 0.681* & 0.500$\sim$ & 0.491 &
-12 & 0.642* & 0.493$\sim$ & 0.502 \\
- 3 & 0.693* & 0.518$\sim$ & 0.495 &
-13 & 0.564* & 0.512$\sim$ & 0.500 \\
- 4 & 0.634* & 0.514$\sim$ & 0.499 &
-14 & 0.595* & 0.484$\sim$ & 0.497 \\
- 5 & 0.642* & 0.486$\sim$ & 0.496 &
-15 & 0.645* & 0.486$\sim$ & 0.497 \\
- 6 & 0.633* & 0.515$\sim$ & 0.501 &
-16 & 0.579* & 0.505$\sim$ & 0.494 \\
- 7 & 0.647* & 0.504$\sim$ & 0.498 &
-17 & 0.586* & 0.511$\sim$ & 0.493 \\
- 8 & 0.633* & 0.469$\sim$ & 0.497 &
-18 & 0.617* & 0.515$\sim$ & 0.507 \\
- 9 & 0.643* & 0.482$\sim$ & 0.494 &
-19 & 0.595* & 0.489$\sim$ & 0.505 \\
-10 & 0.630* & 0.482$\sim$ & 0.503 &
-20 & 0.622* & 0.495$\sim$ & 0.502 \\
+ 1 & 0.605 & 0.511$\sim$ & 0.501 &
+11 & 0.57 & 0.506$\sim$ & 0.500 \\
+ 2 & 0.681 & 0.500$\sim$ & 0.491 &
+12 & 0.642 & 0.493$\sim$ & 0.502 \\
+ 3 & 0.693 & 0.518$\sim$ & 0.495 &
+13 & 0.564 & 0.512$\sim$ & 0.500 \\
+ 4 & 0.634 & 0.514$\sim$ & 0.499 &
+14 & 0.595 & 0.484$\sim$ & 0.497 \\
+ 5 & 0.64 & 0.486$\sim$ & 0.496 &
+15 & 0.645 & 0.486$\sim$ & 0.497 \\
+ 6 & 0.633 & 0.515$\sim$ & 0.501 &
+16 & 0.579 & 0.505$\sim$ & 0.494 \\
+ 7 & 0.647 & 0.504$\sim$ & 0.498 &
+17 & 0.586 & 0.511$\sim$ & 0.493 \\
+ 8 & 0.633 & 0.469$\sim$ & 0.497 &
+18 & 0.617 & 0.515$\sim$ & 0.507 \\
+ 9 & 0.643 & 0.482$\sim$ & 0.494 &
+19 & 0.595 & 0.489$\sim$ & 0.505 \\
+10 & 0.630 & 0.482$\sim$ & 0.503 &
+20 & 0.622 & 0.495$\sim$ & 0.502 \\
 \midrule
 \multicolumn{4}{l}{\textbf{Mean}} &
 \multicolumn{4}{l}{$\bar\alpha^{\rm orig}=0.623\pm0.034$ \quad
@@ -2054,18 +2163,16 @@ The FGN and shuffled curves are parallel to the reference slope,
 confirming $\alpha_k \approx 0.5$ for both null models.
 
 \begin{remark}
-  The exponents $\alpha_k^{\rm orig} \in [0.564, 0.693]$
-  do not decrease monotonically with $k$.
-  Some higher-indexed components (e.g.\ PC12: $\alpha=0.642$,
-  PC15: $\alpha=0.645$) have stronger long-range correlations
-  than some lower-indexed ones (e.g.\ PC11: $\alpha=0.575$,
-  PC13: $\alpha=0.564$).
-  This partial decorrelation between PCA rank (ordered by
-  variance) and DFA exponent mirrors the decorrelation between
-  the eigenvalue spectrum $\{\lambda_k\}$ and the burstiness
-  spectrum $\{B_k\}$ reported in Section~\ref{sec:oliver}:
-  semantic variance and semantic temporal structure are
-  distinct properties of narrative organisation.
+  The exponents $\alpha_k^{\rm orig} \in [0.564, 0.693]$ do not
+  decrease monotonically with $k$: PC12 ($\alpha=0.642$) and PC15
+  ($\alpha=0.645$) exceed PC1 ($\alpha=0.605$), even though they carry
+  an order of magnitude less variance.
+  This partial decorrelation between PCA rank (ordered by variance) and
+  DFA exponent mirrors the decorrelation between the eigenvalue
+  spectrum $\{\lambda_k\}$ and the burstiness spectrum $\{B_k\}$
+  reported in Section~\ref{sec:oliver}: semantic variance and semantic
+  temporal structure are distinct properties of narrative
+  organisation.
 \end{remark}
 
 \paragraph{Consistent temporal signatures.}
@@ -2137,16 +2244,21 @@ density
 \end{equation}
 Such low-frequency variation is consistent with extended semantic
 episodes and clustered threshold exceedances, and therefore with broad
-IET distributions. The connection is not one-to-one, however:
+IET distributions; in the long-range correlated case the sum
+in~\eqref{eq:projection_spectrum} diverges as $\omega\to0$, which is
+the spectral expression of that persistence.The connection is not one-to-one, however:
 thresholding is non-linear, and $B_k$ depends on temporal structure
 beyond the second-order information contained in the ACF.
+
+
 
 The empirical conclusion is consequently based on the agreement of
 three complementary observations rather than on a deterministic causal
 identity. Original texts show elevated $B_k$, positive projection ACFs,
-and projection DFA exponents above $0.5$. The FGN and word-shuffled
-controls remain close to the geometric, zero-ACF, and white-noise
-references, respectively. This convergence of measures supports the
+and projection DFA exponents above $0.5$. The FGN and word-shuffled controls remain 
+close to the geometric
+baseline in burstiness, to zero in autocorrelation, and to white noise
+in DFA. This convergence of measures supports the
 interpretation that ordered topical organisation, rather than global
 rank-level scaling alone, produces persistence in semantic projection
 space.
