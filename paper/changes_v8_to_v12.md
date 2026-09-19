@@ -1,23 +1,33 @@
-# Changes from `paper3_main_v8` to `v11`
+# Changes from `paper3_main_v8` to `v12`
 
-Consolidated record for the co-author. Covers three revision steps:
+Consolidated record for the co-author. Covers four revision steps:
 
 | step | date | nature |
 |---|---|---|
 | v8 → v9 | 16 Sep 2026 | every number regenerated from a single consistent pipeline |
 | v9 → v10 | 17 Sep 2026 | figures consolidated into panels; per-text figures moved to an appendix |
 | v10 → v11 | 18 Sep 2026 | statistics (permutation tests, Spearman), notation collisions, text corrections |
+| v11 → v12 | 19 Sep 2026 | Physica A typesetting; split into main text + Supplementary Material |
 
 Every number is produced by the released code from the tokenised texts with
 fixed seeds, and is reproduced by `scripts/paper_numbers.py data/corpus`,
 which writes `results/paper_numbers.md`.
 
 **Status column**: `done` = already in the `.tex`; `pending` = agreed but not yet
-applied. Nothing marked `pending` should be taken as final.
+applied. Nothing marked `pending` should be taken as final. Statuses were
+re-verified against the source on 19 Sep: of the nine items listed as pending
+on 18 Sep, all nine are now applied.
+
+**Integrity of v12**, checked mechanically against v8 and against `SI.tex`: no
+duplicate labels within either file and none shared between them; no dangling
+`\ref` in either direction; 15 references resolve from the main text into the
+SI through `xr`; all environments balanced; every `\cite` key present in the
+bibliography. Every label present in v8 and absent from v12 is an intended
+consolidation, itemised in §2 and §4.3 — nothing else was lost.
 
 ---
 
-## 0. What matters most, in four points
+## 0. What matters most, in five points
 
 1. **The pipeline is reproducible.** The four Pearson correlations
    regenerate exactly (0.702, 0.295, 0.511, 0.571), verified against
@@ -45,6 +55,15 @@ applied. Nothing marked `pending` should be taken as final.
    covariance structures differ by a few percent (they are identical,
    §3.6). Three of the four were contradicted by the paper's own tables or
    captions.
+
+5. **The paper is now in submission form.** The manuscript is split into a
+   main text and a Supplementary Material to meet the 30-page limit, with
+   one-directional cross-references (§4.2). In the course of that split a
+   copy-paste error silently deleted two whole sections; they were detected
+   by the dangling references they left behind and restored byte-for-byte
+   (§4.4). The reference list, however, is still not in Physica A's
+   numbered format, and changing `\bibliographystyle` did not fix it
+   (§4.6).
 
 ## 1. v8 → v9 — regenerated numbers
 
@@ -170,7 +189,7 @@ Net effect: roughly fifteen figures down to the panels plus the appendix.
 
 ## 3. v10 → v11 — statistics, notation, corrections
 
-### 3.1 Notation: `p` was overloaded (status: partly done)
+### 3.1 Notation: `p` was overloaded (status: done)
 
 `p` meant both the **event rate** $p = 1 - q$ (Sec. 2.3, and in the
 robustness section at $p = 0.01$) and the **p-value** of the correlation
@@ -180,15 +199,13 @@ structural and appears throughout, so the p-value was renamed `P`.
 Seven occurrences converted (status: done): the four $(r, p)$ pairs in the
 per-text sections, and three $t$-test p-values in the corpus sections.
 
-Four occurrences still open (status: **pending**) — they use `<` and `>`
-rather than `=`, so the first pass missed them:
+Four further occurrences used `<` and `>` rather than `=`, so the first
+pass missed them: the `tab:single_text_summary` legend, the $t$-test in
+Eq. `ratio_corpus`, and the corpus ACF $t$-test. All are now converted.
+The only remaining lowercase `p` in the source is the event rate itself,
+in the geometric-baseline derivation — which is the intended meaning.
 
-- table `tab:single_text_summary` footnote: `$^*p<0.05$`, `$^{**}p<0.01$`,
-  `$^{***}p<0.001$`, `no mark: $p>0.05$`
-- `t = 8.7,\quad p < 10^{-6}` (eq. `ratio_corpus`)
-- `$t = 5.05$, $p < 10^{-6}$` (corpus ACF)
-
-### 3.2 Three further symbol collisions (status: pending)
+### 3.2 Three further symbol collisions (status: done)
 
 | symbol | conflicting meanings | resolution |
 |---|---|---|
@@ -199,7 +216,7 @@ rather than `=`, so the first pass missed them:
 $H$ and "Hurst" appear nowhere else in the paper, so this introduces no
 new collision.
 
-### 3.3 Significance by permutation, not by the parametric test (status: pending)
+### 3.3 Significance by permutation, not by the parametric test (status: done)
 
 The $K = 20$ pairs $(\lambda_k, B_k)$ are not independent draws:
 $\{\lambda_k\}$ is a deterministic decreasing sequence and both spectra
@@ -222,7 +239,7 @@ Note for the reader of the table: *Ulysses* has a larger $r$ than *Great
 Expectations* but a larger $P$. This is not an error — the permutation
 null depends on the shape of each text's eigenvalue spectrum.
 
-### 3.4 Spearman added (status: pending)
+### 3.4 Spearman added (status: done)
 
 The eigenvalue spectrum decays steeply, so Pearson is dominated by the
 leading components. The rank correlation was computed as a robustness
@@ -241,7 +258,7 @@ and burstiness is **monotone but not linear**, and Pearson understates it.
 `P = 0.0000` in the regenerated output is the floor of $10^5$ permutations
 ($1/100001$) and is reported as $P < 10^{-4}$, not as zero.
 
-### 3.5 Text correction: the burstiness maximum of Darwin (status: pending)
+### 3.5 Text correction: the burstiness maximum of Darwin (status: done)
 
 The body text of the *Origin of Species* subsection states that PC2 is the
 burstiest direction. It is not: the maximum is at **PC6**, $B_6 = 1.900$,
@@ -264,7 +281,7 @@ and holds in every text (PC3, PC6, PC3, PC2 — never PC1). The subsection
 is rewritten around that fact, with the two correlations reported as
 description rather than as the argument.
 
-### 3.6 The FGN surrogate is a permutation — and three stale passages (status: pending)
+### 3.6 The FGN surrogate is a permutation — and three stale passages (status: done)
 
 Verified directly: `Counter(tokens_all)` of the FGN surrogate equals that
 of the original, for every showcase text, and the filtered counts agree to
@@ -378,7 +395,7 @@ float32 precision floor of the GloVe vectors — not a sign flip, which
 would have produced an error of order unity and would have changed $B_k$,
 since the threshold is applied to the upper tail only.
 
-### 3.9 Errors in the pipeline description (status: pending)
+### 3.9 Errors in the pipeline description (status: done)
 
 Four statements in the methodology do not describe the code that produced
 the results.
@@ -406,10 +423,19 @@ the results.
   measured exponent $\alpha$; the pipeline section states the
   relationship correctly.
 
-Also stale, inside commented-out source that the authors intend to keep:
+All four are now corrected. The methodology states the three conventions
+explicitly — the burstiness spectrum and the DFA exponents averaged over
+$N_{\rm surr}$ permutations with mean$\pm2\sigma$ bands, the
+autocorrelation reported for a single realisation because the shuffled ACF
+is indistinguishable from zero at every lag — and the erroneous "mean over
+10 realisations" is gone. The one surviving occurrence of that phrase is
+in the DFA caption, where `N_SURR_DFA = 10` makes it correct.
+
+Still stale, inside commented-out source that the authors intend to keep:
 the shuffle block states $N_{\rm surr} = 10$ against `n_surr = 20` in
-`config.py`, and contains a sentence missing its first half. Both should
-carry a `% STALE` marker so they are not restored unexamined.
+`config.py`, and contains a sentence missing its first half. Neither is
+typeset, but both should carry a `% STALE` marker so they are not restored
+unexamined. No such marker is in the source yet.
 
 ### 3.10 Editorial changes (status: done)
 
@@ -438,35 +464,205 @@ carry a `% STALE` marker so they are not restored unexamined.
 
 ---
 
-## 4. Open items
+## 4. v11 → v12 — typesetting and the Supplementary Material
 
-Ordered by consequence, not by effort.
+No numbers changed in this step. It converts the manuscript to the
+journal's format and splits it in two, to meet the Physica A limit of 30
+typeset pages. The starting point was 44 pages with the old preamble and
+37 pages under bare `elsarticle`.
 
-1. Rewrite `rem:fgn_cov`, delete the $R = 150$/$200$ degradation sentence
-   and the "below 3% / below 5%" passage (§3.6). These upgrade three
-   hedges into an exact statement.
-2. Correct the OOV rate, the ACF caption's realisation count, the
-   $K_{\rm show}$ passage and $\alpha_{\rm FGN}$ (§3.9).
-3. Rewrite the *Origin of Species* subsection around the PC6 maximum
-   (§3.5), and check the other three per-text subsections for the same
-   class of error.
-4. Apply the four remaining `p` → `P` (§3.1) and the three symbol
-   renames (§3.2).
-5. Table `tab:single_text_summary`: new marks on $r$, new $\rho$ column,
-   caption naming the permutation test.
-6. State the three shuffled-realisation conventions in the methodology,
-   and the fixed seeds (`pca_seed=42`, `fgn_seed=42`, `n_surr=20` with
-   seeds 0–19, $10^5$ permutations with seed 0).
-7. Recompute the filtered-rank DFA of §3.7 with the estimator used inside
-   `fgn_surrogate` before quoting those numbers in the paper.
-8. Decide where the $K = 50$ result belongs: the robustness section of
-   the Results, beside the quantile sweep, is the natural home.
-9. `paper_numbers.py` sections 2–5 still carry hardcoded "(old …)"
-   strings from v8. The `.tex` itself is correct and in sync; only the
-   script's comparison column is stale, so its output for those sections
-   currently flags differences that do not exist.
+### 4.1 Document class and references (status: done)
 
-## 5. Reproducing everything
+`\documentclass[preprint,authoryear]{elsarticle}` → `[preprint]`, and
+`\bibliographystyle{apalike}` → `elsarticle-num`. Physica A uses numbered
+references exclusively; `authoryear` would have been rejected at
+production. The explicit `geometry` and `natbib` loads were dropped, the
+first because it conflicts with the class defaults, the second because
+`elsarticle` loads natbib itself.
+
+The class change takes effect; the `\bibliographystyle` change does not,
+for the reason set out in §4.6.
+
+### 4.2 Split into main text + SI (status: done)
+
+Eleven floats moved to `SI.tex`, which numbers its own floats S1, S2, …
+via `\renewcommand{\thefigure}{S\arabic{figure}}` and the analogous
+redefinitions for tables, equations and sections.
+
+| moved to SI | why |
+|---|---|
+| per-text IET distributions (3 figures) | corroborate the *War and Peace* example kept in the main text |
+| quantile sweep on the four texts | the corpus-level sweep, which is the probative one, stays in the main text |
+| distribution of burstiness ratios | summary statistics are quoted in the text |
+| mean ACF, corpus ACF decay, fraction significant, $\rho(1)$ distribution | four figures supporting one paragraph |
+| ACF summary table, DFA exponent table | full numerical tables; conclusions are in the text |
+
+**Cross-references run in one direction only.** The main text carries
+`\usepackage{xr}` and `\externaldocument{SI}`, so `\ref` into the
+Supplementary Material resolves automatically and prints "Figure S5"
+without any edit to the body text. The SI never uses `\ref` into the main
+text — its few backward references are written in words. The alternative,
+`xr` in both files, is circular and needs four alternating compilations to
+converge; it was rejected as too fragile for submission. **Compile
+`SI.tex` first, then `paper3_main_v12.tex` twice.**
+
+The SI uses `[H]` placement (package `float`) for every float, not
+`[htbp]`. A supplementary document has almost no running text — ten lines
+of prose against two hundred lines of floats — so the standard algorithm
+collapses all section headings onto the first page and then flushes the
+float queue, which puts the figures of §S1 after the heading of §S3.
+`[H]` pins each float where it is written.
+
+### 4.3 Three figures deleted rather than moved (status: done)
+
+The `02_spectra_comparison` figures for *Origin of Species*, *Great
+Expectations* and *Ulysses* were removed from the paper entirely. By §3.6
+the three curves they plot are identical by construction, so the figures
+verify the construction rather than reporting a result; doing that once,
+in the *War and Peace* figure whose caption now says so explicitly, is
+enough. The one substantive sentence in those captions — the more gradual
+eigenvalue decay of *Ulysses* reflecting the diversity of its eighteen
+episodes — was moved into the body text.
+
+`tab:dfa_proj` had been copied into the SI without being deleted from the
+main text, so it was set twice under a duplicated label; the main-text
+copy was removed.
+
+### 4.4 Two sections were lost to a copy-paste error and recovered (status: done)
+
+While the floats were being moved, a contiguous block of 658 lines was
+deleted from the main text by accident. It removed:
+
+- §*Corpus-level generalisation* in full — *Corpus description*,
+  *Component-resolved burstiness holds corpus-wide*, *Robustness to the
+  threshold quantile*, *Distribution of burstiness ratios*, and the corpus
+  table `tab:corpus` listing the 16 texts;
+- §*Temporal persistence in semantic projection space* in full —
+  *Conditional entropy of the embedding trajectory*, *A proxy measure:
+  autocorrelation of projections*, *Empirical results: ACF of
+  projections*, *Corpus-level ACF results*, *DFA of projected series*;
+- four floats that existed in neither file afterwards: `tab:corpus`,
+  `fig:corpus_spectrum`, `fig:corpus_robustness`, `fig:acf_decay`.
+
+The cut began inside the *Robustness* subsection rather than at a section
+boundary, and ended in the middle of the DFA subsection, leaving
+`fig:dfa_spectrum` and `fig:dfa_loglog` behind. It joined in the middle of
+three blank lines, so **the file still compiled without a single error**.
+What exposed it was the label audit: four `\ref` pointing at labels
+present in neither document (`sec:corpus`, `sec:entropy`, `tab:corpus`,
+`sec:corpus_robustness`).
+
+The block was restored from the previous revision and verified
+byte-for-byte against it. One float inside the deleted range was
+deliberately *not* restored: `tab:dfa_proj`, which had already been moved
+to the SI and would have come back as a duplicate.
+
+Two lessons worth carrying into the remaining edits. First, a LaTeX
+manuscript that compiles is not a manuscript that is intact; only a label
+and reference audit catches this class of loss. Second, the audit found it
+in seconds — it is worth running after every structural edit, not only when
+something looks wrong.
+
+### 4.5 `tab:single_text_summary` reformatted (status: done)
+
+The table overflowed the text block. It was transposed — nine quantities
+down the rows, four texts across the columns — which also let the row
+labels carry the quantity names in words instead of bare symbols. The
+$B_{\max}$ entry was split into $B_{\max}$ and $k_{\max}$, so the
+component attaining the maximum is a comparable number rather than a
+parenthesis inside a cell. The significance legend moved from a
+`\multicolumn` row after `\bottomrule` — where booktabs should have
+nothing — into the caption. No column was lost.
+
+The table now shows the discrepancy discussed in §3.4 in a form a reader
+cannot miss: *Origin of Species* is the only text with no mark on $r$
+(0.295) but a mark on $\rho$ (0.460\*). This needs a sentence in the text,
+or it becomes the first question at review.
+
+### 4.6 The reference list is still not in Physica A format (status: **open**)
+
+`\bibliographystyle{apalike}` was changed to `elsarticle-num` (§4.1), but
+that change has **no effect**. The bibliography is written by hand as a
+`thebibliography` environment; `\bibliographystyle` selects a `.bst` for
+BibTeX to generate a `.bbl`, and BibTeX never runs here. The eleven
+entries are still in author-year form:
+
+```latex
+\bibitem[Alvarez-Lacalle et~al.(2006)]{AlvarezLacalle2006}
+Alvarez-Lacalle, E., Dorow, B., Eckmann, J.-P., and Moses, E. (2006).
+\newblock Hierarchical structures induce long-range dynamical correlations...
+```
+
+Every one of the eleven `\bibitem` commands carries an author-year
+optional argument, and the entry bodies follow apalike's field order.
+Physica A uses numbered references exclusively, so the list has to be
+rebuilt, not relabelled.
+
+Since the bibliography needs expanding anyway — eleven references is thin
+for this journal — the efficient route is to build a real `refs.bib` now
+and let BibTeX produce the `.bbl` with `elsarticle-num`. Doing it in the
+other order means formatting the new entries by hand twice.
+
+The body uses `\citep` and `\citet` (18 calls). Those come from natbib,
+which `elsarticle` loads itself, so they survive the switch to numbered
+mode — but `\citet` renders the author name from the `\bibitem` optional
+argument, which disappears when BibTeX takes over. Check those ten `\citet`
+calls read correctly after the change.
+
+One entry, `MontemurroDegliEsposti2025`, is in the bibliography and cited
+nowhere. Either cite it or drop it before submission.
+
+---
+
+## 5. Open items
+
+Ordered by consequence, not by effort. Re-verified against the v12 source
+on 19 Sep; the four items that were on this list and are now applied have
+been removed rather than marked done.
+
+1. **Write the Discussion.** §*Discussion and Conclusions* is still a
+   commented-out `\TODO` block listing key points. It is the only section
+   of the paper with no text in it, and the only item on this list that a
+   referee would treat as disqualifying.
+2. **Rebuild the bibliography as a `.bib` and expand it** (§4.6). The
+   reference list is not in the journal's format and changing
+   `\bibliographystyle` did not change it. Eleven references is also thin
+   given how much of the framing rests on Altmann et al. (2012) and
+   Alvarez-Lacalle et al. (2006). Both problems are cheapest to fix in one
+   pass.
+3. Recompute the filtered-rank DFA of §3.7 with the estimator used inside
+   `fgn_surrogate` before quoting those numbers in the paper. The four
+   columns as computed disagree with the pipeline's own `alpha_text` by up
+   to 0.045, and of opposite sign for *Ulysses*.
+4. State the fixed seeds in the methodology: `pca_seed=42`, `fgn_seed=42`,
+   `n_surr=20` with seeds 0–19, $10^5$ permutations with seed 0. The
+   realisation *conventions* are now stated (§3.9); the seeds are not, and
+   appear only in commented-out source.
+5. Mark the commented-out source blocks the authors intend to keep with
+   `% STALE`: the shuffle block still states $N_{\rm surr} = 10$ against
+   `n_surr = 20` in `config.py`, the $R = 150$/$200$ degradation sentence
+   survives in a comment, and the conflated $\alpha_{\rm FGN}$ of
+   Eq. `fgn_dfa_match` survives in another. None is typeset; none should be
+   restored unexamined either. No marker is in the source yet.
+6. `paper_numbers.py` sections 2–5 still carry hardcoded "(old …)" strings
+   from v8. The `.tex` itself is correct and in sync; only the script's
+   comparison column is stale, so its output for those sections currently
+   flags differences that do not exist.
+7. Typo: `(Remark~\ref{rem:fgn_cov},)` in the PCA-and-projection
+   subsection has a stray comma inside the parenthesis.
+8. Page count under `elsarticle` has not been measured since the split and
+   the recovery. The limit is 30.
+
+**Applied since the 18 Sep list**, and therefore no longer here: the four
+remaining `p` → `P` and the three symbol renames; the permutation marks and
+the Spearman column in `tab:single_text_summary`; the rewrite of the
+*Origin of Species* subsection around the PC6 maximum, including the
+sentence on the Pearson/Spearman discrepancy; the three stale covariance
+passages; the OOV rate, the $K_{\rm show}$ passage and
+$\alpha_{\rm FGN}$; the placement of the $K = 50$ result in the
+robustness subsection; and the realisation conventions in the methodology.
+
+## 6. Reproducing everything
 
 ```bash
 python scripts/run_corpus.py data/corpus        # corpus_*.csv
