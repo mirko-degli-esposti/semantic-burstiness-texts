@@ -6,9 +6,9 @@
 %  Target: Physica A
 % ============================================================
 
-\documentclass[12pt,a4paper]{article}
+\documentclass[preprint]{elsarticle}
+%\documentclass{elsarticle}
 
-% ---- Packages ----------------------------------------------
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \graphicspath{{../}{./}}
@@ -16,15 +16,14 @@
 \usepackage{booktabs}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{natbib}
 \usepackage{microtype}
 \usepackage{placeins}
 \usepackage{rotating}
-\usepackage{geometry}
 \usepackage{hyperref}
-\geometry{margin=2.5cm}
+%\geometry{margin=2.5cm}
 
-
+\usepackage{xr}
+\externaldocument{SI}     % compila SI.tex PRIMA di paper3
 
 % ---- Theorem environments -----------------------------------
 \newtheorem{proposition}{Proposition}
@@ -46,26 +45,28 @@
 \newcommand{\TODO}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
 \newcommand{\NOTE}[1]{\textcolor{blue}{\textbf{[NOTE: #1]}}}
 
+
+
 \usepackage{totcount}
 \newtotcounter{todocount}
 
 % ------------------------------------------------------------
+
 \begin{document}
+\begin{frontmatter}
 
-\title{Semantic burstiness across principal directions\\
-       of textual variation}
+\title{Semantic burstiness across principal directions of textual
+variation}
 
-\author{Mirko Degli Esposti$^{1}$ \and Marcelo A.\ Montemurro$^{2}$\\[6pt]
-  \small $^1$Department of Physics and Astronomy,
-         University of Bologna, Bologna, Italy\\
-  \small $^2$School of Mathematics and Statistics,
-         The Open University, Milton Keynes, UK}
+\author[unibo]{Mirko Degli Esposti}
+\ead{mirko.degliesposti@unibo.it}
+\author[ou]{Marcelo A. Montemurro}
 
-\date{\small Draft --- \today}
+\affiliation[unibo]{organization={Department of Physics and Astronomy,
+  University of Bologna}, city={Bologna}, country={Italy}}
+\affiliation[ou]{organization={School of Mathematics and Statistics,
+  The Open University}, city={Milton Keynes}, country={United Kingdom}}
 
-\maketitle
-
-% -----------------------------------------------------------------------------
 \begin{abstract}
 Long-range correlations in written texts extend over scales far beyond
 local syntax, but their relation to semantic organisation remains
@@ -94,10 +95,13 @@ bursty recurrence observed along semantic directions, which instead
 requires ordered topical organisation.
 \end{abstract}
 
-\smallskip
-\noindent\textbf{Keywords:} long-range correlations; burstiness; word
-embeddings; PCA; surrogate data; semantic trajectories; complex systems;
-topical structure
+\begin{keyword}
+long-range correlations \sep burstiness \sep word embeddings \sep
+principal component analysis \sep surrogate data
+\end{keyword}
+
+\end{frontmatter}
+
 
 % -----------------------------------------------------------------------------
 \section{Introduction}
@@ -617,7 +621,7 @@ identical vocabulary.
 The three sequences differ in which statistical ingredients they retain;
 Table~\ref{tab:null_taxonomy} summarises the differences.
 
-\begin{table}[htbp]
+\begin{table}[tbp]
 \centering
 \caption{Statistical ingredients retained by each sequence.}
 
@@ -868,39 +872,40 @@ component-resolved burstiness spectra, followed by robustness to the
 threshold quantile. Table~\ref{tab:single_text_summary} collects the
 main numerical descriptors.
 
-\begin{table}[htbp]
+\begin{table}[tbp]
 \centering
-\caption{Summary statistics for the four single-text analyses.
-$N$: raw tokens; $M$: filtered tokens (R=100, $F_{\min}=5$);
-OOV: out-of-vocabulary rate after filtering;
-$\alpha$: DFA exponent; $\alpha_0$: FGN bisection parameter
-(resolved to $\pm0.01$ by the bisection tolerance);
-$r(\lambda, B)$ and $\rho(\lambda, B)$: Pearson and Spearman
-correlation between the eigenvalue and burstiness spectra, with
-significance from a permutation test over component pairings
-($10^5$ pairings, seed 0);
-$B_{\max}$: largest burstiness over the $K=20$ components at $q=0.95$,
-with the component at which it occurs.}
+\caption{Summary statistics for the four representative texts.
+$N$: raw tokens; $M$: tokens after filtering; OOV: fraction of filtered
+tokens absent from the embedding vocabulary; $\alpha$: DFA exponent of the
+filtered rank sequence; $\alpha_0$: target exponent of the matched FGN
+surrogate; $r$ and $\rho$: Pearson and Spearman correlation between
+$\lambda_k$ and $B_k$ over $k = 1,\ldots,20$; $B_{\max}$: largest
+burstiness value, attained at component $k_{\max}$.
+Significance from the permutation test over component pairings:
+$^{*}P<0.05$, $^{**}P<0.01$, $^{***}P<0.001$; no mark: $P>0.05$.}
 \label{tab:single_text_summary}
 \small
-\begin{tabular}{lrrrrrrrr}
+\begin{tabular}{@{}l cccc@{}}
 \toprule
-Text & $N$ & $M$ & OOV & $\alpha$ & $\alpha_0$ &
-      $r(\lambda,B)$ & $\rho(\lambda,B)$ & $B_{\max}$ \\
+ & \emph{War and} & \emph{Origin of} & \emph{Great} & \\
+ & \emph{Peace}   & \emph{Species}   & \emph{Expectations} & \emph{Ulysses} \\
 \midrule
-War and Peace      & 564{,}788 & 235{,}933 & 1.6\% &
-  0.721 & 0.76 & 0.702$^{**}$ & 0.850$^{***}$ & 2.045 (PC3) \\
-Origin of Species  & 151{,}179 &  58{,}913 & 0.4\% &
-  0.771 & 0.80 & 0.295         & 0.460$^{*}$   & 1.900 (PC6) \\
-Great Expectations & 188{,}925 &  64{,}410 & 1.3\% &
-  0.689 & 0.74 & 0.511$^{*}$   & 0.579$^{**}$  & 1.244 (PC3) \\
-Ulysses            & 264{,}165 & 101{,}489 & 0.7\% &
-  0.763 & 0.80 & 0.571$^{*}$   & 0.817$^{***}$ & 1.495 (PC2) \\
+Raw tokens $N$                & 564{,}788 & 151{,}179 & 188{,}925 & 264{,}165 \\
+Filtered tokens $M$           & 235{,}933 &  58{,}913 &  64{,}410 & 101{,}489 \\
+OOV fraction                  & 1.6\%     & 0.4\%     & 1.3\%     & 0.7\%     \\
+DFA exponent $\alpha$         & 0.721     & 0.771     & 0.689     & 0.763     \\
+FGN target $\alpha_0$         & 0.76      & 0.80      & 0.74      & 0.80      \\
+Pearson $r(\lambda,B)$        & 0.702$^{**}$  & 0.295       & 0.511$^{*}$  & 0.571$^{*}$   \\
+Spearman $\rho(\lambda,B)$    & 0.850$^{***}$ & 0.460$^{*}$ & 0.579$^{**}$ & 0.817$^{***}$ \\
+Maximum burstiness $B_{\max}$ & 2.045     & 1.900     & 1.244     & 1.495     \\
+Component $k_{\max}$          & 3         & 6         & 3         & 2         \\
 \bottomrule
-\multicolumn{9}{l}{\small $^*P<0.05$;\; $^{**}P<0.01$;\;
-  $^{***}P<0.001$;\; no mark: $P>0.05$.}
 \end{tabular}
+
+
 \end{table}
+
+
 
 Across the four texts, the original projection sequences are more bursty
 than both controls for all $K=20$ components at $q=0.95$. Semantic
@@ -949,7 +954,7 @@ Figure~\ref{fig:wrnpc_spectra} shows that PC1 and PC2 account for
 $6.98\%$ and $4.21\%$ of the variance, respectively, and the first ten
 components account for $27.2\%$.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
   \centering
   \includegraphics[width=\textwidth]{figures/eng_wrnpc/eng_wrnpc_02_spectra_comparison.png}
   \caption{Eigenvalue spectra and cumulative explained variance for
@@ -971,7 +976,7 @@ transliterated Russian names and emotionally inflected rare words lie
 at the periphery of the embedding cloud; it is retained in the spectra
 but interpreted cautiously.
 
-\begin{table}[htbp]
+\begin{table}[tbp]
 \centering
 \caption{Top-6 word types at the positive and negative poles of PC1,
 PC2 and PC3 for \emph{War and Peace} ($R=100$, $F_{\min}=5$),
@@ -1025,9 +1030,7 @@ PC3 & $-$ & &
 \emph{On the Origin of Species} contains $N=151{,}179$ raw tokens and
 $M=58{,}913$ retained tokens, with $\alpha=0.771$ and
 $\alpha_0=0.80$. PC1 explains $6.61\%$ of the variance, PC2
-$3.58\%$, and the first ten components $26.4\%$. All three spectra
-coincide, both surrogates being permutations of the original token
-sequence (Figure~\ref{fig:darwin_spectra}).
+$3.58\%$, and the first ten components $26.4\%$.
 
 PC1 is dominated by specialised nineteenth-century biological and
 geological terminology at one pole and pronouns or conversational
@@ -1039,7 +1042,7 @@ first-person field observations and concrete specimens with abstract
 classification and synthesis. Table~\ref{tab:darwin_pc} also lists PC6,
 the burstiest direction of this text.
 
-\begin{table}[htbp]
+\begin{table}[tbp]
 \centering
 \caption{Top-6 word types at the positive and negative poles of PC1,
 PC2, PC3 and PC6 for \emph{On the Origin of Species} ($R=100$,
@@ -1102,9 +1105,7 @@ PC6 & $-$ & &
 \emph{Great Expectations} contains $N=188{,}925$ raw tokens and
 $M=64{,}410$ retained tokens, with $\alpha=0.689$ and
 $\alpha_0=0.74$. PC1, PC2, and the first ten components account for
-$6.54\%$, $4.34\%$, and $27.2\%$ of the variance, respectively. The
-three covariance spectra are again coincident
-(Figure~\ref{fig:greatexp_spectra}).
+$6.54\%$, $4.34\%$, and $27.2\%$ of the variance, respectively.
 
 The positive pole of PC1 contains character names and Victorian
 dialect, opposed to generic and abstract vocabulary, and is treated as
@@ -1114,7 +1115,7 @@ language. PC3 opposes bodily action and gesture to a formal Latinate
 register. The corresponding poles are listed in
 Table~\ref{tab:greatexp_pc}.
 
-\begin{table}[htbp]
+\begin{table}[tbp]
 \centering
 \caption{Top-6 word types at the positive and negative poles
 of PC1, PC2, and PC3 for \emph{Great Expectations}
@@ -1163,8 +1164,7 @@ PC3 & $-$ & &
 retained tokens, with $\alpha=0.763$ and $\alpha_0=0.80$. Its first
 ten components account for $25.0\%$ of the variance, the smallest
 fraction among the four texts, consistent with the diversity of
-registers across its eighteen episodes
-(Figure~\ref{fig:ulysses_spectra}).
+registers across its eighteen episodes.
 
 PC1 is strongly affected by Dublin-specific proper names,
 multilingual fragments, and neologisms. PC2 separates formal titles and
@@ -1173,7 +1173,7 @@ contrasts physical and material description with the vocabulary of
 kinship, marriage and literary identity. These semantic poles are
 listed in Table~\ref{tab:ulysses_pc}.
 
-\begin{table}[htbp]
+\begin{table}[tbp]
 \centering
 \caption{Top-6 word types at the positive and negative poles of PC1,
 PC2 and PC3 for \emph{Ulysses} ($R=100$, $F_{\min}=5$), with
@@ -1258,7 +1258,7 @@ movement, which are concentrated in the battle and campaign chapters.
 The eigenvalue--burstiness correlation is positive but imperfect,
 $r=0.702$ ($P=0.0055$).
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
   \centering
   \includegraphics[width=\textwidth]{figures/eng_wrnpc/eng_wrnpc_03_iet_comparison.png}
   \caption{Inter-event-time distributions for PC1--PC3 of
@@ -1269,7 +1269,7 @@ $r=0.702$ ($P=0.0055$).
   \label{fig:wrnpc_iet}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
   \centering
   \includegraphics[width=\textwidth]{figures/panel_burstiness_spectra.png}
  \caption{Component-resolved burstiness spectra at $q=0.95$ for the four
@@ -1368,791 +1368,7 @@ For each of the four representative texts, the ordering holds for all
 absolute burstiness increases towards more extreme thresholds because
 rare visits to the upper tail accentuate episode-to-episode clustering.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/panel_quantile_sweep.png}
-  \caption{Mean burstiness over $k=1,\ldots,20$ as a function of the
-  threshold quantile $q$, for the four representative texts:
-  \textbf{A} \emph{War and Peace}, \textbf{B} \emph{On the Origin of
-  Species}, \textbf{C} \emph{Great Expectations}, \textbf{D}
-  \emph{Ulysses}. The original stays above both controls and above the
-  geometric baseline $\sqrt{q}$ throughout $q \in [0.60, 0.99]$, and the
-  full ordering $B_k^{\rm orig} > B_k^{\rm FGN}$ and
-  $B_k^{\rm orig} > B_k^{\rm surr}$ holds for all 20 components at every
-  displayed $q$ in each text. Absolute burstiness grows towards more
-  extreme thresholds, as rare visits to the upper tail accentuate
-  episode-to-episode clustering.}
-  \label{fig:sweep_panel}
-\end{figure}
 
-The separation is likewise not an artefact of truncating the spectrum at
-$K=20$. 
-The retained components account for $35$--$38\%$ of the embedding
-variance; refitting the PCA with $K=50$ and recomputing the spectrum at
-$q=0.95$ leaves every component above the independent-event baseline in
-all four texts, with a minimum of $B_k=1.041$, some $7\%$ above
-$\CV_{\rm geom}$. Burstiness does decline with component index: the mean
-falls from $1.18$--$1.36$ over the first twenty components to
-$1.11$--$1.19$ over components $21$--$50$, while the variance carried per
-component falls from $1.9\%$ to $0.65\%$. 
-The choice $K=20$ is conventional rather than principled; what the
-extension to $K=50$ shows is that it does not act as a threshold beyond
-which component-level burstiness disappears. The leading components are
-also the ones for which the semantic poles were examined
-(Section~\ref{sec:semantic_geometry_results}).
-
-\FloatBarrier
-\section{Corpus-level generalisation}
-\label{sec:corpus}
-
-Having established the component-resolved pattern in four
-representative texts (Section~\ref{sec:oliver}), we now assess its
-generality across the full corpus.
-%
-%\NOTE{All computations use local PCA (eigenvectors re-estimated per
-%text), GloVe-300 embeddings, frequency filter $R=100$, hapax filter
-%$F_{\min}=5$, $N_{\rm surr}=10$ word-shuffled realisations,
-%and a single FGN realisation per text (seed 42).
-%Default quantile $q=0.95$ unless stated.}
-
-\subsection{Corpus description}
-\label{sec:corpus_texts}
-
-The corpus comprises 16 English literary texts from Project Gutenberg,
-sspanning novels, scientific treatises and travel writing, in English editions 
-and translations published between the eighteenth and early twentieth centuries.
-(Table~\ref{tab:corpus}).
-Raw token counts range from approximately $56{,}000$ (The Picture of
-Dorian Gray) to $565{,}000$ (War and Peace), with filtered token counts
-$M$ (after high-frequency and hapax removal, OOV excluded) between
-$17{,}000$ and $236{,}000$.
-DFA scaling exponents $\alpha$ lie in the range $[0.63, 0.85]$,
-consistent with the literature on long-range correlations in English
-texts \citep{Ebeling1995, MontemurroPury2002}.
-
-
-\begin{table}[t]
-\centering
-\caption{Corpus of 16 literary and scientific texts.
-$N$: total token count after tokenisation.
-$M$: content tokens after frequency filtering
-(top $R=100$ words removed, minimum frequency~5).
-$\alpha$: DFA scaling exponent of the rank sequence.
-$\alpha_0$: FGN generator exponent matched to $\alpha$ (bisection
-tolerance $0.01$).}
-\label{tab:corpus}
-\small
-\begin{tabular}{llrrll}
-\toprule
-Title & Author & $N$ & $M$ & $\alpha$ & $\alpha_0$ \\
-\midrule
-Pride and Prejudice        & Austen    & 122{,}226 &  42{,}364 & 0.642 & 0.67 \\
-Don Quixote (transl.)      & Cervantes & 403{,}152 & 147{,}279 & 0.711 & 0.76 \\
-On the Origin of Species   & Darwin    & 151{,}179 &  58{,}913 & 0.770 & 0.80 \\
-The Voyage of the Beagle   & Darwin    & 206{,}728 &  84{,}931 & 0.629 & 0.67 \\
-David Copperfield          & Dickens   & 363{,}557 & 134{,}409 & 0.727 & 0.78 \\
-Great Expectations         & Dickens   & 188{,}925 &  64{,}410 & 0.689 & 0.73 \\
-Oliver Twist               & Dickens   & 161{,}529 &  59{,}729 & 0.711 & 0.76 \\
-Ulysses                    & Joyce     & 264{,}165 & 101{,}489 & 0.763 & 0.80 \\
-The Jungle Book            & Kipling   & 151{,}161 &  49{,}522 & 0.775 & 0.83 \\
-Moby Dick                  & Melville  & 215{,}652 &  82{,}773 & 0.694 & 0.73 \\
-Principia Mathematica      & Newton    & 112{,}225 &  26{,}347 & 0.815 & 0.85 \\
-The Analysis of Mind       & Russell   &  88{,}342 &  30{,}449 & 0.743 & 0.76 \\
-War and Peace              & Tolstoy   & 564{,}788 & 235{,}933 & 0.721 & 0.76 \\
-Huckleberry Finn           & Twain     & 145{,}924 &  52{,}741 & 0.774 & 0.83 \\
-Tom Sawyer                 & Twain     &  71{,}102 &  22{,}085 & 0.788 & 0.80 \\
-The Picture of Dorian Gray & Wilde     &  55{,}619 &  16{,}776 & 0.845 & 0.87 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{quote}
-Per-text IET distributions and burstiness spectra for all texts and
-threshold values can be regenerated with \texttt{scripts/run\_text.py}
-in the code repository. The main text reports the aggregated corpus
-results.
-\end{quote}
-
-
-% ??????????????????????????????????????????????????????????
-% Corpus ordering subsections ? rewritten
-% ??????????????????????????????????????????????????????????
-
-\subsection{Component-resolved burstiness holds corpus-wide}
-\label{sec:corpus_ordering}
-
-The corpus-level component spectrum is summarised in
-Figure~\ref{fig:corpus_spectrum}.
-Averaging the burstiness spectrum $\{\bk\}$ across all 16 texts
-at quantile $q = 0.95$, the original texts are systematically more
-bursty than both null models across all 20 PCA components:
-$\langle B_k^{\rm orig}\rangle_{\rm texts} \in [1.16, 1.54]$
-(mean $1.26$), while both null models cluster tightly around
-the geometric baseline $\CV_{\rm geom} = \sqrt{0.95} \approx 0.975$:
-$\langle B_k^{\rm surr}\rangle \in [0.973, 0.978]$ and
-$\langle B_k^{\rm FGN}\rangle \in [0.958, 0.983]$.
-
-At the level of individual $({\rm text}, k)$ pairs
-($16 \times 20 = 320$ pairs):
-\begin{itemize}
-  \item $B_k^{\rm orig} > B_k^{\rm surr}$ in $\mathbf{100\%}$ of pairs.
-  \item $B_k^{\rm orig} > B_k^{\rm FGN}$ in $\mathbf{100\%}$ of pairs.
-  \item $|B_k^{\rm FGN}/B_k^{\rm surr} - 1| < 0.05$ in
-        $\mathbf{95.6\%}$ of pairs.
-\end{itemize}
-
-The appropriate summary statistic for the magnitude of the effect
-is the \emph{per-text mean ratio}, computed by averaging
-$B_k^{\rm orig}/B_k^{\rm surr}$ over the 20 components for each
-text and then averaging over the 16 texts:
-\begin{equation}
-  \left\langle \frac{B_k^{\rm orig}}{B_k^{\rm surr}}
-  \right\rangle_{\rm texts}
-  \;=\; 1.29 \;\pm\; 0.03,
-  \qquad t = 8.7,\quad P < 10^{-6},
-  \label{eq:ratio_corpus}
-\end{equation}
-where $\pm$ denotes the standard error of the mean over 16 texts.
-The original texts are thus on average $\sim 30\%$ more bursty
-than the word-shuffled null, which itself sits at the geometric baseline.
- The per-text values range from $1.17$ (\emph{Pride and Prejudice}) to
-$1.73$ (\emph{Principia Mathematica}), with a spread across texts
-(sd $= 0.13$) that is uncorrelated with text length
-($r=-0.04$ against $M$). The four expository texts of the corpus
-occupy four of the five highest positions (mean $1.45$ against $1.24$
-for the twelve narrative works), which is consistent with the
-chapter-level topical segmentation of expository prose; with four
-non-fiction texts this is an observation to be tested on a larger and
-deliberately balanced corpus, not a result.
-The analogous ratio for the FGN surrogate is
-$\langle B_k^{\rm orig}/B_k^{\rm FGN}\rangle = 1.29 \pm 0.03$,
-indistinguishable from the word-shuffled value.
-
-The two null models satisfy
-$\langle B_k^{\rm FGN}/B_k^{\rm surr}\rangle = 1.001 \pm 0.001$
-(range over texts $[0.996, 1.005]$; $t = 1.1$, $P = 0.28$):
-the FGN surrogate and the word-shuffled null are statistically
-indistinguishable at the corpus level
-(Section~\ref{sec:corpus_diffs}).
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/fig1_mean_spectrum.png}
-  \caption{Mean component-resolved burstiness spectrum across the
-  analysed corpus at $q=0.95$. Curves show the mean $\langle B_k\rangle$
-  over texts for $k=1,\ldots,20$; shaded bands indicate one standard
-  deviation. The original texts (blue) are above the FGN surrogate
-  (green), word-shuffled null (red), and geometric baseline
-  $\sqrt{q}\simeq0.975$ at every component. The largest corpus means
-  occur among the early components, followed by a broad decline with
-  non-monotone secondary peaks.}
-  \label{fig:corpus_spectrum}
-\end{figure}
-
-
-\subsection{Robustness to the threshold quantile}
-\label{sec:corpus_robustness}
-
-Figure~\ref{fig:corpus_robustness} shows the fraction of
-$({\rm text}, k)$ pairs satisfying the ordering conditions as a
-function of $q \in \{0.60, 0.70, 0.80, 0.90, 0.95, 0.99\}$.
-
-The full ordering $B_k^{\rm orig} > B_k^{\rm surr}$ and
-$B_k^{\rm orig} > B_k^{\rm FGN}$ is satisfied in $100\%$
-of pairs for all $q \in [0.60, 0.95]$, and in $98.1\%$ of pairs at the
-extreme $q = 0.99$.
-The null-model indistinguishability criterion
-$|B_k^{\rm FGN}/B_k^{\rm surr} - 1| < 0.05$ is met by $\geq 99\%$ of
-pairs for $q \leq 0.90$, by $96\%$ at $q = 0.95$, and decreases to
-$73\%$ at $q = 0.99$.
-
-This degradation at the extreme threshold is expected: at the corpus
-median, $M \approx 59{,}000$, the event rate $p = 0.01$ leaves only
-$\sim 590$ events per series, giving a relative error on the IET
-estimator of $\sim 4\%$, rising to $\sim 8\%$ for the shortest text
-($M = 16{,}776$) --- comparable to or larger than the magnitude of
-$B^{\rm FGN} - B^{\rm surr}$ at this threshold.
-For $q = 0.95$ the same texts give $\sim 3{,}000$ and $\sim 840$ events,
-with relative errors of $1.8\%$ and $3.5\%$, well within the regime
-where the null-model comparison is reliable.
-
-The same estimator noise accounts for the six pairs out of 320 that fail the full ordering at $q=0.99$.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.72\textwidth]{figures/fig2_robustness_vs_q.png}
-  \caption{%
-    \textbf{Robustness of the burstiness ordering across quantile
-    threshold $q$.}
-    Each point: fraction of $({\rm text}, k)$ pairs ($320$ per $q$)
-    satisfying the indicated condition.
-    Purple circles: full ordering
-    $B_k^{\rm orig} > B_k^{\rm surr}$ and $B_k^{\rm orig} >
-    B_k^{\rm FGN}$.
-    Red squares: $B_k^{\rm orig} > B_k^{\rm surr}$.
-    Green triangles: $B_k^{\rm orig} > B_k^{\rm FGN}$.
-    Grey diamonds: $|B_k^{\rm FGN}/B_k^{\rm surr} - 1| < 0.05$.
-    The ordering is robust for $q \in [0.60, 0.95]$; the slight
-    degradation at $q = 0.99$ is due to estimator noise at
-    $p = 0.01$.
-  }
-  \label{fig:corpus_robustness}
-\end{figure}
-
-
-\subsection{Distribution of burstiness ratios}
-\label{sec:corpus_diffs}
-
-Figure~\ref{fig:corpus_diffs} shows the distribution of the ratios
-$B^{\rm orig}/B^{\rm surr}$, $B^{\rm orig}/B^{\rm FGN}$, and
-$B^{\rm FGN}/B^{\rm surr}$ over all 320 $({\rm text}, k)$ pairs
-at $q = 0.95$.
-
-Panel~A shows that both orig--null ratios are concentrate
-well above 1, with no mass below 1.
-The two distributions (orig/surr and orig/FGN) are nearly
-identical in shape and location, confirming that the FGN and
-word-shuffled null models are equally poor surrogates for the
-original burstiness.
-
-
-Panel~B isolates the ratio $B^{\rm FGN}/B^{\rm surr}$, which is tightly
-concentrated around 1 over the 320 pairs (mean $1.0008$, sd $0.022$,
-range $[0.91, 1.09]$). Because components within a text are not
-independent, the test is performed on the 16 per-text means: a
-one-sample $t$-test against unity gives $t = 1.13$, $P = 0.28$. The two
-null models are statistically indistinguishable, and the distribution
-is symmetric with no indication of a directional bias.
-
-Together, Figures~\ref{fig:corpus_spectrum}--\ref{fig:corpus_diffs}
-establish the corpus-level result:
-\begin{equation}
-  B_k^{\rm orig} \;\gg\; B_k^{\rm FGN} \;\approx\; B_k^{\rm surr}
-  \qquad \forall\, k,\; \forall\, \text{text in corpus},
-  \label{eq:ordering_corpus}
-\end{equation}
-with a mean excess of the original over the word-shuffled null of
-$\sim 30\%$. The ordering holds for every text and every component
-irrespective of length, genre, DFA exponent and choice of quantile
-threshold; its magnitude, by contrast, varies systematically between
-texts (Section~\ref{sec:corpus_ordering}).
-
-
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/fig3_difference_distributions.png}
-  \caption{%
-    \textbf{Distribution of burstiness ratios over
-    320 (text, $k$) pairs at $q = 0.95$.}
-    \textbf{Panel A}: distributions of $B_k^{\rm orig}/B_k^{\rm surr}$
-    (red) and $B_k^{\rm orig}/B_k^{\rm FGN}$ (green), both
-    concentrated well above 1.
-    The two distributions are nearly identical, confirming that the
-    two null models are equivalently far below the original.
-    \textbf{Panel B}: distribution of $B_k^{\rm FGN}/B_k^{\rm surr}$,
-    tightly centred on 1 (mean $1.0008$, s.e.\ $0.0012$;
-    $t = 0.63$, $P = 0.53$), statistically indistinguishable from
-    unity, confirming
-    $B_k^{\rm FGN} \approx B_k^{\rm surr}$ across the entire corpus.
-  }
-  \label{fig:corpus_diffs}
-\end{figure}
-
-\FloatBarrier
-% ------------------------------------------------------------
-\section{Temporal persistence in semantic projection space}
-\label{sec:entropy}
-
-Sections~\ref{sec:oliver} and~\ref{sec:corpus} establish that the
-original semantic trajectories have elevated component-resolved
-burstiness and are separated from both controls. We now test the same
-temporal organisation in the continuous projections using normalised
-autocorrelation functions and DFA. An information-theoretic argument
-explains why the long-range correlations imposed on the FGN rank
-sequence need not survive the mapping into embedding space.
-
-
-% ============================================================
-% NOTE TO CO-AUTHOR (M.DE.) --- Sec. "Conditional entropy": decide
-% whether to develop this argument or drop it.  As written it does not
-% work, for one reason:
-%
-%   The embedding trajectory is a RELABELLING of the token sequence.
-%   phi is injective on word types, so
-%       H(e_t | e_{t-1},...) = H(s_t | s_{t-1},...) = H(r_t | r_{t-1},...)
-%   exactly.  Entropy is invariant under bijections.  But the FGN
-%   surrogate has rank memory BY CONSTRUCTION, so H_l^FGN < H(e_t),
-%   which is the opposite of Eq. (entropy_ordering).  No deterministic
-%   map can destroy that information; entropy is blind to the geometry
-%   of the embedding space, and the geometry is the whole point.
-%
-% TWO WAYS FORWARD.
-%
-% (a) DROP the entropy formalisation and keep the mechanism, which is
-%     correct and which our own data already confirm.  Rank is a scalar
-%     ordering by frequency, so FGN memory is memory along the one
-%     direction that encodes frequency -- and in all four texts that
-%     direction is PC1 (rare proper nouns vs generic high-frequency
-%     vocabulary).  Prediction: the FGN keeps a residual correlation on
-%     PC1 and none on the thematic directions.  Sec. corpus ACF reports
-%     exactly this: 56% of PC1 pairs significant at lag one, against 8%
-%     for k >= 4.  At present that number is presented as a GloVe
-%     artefact footnote; it is in fact the verified prediction of the
-%     mechanism, and connecting the two costs one paragraph.
-%
-% (b) KEEP the entropy argument but make the coarse-graining explicit.
-%     The claim only holds for an entropy estimated with a
-%     metric-aware estimator (k-NN differential entropy on the vectors,
-%     or a quantisation of embedding space into semantic cells).  Then
-%     the geometry enters through the estimator and the ordering can be
-%     recovered -- but it has to be stated, and ideally measured, not
-%     asserted.  This is a paper of its own, not a subsection.
-%
-% Recommendation: (a) for this paper, (b) as a separate study.
-%
-% Minor, independent of the above: "\et[t-1]" does not typeset as
-% e_{t-1} unless \et takes an optional argument -- check the macro.
-% Label "sec:entropy" no longer matches the section title.
-% ============================================================
-\subsection{Conditional entropy of the embedding trajectory}
-\label{sec:cond_entropy}
-\TODO{Mirko: drop it or develop it !  See \% comments in tex file....}
-
-
-The qualitative argument of Remark~\ref{rem:fgn_entropy} can be cast
-in information-theoretic terms.
-Consider the embedding trajectory $\mathcal{E} = (\et)_{t=1}^M$ as a
-stationary (or locally stationary) stochastic process over $\R^d$.
-For a lag $\ell \geq 1$, define the \emph{conditional entropy}
-\begin{equation}
-  H_\ell = H\!\left(\et \;\Big|\; \et[t-1], \ldots, \et[t-\ell]\right),
-  \label{eq:cond_entropy}
-\end{equation}
-where $\et[s] \equiv \mathbf{e}_s$ for brevity.
-For an i.i.d.\ process, $H_\ell = H(\et)$ for all $\ell \geq 1$:
-past embeddings carry no information about the present.
-For a process with long-range semantic structure (real text),
-$H_\ell < H(\et)$ and the gap $H(\et) - H_\ell$ grows with $\ell$ as
-long as topical context persists.
-
-The corresponding working hypothesis is:
-\begin{equation}
-  H_\ell^{\rm orig} \;<\; H_\ell^{\rm FGN}
-  \;\approx\; H_\ell^{\rm shuf} \;\approx\; H(\et),
-  \qquad \ell = 1, 2, \ldots
-  \label{eq:entropy_ordering}
-\end{equation}
-The word-shuffled null is exchangeable and approaches the i.i.d.
-reference apart from finite-size dependence associated with fixed token
-counts; accordingly, $H_\ell^{\rm shuf} \simeq H(\et)$.
-For the FGN surrogate, past ranks $r_{t-1}, \ldots, r_{t-\ell}$
-carry information about the present rank $r_t$ (by the long-range
-memory of the FGN process); but the mapping $r \mapsto \phi(w_r)$ is
-semantically diffuse: words of similar Zipf rank span the full range
-of semantic content and are spread across all regions of the embedding
-space.
-Therefore past ranks carry negligible information about the present
-embedding $\et$, and $H_\ell^{\rm FGN} \approx H(\et)$.
-For the original text, past embeddings directly encode the topical
-context of the narrative, providing genuine predictive information
-about subsequent embeddings.
-
-
-\subsection{A proxy measure: autocorrelation of projections}
-\label{sec:autocorr_proxy}
-
-Direct estimation of $H_\ell$ in $\R^{300}$ requires large samples and
-density estimation in high dimensions, which is impractical for
-individual texts of length $M \sim 10^4$--$10^5$.
-We therefore use a computationally tractable proxy: the normalised
-autocorrelation function (ACF) of the projected scalar series,
-\begin{equation}
-  \rho_k(\ell) \;=\;
-  \frac{\mathrm{Cov}\!\left(\xtk,\, x_{t+\ell}^{(k)}\right)}
-       {\mathrm{Var}\!\left(\xtk\right)},
-  \label{eq:autocorr}
-\end{equation}
-for PCA component $k$ and lag $\ell$.
-For an i.i.d.\ process (word-shuffled null), $\rho_k(\ell) = 0$ for
-all $\ell \geq 1$ by construction.
-For the original text, $\rho_k(\ell) > 0$ with slow decay, reflecting
-the long-range topical structure.
-For the FGN surrogate, the entropy argument of
-Section~\ref{sec:cond_entropy} predicts $\rho_k(\ell) \approx 0$
-despite the long-range correlations in the rank sequence.
-
-\begin{remark}
-  The ACF proxy is connected to the burstiness spectrum through the
-  Wiener--Khintchine theorem: a slowly decaying $\rho_k(\ell)$
-  corresponds to excess power at low frequencies in the spectral
-  density of $x_t^{(k)}$. For a Gaussian process the level-crossing
-  statistics are determined by the autocorrelation; in general the two
-  are related but not equivalent, since $\bk$ depends on the full IET
-  distribution while $\rho_k$ is a second-order statistic. In the
-  present data they move together: the original has both elevated
-  $\bk$ and slowly decaying $\rho_k$, and both null models have
-  neither.
-\end{remark}
-
-
-\subsection{Empirical results: ACF of projections}
-\label{sec:acf_results}
-
-Figure~\ref{fig:acf_decay} shows $\rho_k(\ell)$ as a function of lag
-$\ell$ (log scale) for PC1, PC2, and PC3 of
-\emph{Great Expectations} by Dickens ($\alpha = 0.689$), for the original text, the FGN surrogate, and
-the word-shuffled null.
-Figure~\ref{fig:acf_mean} shows the same for the mean ACF over all
-$K = 20$ components.
-
-\paragraph{Original text.}
-The ACF is positive and significantly above the i.i.d.\ band
-$\pm 1.96/\sqrt{M} \approx \pm 0.008$ at lag $\ell = 1$ for all 20
-components, with $\rho_k(1) \in [0.049, 0.208]$
-(Table~\ref{tab:acf_summary}).
-The decay is gradual on a log scale, with values remaining above the
-i.i.d.\ band up to lags of order $\ell \sim 100$ for the
-lower-indexed components.
-This slow decay is a second-order signature of the temporal
-persistence that accompanies semantic burstiness.
-
-\paragraph{FGN surrogate.}
-All 20 components have $|\rho_k^{\rm FGN}(1)| \le 0.007$, inside the
-i.i.d.\ band.
-At lag $\ell = 100$ all values are inside the band.
-The FGN surrogate, despite matching the DFA exponent of the original
-($\alpha = 0.689$), exhibits only negligible autocorrelation in the
-projected series: rank-level memory does not reach the thematic
-directions of semantic space.
-
-\paragraph{Word-shuffled null.}
-As expected, $\rho_k^{\rm surr}(\ell) \approx 0$ for all $k$ and
-$\ell$, consistent with the random-permutation reference.
-
-\begin{table}[htbp]
-\centering
-\caption{ACF of projections at lags $\ell = 1$ and $\ell = 100$ for
-\emph{Great Expectations}. The i.i.d.\ reference band is
-$\pm 1.96/\sqrt{M} = \pm 0.0077$. Values clearly outside the band are
-in bold; values that round to the band edge are left unmarked.}
-\label{tab:acf_summary}
-\small
-\begin{tabular}{r rr r rr}
-\toprule
- & \multicolumn{2}{c}{$\rho_k(1)$} & \phantom{x}
- & \multicolumn{2}{c}{$\rho_k(100)$} \\
-\cmidrule{2-3} \cmidrule{5-6}
-$k$ & Orig & FGN && Orig & FGN \\
-\midrule
- 1 & \textbf{0.060} &    0.004 &&    0.008 &    0.004 \\
- 2 & \textbf{0.208} &    0.007 && \textbf{0.015} &    0.004 \\
- 3 & \textbf{0.136} & $-$0.002 && \textbf{0.018} &    0.004 \\
- 4 & \textbf{0.123} & $-$0.003 &&    0.008 & $-$0.003 \\
- 5 & \textbf{0.086} & $-$0.002 &&    0.004 & $-$0.004 \\
- 6 & \textbf{0.121} &    0.004 &&    0.005 & $-$0.001 \\
- 7 & \textbf{0.127} &    0.002 &&    0.007 & $-$0.003 \\
- 8 & \textbf{0.103} &    0.001 &&    0.004 &    0.003 \\
- 9 & \textbf{0.082} & $-$0.002 &&    0.008 &    0.001 \\
-10 & \textbf{0.083} &    0.004 &&    0.003 &    0.003 \\
-\midrule
- & \multicolumn{5}{l}{\emph{(k=11..20 all have $|\rho^{\rm FGN}(1)| \le 0.007$)}} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_08_acf_decay_loglag.png}
-  \caption{%
-    \textbf{Autocorrelation function $\rho_k(\ell)$ of projected
-    series, as a function of lag $\ell$ (log scale) ---
-    \emph{Great Expectations} (Dickens).}
-    Each panel shows one PCA component (PC1, PC2, PC3).
-    Blue: original filtered text.
-    Green: FGN surrogate.
-    Red dashed: word-shuffled null.
-    Grey band: $\pm 1.96/\sqrt{M}$ i.i.d.\ reference (95\% CI).
-    The original text has substantial positive ACF that decays slowly
-    on a log scale, remaining above the i.i.d.\ band up to
-    $\ell \sim 100$.
-    Both null models collapse immediately into the i.i.d.\ band,
-    despite the FGN surrogate having the same DFA exponent
-    $\alpha = 0.689$ as the original.
-  }
-  \label{fig:acf_decay}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.72\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_09_acf_mean_loglag.png}
-  \caption{%
-    \textbf{Mean ACF $\bar\rho(\ell)$ averaged over all $K=20$ PCA
-    components --- \emph{Great Expectations} (Dickens).}
-    Same colour conventions as Figure~\ref{fig:acf_decay}.
-    The original text maintains positive mean autocorrelation well
-    beyond the i.i.d.\ band across the full range of lags shown.
-    The FGN surrogate and word-shuffled null are
-    indistinguishable from the i.i.d.\ reference at all lags,
-    confirming that rank-level long-range memory
-    (present in the FGN by construction) does not propagate to the
-    semantic projection space.
-  }
-  \label{fig:acf_mean}
-\end{figure}
-
-% ============================================================
-%  Subsection: Corpus ACF results
-%  Aggiunge a entropy_section_v2.tex dopo sec:acf_results
-%  Figures in ./figures/
-% ============================================================
-
-\subsection{Corpus-level ACF results}
-\label{sec:acf_corpus}
-
-We computed $\rho_k(\ell)$ for all 16 texts and all $K=20$ PCA
-components at lags $\ell \in \{1, 2, 5, 10, 20, 50, 100, 200, 300\}$,
-yielding $16 \times 20 \times 9 = 2{,}880$ measurements.
-The 95\% confidence band for an i.i.d.\ process at sample size $M$
-is $\pm 1.96/\sqrt{M}$; since $M$ varies across texts, we use the
-text-specific CI for significance tests.
-
-\paragraph{Mean ACF decay.}
-Figure~\ref{fig:acf_corpus_decay} shows the mean $\rho(\ell)$ averaged
-over all $({\rm text}, k)$ pairs as a function of lag.
-The original text maintains positive and significant autocorrelation
-across the full range of lags tested, with mean values
-\begin{equation}
-  \bar\rho^{\rm orig}(1) = 0.100 \pm 0.045,
-  \quad
-  \bar\rho^{\rm orig}(10) = 0.032 \pm 0.021,
-  \quad
-  \bar\rho^{\rm orig}(100) = 0.011 \pm 0.011,
-  \label{eq:rho_orig_values}
-\end{equation}
-where $\pm$ denotes one standard deviation over $({\rm text}, k)$
-pairs.
-The FGN surrogate and the word-shuffled null are indistinguishable
-from each other and from zero across all lags:
-\begin{equation}
-  \bar\rho^{\rm FGN}(1) = 0.002 \pm 0.005,
-  \qquad
-  \bar\rho^{\rm surr}(1) = 0.000 \pm 0.004.
-  \label{eq:rho_null_values}
-\end{equation}
-The ratio $\bar\rho^{\rm orig}(1) / \bar\rho^{\rm FGN}(1) \approx 50$
-quantifies how completely the FGN rank-to-embedding mapping destroys
-the frequency-domain long-range correlations in semantic projection
-space.
-
-\paragraph{Fraction of significant pairs.}
-Figure~\ref{fig:acf_corpus_frac} shows, for each lag, the fraction of
-$({\rm text}, k)$ pairs where $|\rho_k(\ell)|$ exceeds the i.i.d.\
-band.
-At lag $\ell = 1$: $100\%$ of original-text pairs are significant,
-$10.9\%$ of FGN pairs, and $4.7\%$ of shuffled pairs.
-The FGN figure exceeds the expected false-positive rate
-of $5\%$, but the significant cases are concentrated on PC1
-(56\% of the PC1 pairs, against 8\% for $k \geq 4$) --- the component
-most affected by the geometric artefact of rare transliterated proper
-nouns in the GloVe embedding space (Section~\ref{sec:filtering_results}).
-From lag $\ell = 2$ onwards the FGN fraction lies between $2.5\%$ and
-$7\%$, at the false-positive level. The effect is in any case tiny
-relative to the separation of the original projections from both
-controls.
-
-The ``original only'' curve (orig significant, FGN not) peaks at
-$93\%$ at lag $\ell = 2$ and remains above $50\%$ up to lag
-$\ell = 100$, providing a clean corpus-level version of the
-single-text result.
-The original text maintains detectable semantic autocorrelation
-at scales of order $100$ filtered tokens, corresponding to roughly $300$ tokens 
-of running text --- a few paragraphs.
-
-\paragraph{Distribution of $\rho_k(1)$.}
-Figure~\ref{fig:acf_corpus_rho1} shows the distribution of
-$\rho_k(1)$ over all $320$ $({\rm text}, k)$ pairs.
-Panel~A shows two completely separated distributions: the original
-has $\rho_k(1) \in [0.026, 0.264]$ with mean $0.100$, all
-pairs significant; the FGN has $\rho_k(1) \in [-0.014, 0.023]$
-with mean $0.002$, the vast majority inside the i.i.d.\ band.
-
-Panel~B zooms on the FGN and shuffled distributions.
-Both are centred near zero and overlap substantially.
-A one-sample $t$-test of $\bar\rho^{\rm FGN}(1) = 0$ gives
-$t = 5.05$, $P < 10^{-6}$: the mean is statistically non-zero but
-negligibly small ($0.002$) relative to the orig--null gap ($0.098$).
-As with the burstiness differences (Section~\ref{sec:corpus_diffs}),
-the statistical significance at this sample size reflects estimator
-sensitivity rather than a scientifically meaningful effect.
-
-
-\begin{remark}
-  The residual FGN autocorrelation on PC1 is expected rather than
-  anomalous. Rank is an ordering by frequency, so the long-range memory
-  imposed on $\mathbf{r}$ is memory along whichever direction of
-  embedding space encodes frequency --- and in every text of the corpus
-  that direction is PC1, whose poles oppose rare proper nouns and
-  transliterations to generic high-frequency vocabulary
-  (Section~\ref{sec:semantic_geometry_results}).
-  The observation that $56\%$ of PC1 pairs but only $8\%$ of pairs with
-  $k \geq 4$ show significant lag-one autocorrelation is therefore the
-  signature of rank-level memory reaching the one direction it can
-  reach, and failing to reach the thematic ones.
-\end{remark}
-
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/acf_corpus_mean_decay.png}
-  \caption{%
-    \textbf{Mean ACF $\bar\rho(\ell)$ of projected series across the
-    corpus of 16 texts and $K=20$ components, as a function of lag
-    $\ell$ (log scale).}
-    Shaded bands: $\pm 1$ standard deviation over
-    $({\rm text}, k)$ pairs.
-    Grey band: mean 95\% i.i.d.\ confidence band
-    $\pm 1.96/\sqrt{M}$.
-    Blue circles: original filtered text.
-    Green triangles: FGN surrogate.
-    Red squares: word-shuffled null.
-    The original maintains significant positive ACF across all lags
-    tested ($\ell = 1, \ldots, 300$).
-    Both null models are indistinguishable from zero at all lags.
-  }
-  \label{fig:acf_corpus_decay}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.72\textwidth]{figures/acf_corpus_frac_significant.png}
-  \caption{Fraction of text--component pairs with significant ACF as
-  a function of lag $\ell$ (log scale). Blue: original; green: FGN;
-  red: word-shuffled; purple dashed: original significant and FGN not.
-  The original remains clearly separated from both controls through
-  lags of order $10^2$. The short-lag FGN excess is concentrated
-  disproportionately in PC1, the component most affected by the
-  embedding-geometry artefact discussed in Section~\ref{sec:preprocessing}.}
-  \label{fig:acf_corpus_frac}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/acf_corpus_rho1_distribution.png}
-  \caption{%
-    \textbf{Distribution of $\rho_k(1)$ over $320$ (text, $k$) pairs.}
-    \textbf{Panel A}: original (blue) and FGN (green).
-    The two distributions are completely separated: every original pair
-    exceeds its own text-specific i.i.d.\ band (which ranges from
-    $0.004$ to $0.015$ across the corpus), while nearly all FGN pairs
-    fall inside it.
-    \textbf{Panel B}: FGN (green) and word-shuffled (red) on an
-    expanded scale.
-    Both are centred near zero; a $t$-test gives $t = 5.05$
-    for $\bar\rho^{\rm FGN}(1) = 0$ but the effect size is
-    negligible ($0.002$) relative to the orig--null gap ($0.098$).
-  }
-  \label{fig:acf_corpus_rho1}
-\end{figure}
-
-% ============================================================
-%  Subsection: DFA of projected series
-%  Si aggiunge a entropy_section_v2.tex dopo sec:acf_corpus
-%  Figures in ./figures/
-% ============================================================
-
-\subsection{DFA of projected series}
-\label{sec:dfa_projections}
-
-The ACF results of Sections~\ref{sec:acf_results}
-and~\ref{sec:acf_corpus} confirm the predicted ordering
-$\rho_k^{\rm orig}(\ell) \gg \rho_k^{\rm FGN}(\ell) \approx
-\rho_k^{\rm surr}(\ell) \approx 0$.
-We now complement the ACF analysis by computing the DFA scaling
-exponent of the projected series $x_t^{(k)}$ directly, providing the
-semantic-level analogue of the
-symbolic-level DFA result that motivates the paper.
-
-For each PCA component $k$ and each of the three series
-(original, FGN, word-shuffled), we apply DFA to the scalar
-time series $x_t^{(k)}$ and estimate the scaling exponent
-$\alpha_k$ from $F(s) \sim s^{\alpha_k}$, where $F(s)$ is the
-detrended fluctuation function at box size $s$.
-Box sizes range from $s_{\min} = 10$ to $s_{\max} = M/4$
-on a logarithmic grid.
-
-\paragraph{Results on Great Expectations.}
-Table~\ref{tab:dfa_proj} and Figure~\ref{fig:dfa_spectrum}
-report $\alpha_k$ for all $K = 20$ components of
-\emph{Great Expectations} by Dickens ($\alpha = 0.689$).
-The results confirm the prediction precisely:
-
-\begin{itemize}
-  \item \textbf{Original}: $\alpha_k^{\rm orig} > 0.5$ in all
-        $20/20$ components, with mean
-        $\bar\alpha^{\rm orig} = 0.623 \pm 0.034$.
-        All values exceed the shuffled reference by more than
-        $2\sigma$, confirming long-range correlations in every
-        semantic projection.
-
-  \item \textbf{FGN surrogate}: $|\alpha_k^{\rm FGN} - 0.5| < 0.05$
-        in all $20/20$ components, with mean
-        $\bar\alpha^{\rm FGN} = 0.499 \pm 0.014$.
-        Despite having a matched DFA exponent ($\alpha=0.689$,
-        generator exponent $\alpha_0=0.74$) in the rank sequence
-        by construction, the FGN projects
-        onto every semantic direction as an uncorrelated process.
-
-  \item \textbf{Word-shuffled}: $\bar\alpha^{\rm surr} =
-        0.499 \pm 0.004$, consistent with $\alpha = 0.5$
-        (white noise) as expected for an i.i.d.\ sequence.
-\end{itemize}
-
-\begin{table}[htbp]
-\centering
-\caption{DFA scaling exponents $\alpha_k$ of projected series
-$x_t^{(k)}$ for \emph{Great Expectations} (Dickens, $\alpha=0.689$).
-Every original value exceeds the shuffled reference by more than
-$2\sigma$ (the spread over the ten shuffled realisations is
-$\sigma\simeq0.004$), and every FGN value lies within $0.05$ of $0.5$.}
-\label{tab:dfa_proj}
-\scriptsize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{r ccc r ccc}
-\toprule
-$k$ & $\alpha^{\rm orig}$ & $\alpha^{\rm FGN}$ &
-    $\alpha^{\rm surr}$ &
-$k$ & $\alpha^{\rm orig}$ & $\alpha^{\rm FGN}$ &
-    $\alpha^{\rm surr}$ \\
-\midrule
- 1 & 0.605 & 0.511$\sim$ & 0.501 &
-11 & 0.57 & 0.506$\sim$ & 0.500 \\
- 2 & 0.681 & 0.500$\sim$ & 0.491 &
-12 & 0.642 & 0.493$\sim$ & 0.502 \\
- 3 & 0.693 & 0.518$\sim$ & 0.495 &
-13 & 0.564 & 0.512$\sim$ & 0.500 \\
- 4 & 0.634 & 0.514$\sim$ & 0.499 &
-14 & 0.595 & 0.484$\sim$ & 0.497 \\
- 5 & 0.64 & 0.486$\sim$ & 0.496 &
-15 & 0.645 & 0.486$\sim$ & 0.497 \\
- 6 & 0.633 & 0.515$\sim$ & 0.501 &
-16 & 0.579 & 0.505$\sim$ & 0.494 \\
- 7 & 0.647 & 0.504$\sim$ & 0.498 &
-17 & 0.586 & 0.511$\sim$ & 0.493 \\
- 8 & 0.633 & 0.469$\sim$ & 0.497 &
-18 & 0.617 & 0.515$\sim$ & 0.507 \\
- 9 & 0.643 & 0.482$\sim$ & 0.494 &
-19 & 0.595 & 0.489$\sim$ & 0.505 \\
-10 & 0.630 & 0.482$\sim$ & 0.503 &
-20 & 0.622 & 0.495$\sim$ & 0.502 \\
-\midrule
-\multicolumn{4}{l}{\textbf{Mean}} &
-\multicolumn{4}{l}{$\bar\alpha^{\rm orig}=0.623\pm0.034$ \quad
-                   $\bar\alpha^{\rm FGN}=0.499\pm0.014$ \quad
-                   $\bar\alpha^{\rm surr}=0.499\pm0.004$}\\
-\bottomrule
-\end{tabular}
-\end{table}
 
 Figure~\ref{fig:dfa_loglog} shows the log-log fluctuation
 function $F(s)$ for PC1, PC2, and PC3.
@@ -2197,7 +1413,7 @@ semantic projection has $\alpha_k^{\rm FGN}\simeq0.5$. Rank-level
 persistence therefore does not propagate automatically into semantic
 projection space.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
   \centering
   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_10_dfa_projections_spectrum.png}
   \caption{%
@@ -2215,7 +1431,7 @@ projection space.
   \label{fig:dfa_spectrum}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
   \centering
   \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_11_dfa_projections_loglog.png}
   \caption{%
@@ -2356,72 +1572,6 @@ approximation is adequate.
 For $p = 0.5$, $\CV_{\rm geom} = 0.707$, and the Poisson
 approximation fails badly.
 
-\section{Additional per-text figures}
-\label{app:pertext}
-
-Eigenvalue spectra and inter-event-time distributions for the three
-representative texts other than \emph{War and Peace}, whose
-corresponding figures appear in the main text
-(Figures~\ref{fig:wrnpc_spectra} and~\ref{fig:wrnpc_iet}).
-Equivalent figures for every text of the corpus, at any threshold
-quantile, can be regenerated with \texttt{scripts/run\_text.py} in the
-code repository.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_02_spectra_comparison.png}
-  \caption{Eigenvalue spectra and cumulative explained variance
-  for \emph{On the Origin of Species}.
-  Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
-  \label{fig:darwin_spectra}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_02_spectra_comparison.png}
-  \caption{Eigenvalue spectra and cumulative explained variance
-  for \emph{Great Expectations}.
-  Same conventions as Figure~\ref{fig:wrnpc_spectra}.}
-  \label{fig:greatexp_spectra}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_02_spectra_comparison.png}
-  \caption{Eigenvalue spectra and cumulative explained variance
-  for \emph{Ulysses}.
-  The more gradual eigenvalue decay reflects the greater stylistic
-  diversity of the 18 episodes compared to the other texts.}
-  \label{fig:ulysses_spectra}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/darwin_origin/darwin_origin_03_iet_comparison.png}
-  \caption{Inter-event time distributions for PC1, PC2, PC3 of
-  \emph{On the Origin of Species} ($q=0.95$).
-  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
-  \label{fig:darwin_iet}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/great_expectations_cut_clean/great_expectations_cut_clean_03_iet_comparison.png}
-  \caption{Inter-event time distributions for PC1, PC2, PC3
-  of \emph{Great Expectations} ($q=0.95$).
-  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
-  \label{fig:greatexp_iet}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{figures/eng_ulysses/eng_ulysses_03_iet_comparison.png}
-  \caption{Inter-event time distributions for PC1, PC2, PC3
-  of \emph{Ulysses} ($q=0.95$).
-  Same conventions as Figure~\ref{fig:wrnpc_iet}.}
-  \label{fig:ulysses_iet}
-\end{figure}
-
 
 %\section{Corpus text list}
 %\label{app:corpus}
@@ -2434,7 +1584,8 @@ code repository.
 
 
 % ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-\bibliographystyle{apalike}
+%\bibliographystyle{apalike}
+\bibliographystyle{elsarticle-num}
 \begin{thebibliography}{99}
 
 \bibitem[Alvarez-Lacalle et~al.(2006)]{AlvarezLacalle2006}
