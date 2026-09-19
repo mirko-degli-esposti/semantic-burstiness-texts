@@ -1,0 +1,10 @@
+pg_id,title,author,length_bucket,N_all,N_filt,M,alpha,alpha0,n_k,B_orig_surr_mean,B_orig_surr_sd,B_orig_fgn_mean
+58881,A Philosophical Essay on Probabilities,"Laplace, Pierre Simon, marquis de, 1749-1827",short,51593,15461,15418,0.8452,0.8738,20,1.4531,0.2291,1.4551
+9662,An Enquiry Concerning Human Understanding,"Hume, David, 1711-1776",short,56660,17873,17858,0.8043,0.8044,20,1.226,0.064,1.2409
+52293,On the Various Forces of Nature and their Relations to each other,"Faraday, Michael, 1791-1867",short,54048,16322,16206,0.7596,0.735,20,1.5492,0.5298,1.5491
+56852,Time and Free Will: An Essay on the Immediate Data of Consciousness,"Bergson, Henri, 1859-1941",short,64665,21850,21666,0.87,0.8969,20,1.5594,0.4163,1.5674
+32021,Island Life,"Wallace, Alfred Russel, 1823-1913",medium,153199,59945,59577,0.8425,0.9084,20,1.4537,0.2304,1.4432
+55262,Psychology: Briefer Course,"James, William, 1842-1910",medium,152281,56125,55990,0.6902,0.7234,20,1.2904,0.1568,1.2877
+67363,The Theory of Moral Sentiments,"Smith, Adam, 1723-1790",medium,116733,39779,39628,0.705,0.735,20,1.2758,0.1532,1.2714
+27942,"A System of Logic, Ratiocinative and Inductive","Mill, John Stuart, 1806-1873",long,403954,155771,155035,0.7791,0.8275,20,1.3545,0.0858,1.3484
+33224,Principles of Geology,"Lyell, Charles, Sir, 1797-1875",long,412287,178029,176352,0.766,0.8044,20,1.4549,0.3265,1.4524

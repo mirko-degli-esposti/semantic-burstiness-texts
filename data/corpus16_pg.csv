@@ -1,0 +1,17 @@
+pg_id,title,author,N,M,alpha,alpha0,note
+1342,Pride and Prejudice,Austen,122226,42364,0.642,0.67,
+996,Don Quixote (Ormsby transl.),Cervantes,403152,147279,0.711,0.76,verificare traduttore
+1228,On the Origin of Species,Darwin,151179,58913,0.770,0.80,VERIFICARE edizione: 1228=1a ed. 2009=6a ed.
+944,The Voyage of the Beagle,Darwin,206728,84931,0.629,0.67,
+766,David Copperfield,Dickens,363557,134409,0.727,0.78,
+1400,Great Expectations,Dickens,188925,64410,0.689,0.73,
+730,Oliver Twist,Dickens,161529,59729,0.711,0.76,
+4300,Ulysses,Joyce,264165,101489,0.763,0.80,
+236,The Jungle Book,Kipling,151161,49522,0.775,0.83,
+2701,Moby Dick,Melville,215652,82773,0.694,0.73,
+76404,Newton's Principia (Motte transl.),Newton,112225,26347,0.815,0.85,aggiunto a PG di recente
+2529,The Analysis of Mind,Russell,88342,30449,0.743,0.76,
+2600,War and Peace,Tolstoy,564788,235933,0.721,0.76,
+76,Adventures of Huckleberry Finn,Twain,145924,52741,0.774,0.83,
+74,The Adventures of Tom Sawyer,Twain,71102,22085,0.788,0.80,
+174,The Picture of Dorian Gray,Wilde,55619,16776,0.845,0.87,

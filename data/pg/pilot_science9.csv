@@ -1,0 +1,10 @@
+pg_id,title,author,born,died,locc,subjects,curated_shelves,bytes,words_clean,length_bucket
+52293,On the Various Forces of Nature and their Relations to each other,"Faraday, Michael, 1791-1867",1791,1867,QC,Physics,,373236,57660,short
+58881,A Philosophical Essay on Probabilities,"Laplace, Pierre Simon, marquis de, 1749-1827",1749,1827,QA,Probabilities,,332352,52762,short
+9662,An Enquiry Concerning Human Understanding,"Hume, David, 1711-1776",1711,1776,B,Philosophy,,373357,,short
+56852,Time and Free Will: An Essay on the Immediate Data of Consciousness,"Bergson, Henri, 1859-1941",1859,1941,BF,Consciousness; Space and time; Free will and determinism,Nobel Prizes in Literature,419146,66218,short
+67363,The Theory of Moral Sentiments,"Smith, Adam, 1723-1790",1723,1790,BJ,Ethics -- Early works to 1800; Language and languages -- Early works to 1800,,723065,117582,medium
+55262,Psychology: Briefer Course,"James, William, 1842-1910",1842,1910,BF,Psychology,,981880,159442,medium
+32021,Island Life,"Wallace, Alfred Russel, 1823-1913",1823,1913,QH,Glacial epoch; Island ecology; Biogeography,,1097305,165448,medium
+27942,"A System of Logic, Ratiocinative and Inductive","Mill, John Stuart, 1806-1873",1806,1873,BC,"Science -- Methodology; Knowledge, Theory of; Logic",Philosophy; Banned Books from Anne Haight's list,2513913,410426,long
+33224,Principles of Geology,"Lyell, Charles, Sir, 1797-1875",1797,1875,QE,Geology,Geology,2649376,428589,long

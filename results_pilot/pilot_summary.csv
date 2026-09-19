@@ -1,0 +1,31 @@
+pg_id,title,author,length_bucket,N_all,N_filt,M,alpha,alpha0,n_k,B_orig_surr_mean,B_orig_surr_sd,B_orig_fgn_mean
+14355,54-40 or Fight,"Hough, Emerson, 1857-1923",short,88547,29234,29161,0.7766,0.7813,20,1.2251,0.1114,1.2191
+8387,Hunger,"Hamsun, Knut, 1859-1952",short,66466,20054,19988,0.7524,0.7581,20,1.1832,0.0642,1.1903
+2166,King Solomon's Mines,"Haggard, H. Rider (Henry Rider), 1856-1925",short,81332,27901,27320,0.7271,0.735,20,1.2274,0.0937,1.2321
+557,Puck of Pook's Hill,"Kipling, Rudyard, 1865-1936",short,56270,18371,18131,0.7034,0.6888,20,1.2985,0.1509,1.3005
+14598,The Goose Girl,"MacGrath, Harold, 1871-1932",short,65015,19387,19205,0.6238,0.6309,20,1.1858,0.1151,1.1811
+14393,The Inner Shrine,"King, Basil, 1859-1928",short,78860,23228,23188,0.7266,0.735,20,1.1864,0.0973,1.1919
+4707,The Valley of Silent Men: A Story of the Three River Country,"Curwood, James Oliver, 1878-1927",short,73662,23458,23212,0.6971,0.7003,20,1.2198,0.0775,1.2269
+59981,The Village,"Bunin, Ivan Alekseevich, 1870-1953",short,69531,22233,21916,0.6826,0.6772,20,1.21,0.1155,1.2184
+308,Three men in a boat (to say nothing of the dog),"Jerome, Jerome K. (Jerome Klapka), 1859-1927",short,65987,19380,19348,0.7574,0.7581,20,1.2236,0.0763,1.2151
+17498,"When Knighthood Was in Flower | or, the Love Story of Charles Brandon and Mary Tudor the King's Sister, and Happening in the Reign of His August Majesty King Henry the Eighth","Major, Charles, 1856-1913",short,92434,28737,28632,0.7607,0.7813,20,1.201,0.0751,1.2026
+70875,Arrowsmith,"Lewis, Sinclair, 1885-1951",medium,163725,59070,58187,0.7136,0.7581,20,1.1812,0.0767,1.1794
+16101,Diane of the Green Van,"Dalrymple, Leona, 1884-1968",medium,84940,28936,28682,0.708,0.7119,20,1.201,0.0924,1.1978
+5006,Harriet and the Piper,"Norris, Kathleen Thompson, 1880-1966",medium,88172,29420,29339,0.6736,0.6888,20,1.1628,0.0685,1.1656
+6485,"Hugh Wynne, Free Quaker | Sometime Brevet Lieutenant-Colonel on the Staff of his Excellency General Washington","Mitchell, S. Weir (Silas Weir), 1829-1914",medium,151099,53056,52988,0.7284,0.7581,20,1.1932,0.1053,1.1976
+41822,Phroso: A Romance,"Hope, Anthony, 1863-1933",medium,97293,32092,31631,0.6823,0.6888,20,1.2007,0.0705,1.2072
+1290,Salammbo,"Flaubert, Gustave, 1821-1880",medium,105194,37255,36702,0.6506,0.6656,20,1.1434,0.0865,1.1321
+1947,Scaramouche: A Romance of the French Revolution,"Sabatini, Rafael, 1875-1950",medium,123148,41074,40257,0.7098,0.735,20,1.1755,0.0591,1.1742
+133,The Damnation of Theron Ware,"Frederic, Harold, 1856-1898",medium,117479,39093,39014,0.6894,0.7119,20,1.1733,0.1026,1.1876
+5129,The Prodigal Judge,"Kester, Vaughan, 1869-1911",medium,115212,41150,40923,0.7043,0.735,20,1.17,0.1284,1.1741
+18056,The Tin Soldier,"Bailey, Temple, 1869-1953",medium,95392,30252,30223,0.6826,0.7003,20,1.212,0.0821,1.2151
+5719,Janice Meredith: A Story of the American Revolution,"Ford, Paul Leicester, 1865-1902",long,180135,68319,67769,0.7131,0.7581,20,1.1845,0.0976,1.1894
+135,Les Misérables,"Hugo, Victor, 1802-1885",long,556622,227663,224736,0.7721,0.8044,20,1.2954,0.1304,1.2972
+145,Middlemarch,"Eliot, George, 1819-1880",long,310847,115423,114343,0.7197,0.7581,20,1.1695,0.0795,1.1717
+31824,"The ""Genius""","Dreiser, Theodore, 1871-1945",long,303914,110351,109804,0.7136,0.7581,20,1.2663,0.1268,1.2654
+9879,The Amateur Gentleman,"Farnol, Jeffery, 1878-1952",long,176152,67500,66089,0.7561,0.8044,20,1.2265,0.0616,1.2167
+23784,The History of Sir Richard Calmady: A Romance,"Malet, Lucas, 1852-1931",long,260096,106107,105510,0.7439,0.7813,20,1.1689,0.1188,1.1691
+28948,The Rainbow,"Lawrence, D. H. (David Herbert), 1885-1930",long,184705,65326,65017,0.6904,0.735,20,1.2779,0.1142,1.2839
+15384,The Real Adventure,"Webster, Henry Kitchell, 1875-1932",long,202417,68164,68087,0.7563,0.8044,20,1.1904,0.0711,1.1861
+1257,The three musketeers,"Dumas, Alexandre, 1802-1870",long,227491,83160,82596,0.727,0.7813,20,1.2085,0.1056,1.2038
+599,Vanity Fair,"Thackeray, William Makepeace, 1811-1863",long,299843,116693,115961,0.7226,0.7581,20,1.1968,0.0695,1.1966
